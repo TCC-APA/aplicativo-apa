@@ -1,6 +1,6 @@
 package com.ppa.perfildeaprendizado.data;
 
-import com.ppa.perfildeaprendizado.data.model.LoggedInUser;
+import com.ppa.perfildeaprendizado.data.model.Aluno;
 
 import java.io.IOException;
 
@@ -9,14 +9,14 @@ import java.io.IOException;
  */
 public class LoginDataSource {
 
-    public Result<LoggedInUser> login(String username, String password) {
+    public Result<Aluno> login(String username, String password) {
 
         try {
             // TODO: handle loggedInUser authentication
-            LoggedInUser fakeUser =
-                    new LoggedInUser(
+            Aluno fakeUser =
+                    new Aluno(
                             java.util.UUID.randomUUID().toString(),
-                            "Jane Doe");
+                            "Jane Doe", "jane_doe@gmail.com", "BCC", 20, "Feminino");
             return new Result.Success<>(fakeUser);
         } catch (Exception e) {
             return new Result.Error(new IOException("Error logging in", e));

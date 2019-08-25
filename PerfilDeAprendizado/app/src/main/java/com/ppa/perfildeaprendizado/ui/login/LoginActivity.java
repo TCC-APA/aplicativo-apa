@@ -46,6 +46,7 @@ public class LoginActivity extends AppCompatActivity {
         firstAccessButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                loadingProgressBar.setVisibility(View.VISIBLE);
                 iniciarQuestionario();
             }
         });

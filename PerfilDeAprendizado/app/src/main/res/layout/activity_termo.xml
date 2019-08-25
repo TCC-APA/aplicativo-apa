@@ -58,7 +58,7 @@
         android:scrollbars="vertical"
         android:shadowColor="#00424242"
         android:shadowRadius="0.5"
-        android:text='Você está sendo convidado(a) a participar da pesquisa sobre Estilos de Aprendizagem dos alunos do curso técnico integrado de informática do Cefet-RJ. Para isto será aplicado um questionário denominado Questionário Honey-Alonso que tem como objetivo verificar o seu estilo de aprendizagem e qual a relação entre  ele e a aprendizagem de programação por meio do desenvolvimento de jogos digitais.\nSua participação neste estudo consistirá apenas em responder ao questionário digital e sua colaboração será de muita importância. Você não será penalizado(a) caso não queira participar e poderá deixar de responder a qualquer momento bastando para isso sair do site.\nOs dados obtidos por meio do questionário são confidenciais e não serão divulgados em nível individual, visando assegurar o sigilo da sua participação.\nCaso você concorde em participar selecione a primeira opção "Declaro que li... " e você será direcionado à página do questionário; caso contrário, selecione a opção “Não aceito participar”.  '
+        android:text="@string/termo_texto"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textSize="16sp"
         app:fontFamily="sans-serif"
@@ -70,7 +70,7 @@
         android:id="@+id/tituloTermo"
         android:layout_width="390dp"
         android:layout_height="27dp"
-        android:text="TERMO DE CONSENTIMENTO LIVRE E ESCLARECIDO"
+        android:text="@string/termo_titulo"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="#353434"
         android:textSize="15sp"
