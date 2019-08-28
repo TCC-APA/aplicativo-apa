@@ -81,7 +81,8 @@
             android:padding="10dp"
             android:text="Enviar"
             android:textColor="#FFFFFF"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:onClick="sendMessage"/>
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
