@@ -1,5 +1,6 @@
 package com.ppa.perfildeaprendizado;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
@@ -19,6 +20,12 @@ public class QuestionarioActivity extends AppCompatActivity {
     private static ProgressBar progressBar;
     private List<String> questoes = new ArrayList<String>();
     public static int numQuestao = 1;
+    RadioButton radioDiscTot;
+    RadioButton radioDisc;
+    RadioButton radioConc;
+    RadioButton radioConcTot;
+    private static List<Integer> respostas = new ArrayList<Integer>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,22 +112,58 @@ public class QuestionarioActivity extends AppCompatActivity {
                 , "Normalmente, fico interessado(a) em descobrir o que as pessoas pensam.."
                 , "Evito os assuntos abstratos, duvidosos e pouco claros."));
 
-        /*TextView textoTermo = findViewById(R.id.textoTermo);
-        RadioButton radioSim = findViewById(R.id.radioYes);
-        RadioButton radioNao = findViewById(R.id.radioNo);
+        this.respostas = new ArrayList<Integer>();
+        this.radioDiscTot = findViewById(R.id.radioDiscTot);
+        this.radioDisc = findViewById(R.id.radioDisc);
+        this.radioConc = findViewById(R.id.radioConc);
+        this.radioConcTot = findViewById(R.id.radioConcTot);
 
-
-        radioNao.setOnClickListener(new View.OnClickListener() {
+        radioDiscTot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 avancaPergunta();
+                radioDiscTot.setChecked(false);
+                respostas.add(0);
+                System.out.println(respostas);
             }
         });
 
-        textoTermo.setMovementMethod(new ScrollingMovementMethod());
-*/
+        radioDisc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                avancaPergunta();
+                radioDisc.setChecked(false);
+                respostas.add(1);
+                System.out.println(respostas);
+
+            }
+        });
+
+        radioConc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                avancaPergunta();
+                radioConc.setChecked(false);
+                respostas.add(2);
+                System.out.println(respostas);
+
+            }
+        });
+
+        radioConcTot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                avancaPergunta();
+                radioConcTot.setChecked(false);
+                respostas.add(3);
+                System.out.println(respostas);
+
+            }
+        });
+
         TextView questao = (TextView) findViewById(R.id.pergunta);
         questao.setText(this.numQuestao + ". " +questoes.get(numQuestao-1));
+        questao.setMovementMethod(new ScrollingMovementMethod());
 
         progressBar = (ProgressBar) findViewById(R.id.progressBarQuest);
         progressBar.setMax(questoes.size());
@@ -136,11 +179,23 @@ public class QuestionarioActivity extends AppCompatActivity {
     }
 
     public void avancaPergunta(){
-        TextView questao = (TextView) findViewById(R.id.pergunta);
-        questao.setText(this.numQuestao + ". " +questoes.get(numQuestao-1));
+
         progressBar.setProgress(numQuestao-1);
+        if(this.numQuestao <= this.questoes.size()){
+            TextView questao = (TextView) findViewById(R.id.pergunta);
+            questao.setText(this.numQuestao + ". " +questoes.get(numQuestao-1));
+        } else {
+            terminaQuestionario();
+        }
         this.numQuestao++;
 
+
+
+    }
+
+    public void terminaQuestionario(){
+        Intent intent = new Intent(QuestionarioActivity.this, FimQuestionarioActivity.class);
+        startActivity(intent);
     }
 
 

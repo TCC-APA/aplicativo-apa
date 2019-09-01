@@ -25,6 +25,15 @@
 
     <!--    QuestionarioActivity-->
     <string name="enviar_respostas">"Enviar Respostas"</string>
+    <string name="disc_tot">"Discordo totalmente"</string>
+    <string name="disc">"Discordo"</string>
+    <string name="conc">"Concordo"</string>
+    <string name="conc_tot">"Concordo totalmente"</string>
+
+    <!--    FimQuestionarioActivity-->
+    <string name="fim_questionario">"Obrigado! Todas as questões foram respondidas com sucesso. Deseja enviar as respostas?"</string>
+
+
 
 
 </resources>

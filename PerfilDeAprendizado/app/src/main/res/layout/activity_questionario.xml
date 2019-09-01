@@ -74,11 +74,10 @@
 
     <RadioGroup
         android:id="@+id/radioQuestionario"
-        android:layout_width="380dp"
-        android:layout_height="88dp"
+        android:layout_width="398dp"
+        android:layout_height="142dp"
         android:layout_marginStart="39dp"
         android:layout_marginLeft="39dp"
-        android:layout_marginTop="9dp"
         android:layout_marginEnd="132dp"
         android:layout_marginRight="132dp"
         android:layout_marginBottom="35dp"
@@ -87,23 +86,36 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.17"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pergunta"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintStart_toStartOf="parent">
 
         <RadioButton
-            android:id="@+id/radioYes"
+            android:id="@+id/radioDiscTot"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/termo_aceito"
+            android:text="@string/disc_tot"
             tools:layout_editor_absoluteX="35dp"
             tools:layout_editor_absoluteY="628dp" />
 
         <RadioButton
-            android:id="@+id/radioNo"
+            android:id="@+id/radioDisc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/termo_negado" />
+            android:text="@string/disc" />
+
+
+        <RadioButton
+            android:id="@+id/radioConc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/conc"
+            tools:layout_editor_absoluteX="35dp"
+            tools:layout_editor_absoluteY="628dp" />
+
+        <RadioButton
+            android:id="@+id/radioConcTot"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/conc_tot" />
 
     </RadioGroup>
 
