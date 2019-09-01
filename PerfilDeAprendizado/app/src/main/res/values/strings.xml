@@ -13,6 +13,7 @@
     <string name="invalid_password">Senha deve ter mais de 5 caracteres</string>
     <string name="login_failed">"Login Falhou"</string>
 
+
     <!--    TermoActivity-->
     <string name="termo_aceito">Declaro que li e aceito participar.</string>
     <string name="termo_negado">Não aceito participar.</string>
@@ -21,4 +22,9 @@
         \nSua participação neste estudo consistirá apenas em responder ao questionário digital e sua colaboração será de muita importância. Você não será penalizado(a) caso não queira participar e poderá deixar de responder a qualquer momento bastando para isso sair do site.
         \nOs dados obtidos por meio do questionário são confidenciais e não serão divulgados em nível individual, visando assegurar o sigilo da sua participação.
         \nCaso você concorde em participar selecione a primeira opção "Declaro que li e aceito participar." e você será direcionado à página do questionário; caso contrário, selecione a opção “Não aceito participar.”.</string>
+
+    <!--    QuestionarioActivity-->
+    <string name="enviar_respostas">"Enviar Respostas"</string>
+
+
 </resources>

@@ -32,7 +32,7 @@
             android:layout_margin="10dp"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="Nome Completo" />
+            android:hint="Nome Completo" />
 
         <EditText
             android:id="@+id/email"
@@ -41,7 +41,7 @@
             android:layout_margin="10dp"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="E-mail" />
+            android:hint="E-mail" />
 
         <EditText
             android:id="@+id/turma"
@@ -50,7 +50,7 @@
             android:layout_margin="10dp"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="Turma" />
+            android:hint="Turma" />
 
         <EditText
             android:id="@+id/idade"
@@ -59,7 +59,7 @@
             android:layout_margin="10dp"
             android:ems="10"
             android:inputType="number"
-            android:text="Idade" />
+            android:hint="Idade" />
 
         <EditText
             android:id="@+id/genero"
@@ -68,7 +68,7 @@
             android:layout_margin="10dp"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="Gênero" />
+            android:hint="Gênero" />
 
         <Button
             android:id="@+id/enviar"
