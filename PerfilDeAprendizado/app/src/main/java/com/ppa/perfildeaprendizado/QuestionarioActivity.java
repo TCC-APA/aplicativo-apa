@@ -17,13 +17,15 @@ import static java.util.Arrays.asList;
 
 public class QuestionarioActivity extends AppCompatActivity {
 
+    public static boolean refazer = false;
+    private TextView questao;
     private static ProgressBar progressBar;
     private List<String> questoes = new ArrayList<String>();
-    public static int numQuestao = 1;
-    RadioButton radioDiscTot;
-    RadioButton radioDisc;
-    RadioButton radioConc;
-    RadioButton radioConcTot;
+    public static int numQuestao = 0;
+    private RadioButton radioDiscTot;
+    private RadioButton radioDisc;
+    private RadioButton radioConc;
+    private RadioButton radioConcTot;
     private static List<Integer> respostas = new ArrayList<Integer>();
 
 
@@ -112,7 +114,8 @@ public class QuestionarioActivity extends AppCompatActivity {
                 , "Normalmente, fico interessado(a) em descobrir o que as pessoas pensam.."
                 , "Evito os assuntos abstratos, duvidosos e pouco claros."));
 
-        this.respostas = new ArrayList<Integer>();
+
+        this.numQuestao = 0;
         this.radioDiscTot = findViewById(R.id.radioDiscTot);
         this.radioDisc = findViewById(R.id.radioDisc);
         this.radioConc = findViewById(R.id.radioConc);
@@ -121,31 +124,52 @@ public class QuestionarioActivity extends AppCompatActivity {
         radioDiscTot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                avancaPergunta();
+
                 radioDiscTot.setChecked(false);
-                respostas.add(0);
+                System.out.println("numQuestao:"+numQuestao);
+                if(respostas.size() == questoes.size()){
+                    respostas.set(numQuestao, 0);
+                } else {
+                    respostas.add(0);
+                }
+                numQuestao++;
+
                 System.out.println(respostas);
+                avancaPergunta();
             }
         });
 
         radioDisc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                avancaPergunta();
                 radioDisc.setChecked(false);
-                respostas.add(1);
-                System.out.println(respostas);
+                System.out.println("numQuestao:"+numQuestao);
+                if(respostas.size() == questoes.size()){
+                    respostas.set(numQuestao, 1);
+                } else {
+                    respostas.add(1);
+                }
+                numQuestao++;
 
+                System.out.println(respostas);
+                avancaPergunta();
             }
         });
 
         radioConc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                avancaPergunta();
                 radioConc.setChecked(false);
-                respostas.add(2);
+                System.out.println("numQuestao:"+numQuestao);
+                if(respostas.size() == questoes.size()){
+                    respostas.set(numQuestao, 2);
+                } else {
+                    respostas.add(2);
+                }
+                numQuestao++;
+
                 System.out.println(respostas);
+                avancaPergunta();
 
             }
         });
@@ -153,23 +177,28 @@ public class QuestionarioActivity extends AppCompatActivity {
         radioConcTot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                avancaPergunta();
                 radioConcTot.setChecked(false);
-                respostas.add(3);
+                System.out.println("numQuestao:"+numQuestao);
+                if(respostas.size() == questoes.size()){
+                    respostas.set(numQuestao, 3);
+                } else {
+                    respostas.add(3);
+                }
+                numQuestao++;
                 System.out.println(respostas);
+                avancaPergunta();
+
 
             }
         });
 
-        TextView questao = (TextView) findViewById(R.id.pergunta);
-        questao.setText(this.numQuestao + ". " +questoes.get(numQuestao-1));
-        questao.setMovementMethod(new ScrollingMovementMethod());
 
         progressBar = (ProgressBar) findViewById(R.id.progressBarQuest);
         progressBar.setMax(questoes.size());
-        progressBar.setProgress(numQuestao-1);
+        progressBar.setProgress(numQuestao);
 
-        this.numQuestao++;
+        avancaPergunta();
+
 
 
     }
@@ -180,14 +209,25 @@ public class QuestionarioActivity extends AppCompatActivity {
 
     public void avancaPergunta(){
 
-        progressBar.setProgress(numQuestao-1);
-        if(this.numQuestao <= this.questoes.size()){
-            TextView questao = (TextView) findViewById(R.id.pergunta);
-            questao.setText(this.numQuestao + ". " +questoes.get(numQuestao-1));
-        } else {
-            terminaQuestionario();
+        if(this.refazer == true){
+            this.numQuestao = 0;
+            this.refazer = false;
+            System.out.println("NUMERO QUESTAO="+this.numQuestao);
         }
-        this.numQuestao++;
+
+        progressBar.setProgress(numQuestao);
+        if(this.numQuestao < this.questoes.size()){
+            questao = (TextView) findViewById(R.id.pergunta);
+            questao.setText(this.numQuestao+1 + ". " +questoes.get(numQuestao));
+
+        } else {
+            this.numQuestao = 0;
+            terminaQuestionario();
+
+        }
+
+
+
 
 
 
@@ -196,6 +236,7 @@ public class QuestionarioActivity extends AppCompatActivity {
     public void terminaQuestionario(){
         Intent intent = new Intent(QuestionarioActivity.this, FimQuestionarioActivity.class);
         startActivity(intent);
+        System.out.println("size respostas final:"+respostas.size());
     }
 
 

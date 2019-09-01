@@ -29,5 +29,31 @@
         app:layout_constraintHorizontal_bias="0.076"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+    <Button
+        android:id="@+id/nao_enviar_respostas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="80dp"
+        android:background="@color/colorPrimary"
+        android:padding="10dp"
+        android:text="Voltar ao questionario"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        android:onClick="goToQuestionario"/>
+    <Button
+        android:id="@+id/enviar_respostas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="80dp"
+        android:background="@color/colorPrimary"
+        android:padding="10dp"
+        android:text="Enviar repostas"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        android:onClick="goToInicio"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
