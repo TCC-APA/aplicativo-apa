@@ -11,15 +11,17 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="20dp"
-        tools:layout_editor_absoluteX="17dp"
-        tools:layout_editor_absoluteY="17dp">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/perfilAluno"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
-            android:text="Perfil do(a) Aluno(a)"
+            android:text="@string/perfil_aluno"
             android:textColor="#CD141414"
             android:textSize="24sp"
             android:textStyle="bold"
@@ -31,8 +33,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:hint="Nome Completo" />
+            android:hint="@string/nome"
+            android:inputType="textPersonName" />
 
         <EditText
             android:id="@+id/email"
@@ -40,8 +42,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:hint="E-mail" />
+            android:hint="@string/email"
+            android:inputType="textEmailAddress" />
 
         <EditText
             android:id="@+id/turma"
@@ -49,8 +51,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:hint="Turma" />
+            android:hint="@string/turma"
+            android:inputType="textShortMessage" />
 
         <EditText
             android:id="@+id/idade"
@@ -58,17 +60,24 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:ems="10"
-            android:inputType="number"
-            android:hint="Idade" />
+            android:hint="@string/idade"
+            android:inputType="number" />
+
+        <Spinner
+            android:id="@+id/genero"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:layout_margin="10dp"
+            android:entries="@array/generos" />
 
         <EditText
-            android:id="@+id/genero"
+            android:id="@+id/editText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:hint="Gênero" />
+            android:hint="@string/senha"
+            android:inputType="textPassword" />
 
         <Button
             android:id="@+id/enviar"
@@ -78,11 +87,11 @@
             android:layout_marginTop="20dp"
             android:layout_marginRight="80dp"
             android:background="@color/colorPrimary"
+            android:onClick="sendMessage"
             android:padding="10dp"
             android:text="Enviar"
             android:textColor="#FFFFFF"
-            android:textSize="14sp"
-            android:onClick="sendMessage"/>
+            android:textSize="14sp" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
