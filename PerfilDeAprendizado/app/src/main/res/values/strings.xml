@@ -24,7 +24,6 @@
         \nCaso você concorde em participar selecione a primeira opção "Declaro que li e aceito participar." e você será direcionado à página do questionário; caso contrário, selecione a opção “Não aceito participar.”.</string>
 
     <!--    QuestionarioActivity-->
-    <string name="enviar_respostas">"Enviar Respostas"</string>
     <string name="disc_tot">"Discordo totalmente"</string>
     <string name="disc">"Discordo"</string>
     <string name="conc">"Concordo"</string>
@@ -32,6 +31,8 @@
 
     <!--    FimQuestionarioActivity-->
     <string name="fim_questionario">"Obrigado! Todas as questões foram respondidas com sucesso. Deseja enviar as respostas?"</string>
+    <string name="enviar_respostas">"Enviar respostas"</string>
+    <string name="voltar_inicio">"Voltar ao questionário"</string>
 
 
 

@@ -24,7 +24,7 @@ public class FimQuestionarioActivity extends AppCompatActivity {
 
     public void goToInicio(View view){
         QuestionarioActivity.refazer = true;
-        Intent intent = new Intent(FimQuestionarioActivity.this, QuestionarioActivity.class);
+        Intent intent = new Intent(FimQuestionarioActivity.this, PerguntasPessoaisActivity.class);
         startActivity(intent);
 
     }
