@@ -29,6 +29,7 @@ import com.ppa.perfildeaprendizado.R;
 public class LoginActivity extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
+    public static ProgressBar loadingProgressBar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -37,11 +38,11 @@ public class LoginActivity extends AppCompatActivity {
         loginViewModel = ViewModelProviders.of(this, new LoginViewModelFactory())
                 .get(LoginViewModel.class);
 
-        final Button firstAccessButton = findViewById(R.id.primAcesso);
-        final EditText usernameEditText = findViewById(R.id.username);
-        final EditText passwordEditText = findViewById(R.id.password);
-        final Button loginButton = findViewById(R.id.login);
-        final ProgressBar loadingProgressBar = findViewById(R.id.loading);
+        final Button firstAccessButton = (Button) findViewById(R.id.primAcesso);
+        final EditText usernameEditText = (EditText) findViewById(R.id.username);
+        final EditText passwordEditText = (EditText) findViewById(R.id.password);
+        final Button loginButton = (Button) findViewById(R.id.login);
+        loadingProgressBar = (ProgressBar) findViewById(R.id.loading);
 
         firstAccessButton.setOnClickListener(new View.OnClickListener() {
             @Override

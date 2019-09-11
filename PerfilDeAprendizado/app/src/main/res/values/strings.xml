@@ -34,6 +34,21 @@
     <string name="enviar_respostas">"Enviar respostas"</string>
     <string name="voltar_inicio">"Voltar ao questionário"</string>
 
+    <!--    PerguntasPessoaisActivity-->
+    <string name="perfil_aluno">"Perfil do(a) Aluno(a)"</string>
+    <string name="nome">"Nome Completo"</string>
+    <string name="email">"E-mail"</string>
+    <string name="turma">"Turma"</string>
+    <string name="idade">"Idade"</string>
+    <string name="senha">"Senha"</string>
+    <!--    Gêneros Perfil Aprendizado-->
+    <string-array name="generos">
+        <item>Gênero</item>
+        <item>Feminino</item>
+        <item>Masculino</item>
+        <item>Outro</item>
+    </string-array>
+
 
 
 
