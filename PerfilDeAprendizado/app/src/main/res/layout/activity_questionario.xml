@@ -41,7 +41,6 @@
         android:layout_height="452dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="50dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:background="#FFFFFF"
@@ -53,10 +52,11 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textSize="24sp"
         app:fontFamily="sans-serif"
+        app:layout_constraintBottom_toTopOf="@+id/radioQuestionario"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.076"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/spinnerQuestao" />
 
     <ProgressBar
         android:id="@+id/progressBarQuest"
@@ -64,12 +64,10 @@
         android:layout_width="0dp"
         android:layout_height="33dp"
 
-        app:layout_constraintBottom_toTopOf="@+id/pergunta"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <RadioGroup
@@ -118,5 +116,15 @@
             android:text="@string/conc_tot" />
 
     </RadioGroup>
+
+    <Spinner
+        android:id="@+id/spinnerQuestao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="11dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/progressBarQuest" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
