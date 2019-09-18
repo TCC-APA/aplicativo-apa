@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#DBD9D9"
     tools:context=".QuestionarioActivity">
 
     <!--androidx.recyclerview.widget.RecyclerView
@@ -35,12 +36,83 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" /-->
 
+    <SeekBar
+        android:id="@+id/progressBarQuest"
+        android:layout_width="0dp"
+        android:layout_height="33dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:clickable="false"
+        android:scrollbarSize="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RadioGroup
+        android:id="@+id/radioQuestionario"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="40dp"
+        android:background="#FFFFFF"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.17"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pergunta">
+
+        <RadioButton
+            android:id="@+id/radioDiscTot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:text="@string/disc_tot"
+            android:textSize="16sp"
+            tools:layout_editor_absoluteX="35dp"
+            tools:layout_editor_absoluteY="628dp" />
+
+        <RadioButton
+            android:id="@+id/radioDisc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:text="@string/disc"
+            android:textSize="16sp" />
+
+
+        <RadioButton
+            android:id="@+id/radioConc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:text="@string/conc"
+            android:textSize="16sp"
+            tools:layout_editor_absoluteX="35dp"
+            tools:layout_editor_absoluteY="628dp" />
+
+        <RadioButton
+            android:id="@+id/radioConcTot"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:text="@string/conc_tot"
+            android:textSize="16sp" />
+
+    </RadioGroup>
+
     <TextView
         android:id="@+id/pergunta"
         android:layout_width="0dp"
         android:layout_height="452dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:background="#FFFFFF"
@@ -56,75 +128,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.076"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerQuestao" />
+        app:layout_constraintTop_toBottomOf="@id/posicaoQuest" />
 
-    <ProgressBar
-        android:id="@+id/progressBarQuest"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="0dp"
-        android:layout_height="33dp"
-
+    <TextView
+        android:id="@+id/posicaoQuest"
+        android:layout_width="67dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="176dp"
+        android:layout_marginLeft="176dp"
+        android:layout_marginEnd="168dp"
+        android:layout_marginRight="168dp"
+        android:text="     /"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/progressBarQuest" />
 
-
-    <RadioGroup
-        android:id="@+id/radioQuestionario"
-        android:layout_width="398dp"
-        android:layout_height="142dp"
-        android:layout_marginStart="39dp"
-        android:layout_marginLeft="39dp"
-        android:layout_marginEnd="132dp"
-        android:layout_marginRight="132dp"
-        android:layout_marginBottom="35dp"
-        android:background="#FFFFFF"
-        android:padding="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.17"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <RadioButton
-            android:id="@+id/radioDiscTot"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/disc_tot"
-            tools:layout_editor_absoluteX="35dp"
-            tools:layout_editor_absoluteY="628dp" />
-
-        <RadioButton
-            android:id="@+id/radioDisc"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/disc" />
-
-
-        <RadioButton
-            android:id="@+id/radioConc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/conc"
-            tools:layout_editor_absoluteX="35dp"
-            tools:layout_editor_absoluteY="628dp" />
-
-        <RadioButton
-            android:id="@+id/radioConcTot"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/conc_tot" />
-
-    </RadioGroup>
-
-    <Spinner
-        android:id="@+id/spinnerQuestao"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="11dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.51"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/progressBarQuest" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

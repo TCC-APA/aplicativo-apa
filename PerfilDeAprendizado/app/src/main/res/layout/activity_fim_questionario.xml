@@ -4,7 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context=".FimQuestionarioActivity">
+
+    <Button
+        android:id="@+id/enviar_respostas"
+        android:layout_width="144dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="45dp"
+        android:background="@color/colorPrimary"
+        android:onClick="goToInicio"
+        android:padding="10dp"
+        android:text="@string/enviar_respostas"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fimQuestionario" />
 
     <TextView
         android:id="@+id/fimQuestionario"
@@ -29,20 +45,5 @@
         app:layout_constraintHorizontal_bias="0.076"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/enviar_respostas"
-        android:layout_width="144dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="45dp"
-        android:background="@color/colorPrimary"
-        android:onClick="goToInicio"
-        android:padding="10dp"
-        android:text="@string/enviar_respostas"
-        android:textColor="#FFFFFF"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fimQuestionario" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

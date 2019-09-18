@@ -3,11 +3,14 @@ package com.ppa.perfildeaprendizado;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -22,14 +25,15 @@ public class QuestionarioActivity extends AppCompatActivity {
 
     public static boolean refazer = false;
     private TextView questao;
-    private static ProgressBar progressBar;
+    private TextView posicao;
+    private static SeekBar progressBar;
     public static int numQuestao = 0;
     public Integer[] numQuestoesSpinner;
+    private RadioGroup radioQuest;
     private RadioButton radioDiscTot;
     private RadioButton radioDisc;
     private RadioButton radioConc;
     private RadioButton radioConcTot;
-    private Spinner comboQuestoes;
     private String[] questoes = new String[]{"Eu tenho fama de dizer o que penso claramente e sem rodeios."
             , "Tenho certeza do que é bom e do que é mau, do que está certo e do que está errado."
             , "Muitas vezes ajo sem olhar as consequências."
@@ -107,8 +111,8 @@ public class QuestionarioActivity extends AppCompatActivity {
             , "Fico rapidamente aborrecido(a) com o trabalho detalhista e cuidadoso."
             , "Na maioria das vezes, as pessoas acham que sou insensível em relação aos sentimentos delas."
             , "Geralmente, minhas intuições me orientam (guiam)."
-            , "Se faço parte de um trabalho em grupo, tento seguir um plano, uma ordem, uma metodologia.."
-            , "Normalmente, fico interessado(a) em descobrir o que as pessoas pensam.."
+            , "Se faço parte de um trabalho em grupo, tento seguir um plano, uma ordem, uma metodologia."
+            , "Normalmente, fico interessado(a) em descobrir o que as pessoas pensam."
             , "Evito os assuntos abstratos, duvidosos e pouco claros."};;
     private static Integer[] respostas;
 
@@ -121,6 +125,7 @@ public class QuestionarioActivity extends AppCompatActivity {
 
         this.respostas = new Integer[this.questoes.length];
         this.numQuestao = 0;
+        this.radioQuest = findViewById(R.id.radioQuestionario);
         this.radioDiscTot = findViewById(R.id.radioDiscTot);
         this.radioDisc = findViewById(R.id.radioDisc);
         this.radioConc = findViewById(R.id.radioConc);
@@ -135,17 +140,12 @@ public class QuestionarioActivity extends AppCompatActivity {
         radioDiscTot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 radioDiscTot.setChecked(false);
                 System.out.println("numQuestao:"+numQuestao);
                 respostas[numQuestao] = 0;
                 while(respostas.length > numQuestao && respostas[numQuestao] != null){
                     numQuestao++;
-
                 }
-
-
-
                 System.out.println(respostas);
                 avancaPergunta();
             }
@@ -159,9 +159,7 @@ public class QuestionarioActivity extends AppCompatActivity {
                 respostas[numQuestao] = 1;
                 while(respostas.length > numQuestao && respostas[numQuestao] != null){
                     numQuestao++;
-
                 }
-
                 System.out.println(respostas);
                 avancaPergunta();
             }
@@ -175,9 +173,7 @@ public class QuestionarioActivity extends AppCompatActivity {
                 respostas[numQuestao] = 2;
                 while(respostas.length > numQuestao && respostas[numQuestao] != null){
                     numQuestao++;
-
                 }
-
                 System.out.println(respostas);
                 avancaPergunta();
 
@@ -192,9 +188,7 @@ public class QuestionarioActivity extends AppCompatActivity {
                 respostas[numQuestao] = 3;
                 while(respostas.length > numQuestao && respostas[numQuestao] != null){
                     numQuestao++;
-
                 }
-
                 System.out.println(respostas);
                 avancaPergunta();
 
@@ -202,35 +196,31 @@ public class QuestionarioActivity extends AppCompatActivity {
             }
         });
 
-
-        progressBar = (ProgressBar) findViewById(R.id.progressBarQuest);
-        progressBar.setMax(questoes.length);
+        progressBar = (SeekBar) findViewById(R.id.progressBarQuest);
+        posicao = (TextView) findViewById(R.id.posicaoQuest);
+        progressBar.setMax(questoes.length - 1);
         progressBar.setProgress(numQuestao);
-
-        avancaPergunta();
-
-        comboQuestoes = (Spinner) findViewById(R.id.spinnerQuestao);
-        ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(this,
-                android.R.layout.simple_spinner_item, numQuestoesSpinner);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        comboQuestoes.setAdapter(adapter);
-
-        comboQuestoes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        posicao.setText((progressBar.getProgress() + 1) + "/" + questoes.length);
+        progressBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                posicao.setText((progressBar.getProgress() + 1) + "/" + questoes.length);
                 questao = (TextView) findViewById(R.id.pergunta);
-                numQuestao = position;
+                numQuestao = progress;
                 questao.setText(questoes[numQuestao]);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
 
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-                // your code here
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
             }
-
         });
-
+        avancaPergunta();
     }
 
     public String[] getQuestoes(){
@@ -274,26 +264,15 @@ public class QuestionarioActivity extends AppCompatActivity {
             }
         }
 
-        Spinner s = (Spinner) findViewById(R.id.spinnerQuestao);
-        s.setSelection(this.numQuestao);
-
-
-
-
-
-
     }
 
     public void terminaQuestionario(){
-
+        Log.d("Size respostas final:", String.valueOf(respostas.length));
+        for(Integer resp: respostas){
+            Log.d("respostas final: ", String.valueOf(resp));
+        }
         Intent intent = new Intent(QuestionarioActivity.this, FimQuestionarioActivity.class);
         startActivity(intent);
-
-        System.out.println("size respostas final:"+respostas.length);
-        for(Integer resp: respostas){
-            System.out.println("respostas final: "+resp);
-
-        }
     }
 
 
