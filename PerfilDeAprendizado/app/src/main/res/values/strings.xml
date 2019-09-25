@@ -41,15 +41,102 @@
     <string name="turma">"Turma"</string>
     <string name="idade">"Idade"</string>
     <string name="senha">"Senha"</string>
+
+    <!--    ResultadoActivity-->
+    <string name="ativo">"Ativo"</string>
+    <string name="reflexivo">"Reflexivo"</string>
+    <string name="teorico">"Teórico"</string>
+    <string name="pragmático">"Pragmático"</string>
+
     <!--    Gêneros Perfil Aprendizado-->
     <string-array name="generos">
-        <item>Gênero</item>
-        <item>Feminino</item>
-        <item>Masculino</item>
-        <item>Outro</item>
+        <item>"Gênero"</item>
+        <item>"Feminino"</item>
+        <item>"Masculino"</item>
+        <item>"Outro"</item>
     </string-array>
 
-
-
-
+    <!--    Questionario-->
+    <string-array name="perguntas">
+        <item>"Eu tenho fama de dizer o que penso claramente e sem rodeios."</item>
+        <item>"Tenho certeza do que é bom e do que é mau, do que está certo e do que está errado."</item>
+        <item>"Muitas vezes ajo sem olhar as consequências."</item>
+        <item>"Geralmente, resolvo os problemas de forma metódica, passo a passo."</item>
+        <item>"Acho que a formalidade limita a espontaneidade das pessoas."</item>
+        <item>"Tenho interesse em saber quais são os princípios das pessoas e com quais critérios elas agem."</item>
+        <item>"Acho que agir de forma espontânea pode ser tão valioso quanto agir de forma ponderada."</item>
+        <item>"Eu acho que o mais importante é que as coisas funcionem."</item>
+        <item>"Presto atenção em todos os detalhes das disciplinas que frequento."</item>
+        <item>"Fico satisfeito(a) quando tenho tempo para organizar meu estudo e realizá-lo de forma consciente."</item>
+        <item>"Sou adepto(a) da autodisciplina, eu sigo uma certa ordem, por exemplo, na alimentação, no estudo e ao praticar exercícios físicos."</item>
+        <item>"Quando escuto uma nova ideia, em seguida, começo a pensar em como colocá-la em prática."</item>
+        <item>"Prefiro as ideias originais e novas mesmo que não sejam práticas."</item>
+        <item>"Aceito e sigo as normas somente se servem para atingir meus objetivos."</item>
+        <item>"Normalmente me dou bem com pessoas pensativas (reflexivas), e acho difícil me entrosar com pessoas extremamente espontâneas e imprevisíveis."</item>
+        <item>"Escuto com mais frequência do que falo."</item>
+        <item>"Prefiro as coisas organizadas do que as desordenadas."</item>
+        <item>"Quando possuo alguma informação, analiso-a bem antes de expressar qualquer ideia."</item>
+        <item>"Antes de fazer algo, estudo cuidadosamente as vantagens e as desvantagens."</item>
+        <item>"Fico entusiasmado(a) quando faço algo novo e diferente."</item>
+        <item>"Quase sempre procuro ser coerente com meus critérios e valores. Tenho princípios e os respeito."</item>
+        <item>"Em uma discussão, não gosto de rodeios."</item>
+        <item>"Não gosto do envolvimento afetivo no ambiente de estudo. Prefiro manter o relacionamento distante."</item>
+        <item>"Gosto mais das pessoas realistas e concretas do que as teóricas."</item>
+        <item>"Tenho dificuldade em ser criativo(a) e em superar as estruturas."</item>
+        <item>"Gosto de ficar perto de pessoas espontâneas e divertidas."</item>
+        <item>"Na maioria das vezes, demonstro abertamente o que sinto."</item>
+        <item>"Gosto de analisar e transformar as coisas."</item>
+        <item>"Fico incomodado(a) quando as pessoas não levam as coisas a sério."</item>
+        <item>"Fico tentado(a) em experimentar e praticar as últimas técnicas e inovações."</item>
+        <item>"Sou cauteloso(a) na hora de tirar conclusões."</item>
+        <item>"Prefiro ter o maior número de fontes de informação. Quanto mais dados tiver reunido para refletir, melhor."</item>
+        <item>"Tenho tendência a ser perfeccionista (detalhista)."</item>
+        <item>"Prefiro ouvir a opinião dos outros antes de expor a minha."</item>
+        <item>"Gosto de levar a vida espontaneamente e não ter que planejar tudo com antecedência."</item>
+        <item>"Nas discussões gosto de observar como os outros participantes se comportam."</item>
+        <item>"Fico incomodado(a) com as pessoas caladas e excessivamente cuidadosas."</item>
+        <item>"Muitas vezes, julgo as ideias dos outros pelo valor prático."</item>
+        <item>"Fico angustiado(a) quando me obrigam a acelerar uma tarefa para cumprir o prazo."</item>
+        <item>"Nos trabalhos em grupo, apoio as ideias práticas e realistas."</item>
+        <item>"É melhor aproveitar o momento presente do que ficar pensando no passado ou no futuro."</item>
+        <item>"Fico incomodado(a) com as pessoas que sempre desejam apressar as coisas."</item>
+        <item>"Apoio ideias novas e espontâneas nos trabalhos em grupo."</item>
+        <item>"Eu acho que as decisões fundamentadas numa análise cuidadosa são mais consistentes do que as baseadas na intuição."</item>
+        <item>"Percebo frequentemente a contradição e os pontos frágeis nas argumentações dos outros."</item>
+        <item>"Eu acho que é necessário passar por cima das normas muito mais vezes do que cumpri-las."</item>
+        <item>"Geralmente, percebo formas melhores e mais práticas de fazer as coisas."</item>
+        <item>"Geralmente, falo mais do que escuto."</item>
+        <item>"Prefiro ficar distante dos fatos e observá-los a partir de outra perspectiva."</item>
+        <item>"Estou convencido(a) de que a lógica e a razão devem ser impostas."</item>
+        <item>"Gosto de buscar novas experiências."</item>
+        <item>"Gosto de experimentar e aplicar as coisas."</item>
+        <item>"Eu acho que devemos chegar logo ao centro das questões e não ficar enrolando."</item>
+        <item>"Procuro sempre chegar a conclusões e ideias claras."</item>
+        <item>"Prefiro discutir questões concretas e não perder tempo com discursos vazios."</item>
+        <item>"Fico impaciente quando me dão explicações desnecessárias e contraditórias."</item>
+        <item>"Comprovo antes se as coisas realmente funcionam."</item>
+        <item>"Faço vários rascunhos antes da redação final de um trabalho."</item>
+        <item>"Tenho certeza que nas discussões ajudo os outros a ficarem focados no tema, evitando distrações."</item>
+        <item>"Normalmente, numa discussão em grupo, percebo que sou um(a) dos(as) mais objetivos(as) e sensatos(as)."</item>
+        <item>"Quando algo dá errado, não dou importância e tento fazer melhor."</item>
+        <item>"Eu dispenso as ideias originais e espontâneas se elas não forem práticas."</item>
+        <item>"Gosto de comparar várias alternativas antes de tomar uma decisão."</item>
+        <item>"Frequentemente, olho adiante para prever o futuro."</item>
+        <item>"Nos debates e discussões prefiro desempenhar um papel secundário do que ser o(a) líder ou aquele(a) que mais participa."</item>
+        <item>"Fico incomodado(a) com as pessoas que não agem com lógica."</item>
+        <item>"Eu não gosto muito ter que planejar e prever as coisas."</item>
+        <item>"Em muitos casos, eu acho que os fins justificam os meios."</item>
+        <item>"Costumo refletir sobre os assuntos e problemas."</item>
+        <item>"Quando estudo de forma consciente,  fico satisfeito(a) e sinto orgulho."</item>
+        <item>"Diante dos acontecimentos, procuro descobrir quais são os princípios e as teorias nas quais eles se baseiam."</item>
+        <item>"Para alcançar o meu objetivo, sou capaz de ferir os sentimentos dos outros."</item>
+        <item>"Não me importo em fazer tudo o que é necessário para tornar meu trabalho (estudo) eficiente."</item>
+        <item>"Normalmente, sou aquela pessoa que mais anima as festas."</item>
+        <item>"Fico rapidamente aborrecido(a) com o trabalho detalhista e cuidadoso."</item>
+        <item>"Na maioria das vezes, as pessoas acham que sou insensível em relação aos sentimentos delas."</item>
+        <item>"Geralmente, minhas intuições me orientam (guiam)."</item>
+        <item>"Se faço parte de um trabalho em grupo, tento seguir um plano, uma ordem, uma metodologia."</item>
+        <item>"Normalmente, fico interessado(a) em descobrir o que as pessoas pensam."</item>
+        <item>"Evito os assuntos abstratos, duvidosos e pouco claros."</item>
+    </string-array>
 </resources>
