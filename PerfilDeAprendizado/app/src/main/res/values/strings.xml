@@ -41,6 +41,7 @@
     <string name="turma">"Turma"</string>
     <string name="idade">"Idade"</string>
     <string name="senha">"Senha"</string>
+    <string name="campo_obrigatorio">"Campo Obrigatório!"</string>
 
     <!--    ResultadoActivity-->
     <string name="ativo">"Ativo"</string>

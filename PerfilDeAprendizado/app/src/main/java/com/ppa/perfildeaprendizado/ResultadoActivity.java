@@ -30,16 +30,16 @@ public class ResultadoActivity extends AppCompatActivity {
         int teorico = 0;
         int pragmatico = 0;
         for(int i = 0; i < 20; i++){
-            ativo += respostas[i].intValue();
+            ativo += respostas[i];
         }
         for(int i = 20; i < 40; i++){
-            reflexivo += respostas[i].intValue();
+            reflexivo += respostas[i];
         }
         for(int i = 40; i < 60; i++){
-            teorico += respostas[i].intValue();
+            teorico += respostas[i];
         }
         for(int i = 60; i < 80; i++){
-            pragmatico += respostas[i].intValue();
+            pragmatico += respostas[i];
         }
 
         ativoBar.setMax(79);
