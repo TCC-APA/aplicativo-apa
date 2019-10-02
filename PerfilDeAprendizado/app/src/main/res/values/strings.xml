@@ -57,6 +57,11 @@
         <item>"Outro"</item>
     </string-array>
 
+    <!--    Menu Questionarios-->
+    <string name="escolha_questionario">"Escolha um questionário para responder"</string>
+
+
+
     <!--    Questionario-->
     <string-array name="perguntas">
         <item>"Eu tenho fama de dizer o que penso claramente e sem rodeios."</item>

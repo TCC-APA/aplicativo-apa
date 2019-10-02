@@ -78,7 +78,7 @@ public class PerguntasPessoaisActivity extends AppCompatActivity {
     }
 
     public void sendMessage(){
-        Intent intent = new Intent(PerguntasPessoaisActivity.this, QuestionarioActivity.class);
+        Intent intent = new Intent(PerguntasPessoaisActivity.this, MenuQuestionariosActivity.class);
         startActivity(intent);
     }
 

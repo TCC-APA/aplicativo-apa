@@ -17,7 +17,9 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static java.util.Arrays.asList;
 
@@ -34,6 +36,7 @@ public class QuestionarioActivity extends AppCompatActivity {
     private RadioButton radioConcTot;
     private String[] questoes;
     protected static Integer[] respostas;
+    public static Map<String, String[]> mapaTurmasQuestoes;
 
 
 
@@ -48,6 +51,8 @@ public class QuestionarioActivity extends AppCompatActivity {
         this.radioDisc = findViewById(R.id.radioDisc);
         this.radioConc = findViewById(R.id.radioConc);
         this.radioConcTot = findViewById(R.id.radioConcTot);
+        this.mapaTurmasQuestoes = new HashMap<String, String[]>();
+        this.mapaTurmasQuestoes.put("T1234", questoes);
 
         radioDiscTot.setOnClickListener(new View.OnClickListener() {
             @Override
