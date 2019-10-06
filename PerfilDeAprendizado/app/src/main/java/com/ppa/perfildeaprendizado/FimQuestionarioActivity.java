@@ -16,14 +16,14 @@ public class FimQuestionarioActivity extends AppCompatActivity {
     }
 
     public void goToQuestionario(View view){
-        QuestionarioActivity.refazer = true;
+        //QuestionarioActivity.refazer = true;
         Intent intent = new Intent(FimQuestionarioActivity.this, QuestionarioActivity.class);
         startActivity(intent);
 
     }
 
     public void goToInicio(View view){
-        QuestionarioActivity.refazer = true;
+        //QuestionarioActivity.refazer = true;
         Intent intent = new Intent(FimQuestionarioActivity.this, ResultadoActivity.class);
         startActivity(intent);
 
