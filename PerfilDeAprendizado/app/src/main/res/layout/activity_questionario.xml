@@ -139,14 +139,11 @@
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="35dp"
-        android:layout_marginEnd="235dp"
-        android:layout_marginRight="235dp"
         android:layout_marginBottom="36dp"
         android:background="@color/colorPrimary"
         android:text="Voltar"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/pergunta"
-        app:layout_constraintEnd_toStartOf="@+id/buttonProx"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -154,15 +151,15 @@
         android:id="@+id/buttonProx"
         android:layout_width="72dp"
         android:layout_height="33dp"
-        android:layout_marginStart="235dp"
-        android:layout_marginLeft="235dp"
         android:layout_marginTop="35dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
         android:layout_marginBottom="36dp"
         android:background="@color/colorPrimary"
         android:text="Próxima"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/pergunta"
-        app:layout_constraintStart_toEndOf="@+id/buttonVoltar"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 

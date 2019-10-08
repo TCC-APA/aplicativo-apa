@@ -16,6 +16,7 @@ public class QuestionarioActivity extends AppCompatActivity {
 
     private TextView questao;
     private TextView posicao;
+    private RadioGroup opcoesRadio;
     private RadioButton radioDiscTot;
     private RadioButton radioDisc;
     private RadioButton radioConc;
@@ -39,43 +40,48 @@ public class QuestionarioActivity extends AppCompatActivity {
         botaoProx = (Button) findViewById(R.id.buttonProx);
         posicao = (TextView) findViewById(R.id.posicaoQuest);
         questao = (TextView) findViewById(R.id.pergunta);
+        opcoesRadio = (RadioGroup) findViewById(R.id.radioQuestionario);
 
         coletaRespostas();
 
         botaoProx.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                desmarcarRadios();
-                if(numQuestao < questoes.length-1) {
+
+                if(numQuestao == questoes.length-1){
+                    numQuestao = 0;
+                    questao.setText(questoes[numQuestao]);
+                    String pos = (numQuestao+1)+"/"+questoes.length;
+                    posicao.setText(pos);
+                } else {
                     numQuestao++;
-                    avancaQuestao();
-                }else{
-                    int contador = 0;
-                    for(int i = 0; i < questoes.length; i++){
-                        if(respostas[i] != null){
-                            contador++;
-                        } else {
-                            break;
-                        }
-                    }
-                    if(contador == questoes.length){
-                        terminaQuestionario();
-                    }else{
-                        numQuestao = contador;
-                        avancaQuestao();
-                    }
+                    questao.setText(questoes[numQuestao]);
+                    String pos = (numQuestao+1)+"/"+questoes.length;
+                    posicao.setText(pos);
                 }
+                mantemMarcado();
+
             }
         });
 
         botaoVoltar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                desmarcarRadios();
                 if(numQuestao > 0){
                     numQuestao--;
-                    avancaQuestao();
+                    questao.setText(questoes[numQuestao]);
+                    String pos = (numQuestao+1)+"/"+questoes.length;
+                    posicao.setText(pos);
+
+
+                } else {
+                    numQuestao = questoes.length-1;
+                    questao.setText(questoes[numQuestao]);
+                    String pos = (numQuestao+1)+"/"+questoes.length;
+                    posicao.setText(pos);
                 }
+                mantemMarcado();
+
             }
         });
     }
@@ -83,19 +89,70 @@ public class QuestionarioActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        avancaQuestao();
-    }
-
-    public String[] getQuestoes(){
-        return this.questoes;
-    }
-
-    public void avancaQuestao(){
-        desmarcarRadios();
         questao.setText(questoes[numQuestao]);
         String pos = (numQuestao+1)+"/"+questoes.length;
         posicao.setText(pos);
         mantemMarcado();
+    }
+
+    public String[] getQuestoes(){
+        return this.questoes;
+
+    }
+
+    public void retornaQuestao(){
+
+    }
+
+    public void avancaQuestao(){
+        int contador = 0;
+        int primeiraNaoRespondidaAnterior = -1;
+        for (int i = 0; i < questoes.length; i++) {
+
+            if (respostas[i] != null) { //pode achar questoes anteriores nao respondidas e nao acrescentar o contador
+                contador++;
+
+            } else {
+                if(i > numQuestao){
+                    break;
+
+                } else {// depois de rodar todas as perguntas, existe uma nao respondida antes da atual
+                    contador++; //resolver o problema do "pode achar questoes anteriores nao respondidas e nao acrescentar o contador"
+                    if(primeiraNaoRespondidaAnterior == -1){
+                        primeiraNaoRespondidaAnterior = i;
+
+                    }
+
+                }
+            }
+        }
+        if(contador == questoes.length){
+            if(primeiraNaoRespondidaAnterior == -1){
+                terminaQuestionario();
+
+            } else{
+                numQuestao = primeiraNaoRespondidaAnterior;
+                questao.setText(questoes[numQuestao]);
+                String pos = (numQuestao+1)+"/"+questoes.length;
+                posicao.setText(pos);
+            }
+        } else {
+            numQuestao = contador;
+            questao.setText(questoes[numQuestao]);
+            String pos = (numQuestao+1)+"/"+questoes.length;
+            posicao.setText(pos);
+        }
+        String apagar = "";
+        for(int i = 0; i < respostas.length; i++){
+            if(respostas[i] != null){
+                apagar += respostas[i] + ", ";
+            } else {
+                apagar += "0, ";
+            }
+        }
+        System.out.println(apagar);
+        mantemMarcado();
+
     }
 
     public void terminaQuestionario(){
@@ -113,6 +170,7 @@ public class QuestionarioActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 respostas[numQuestao] = 1;
+                avancaQuestao();
             }
         });
 
@@ -120,6 +178,8 @@ public class QuestionarioActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 respostas[numQuestao] = 2;
+                avancaQuestao();
+
             }
         });
 
@@ -127,6 +187,8 @@ public class QuestionarioActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 respostas[numQuestao] = 3;
+                avancaQuestao();
+
             }
         });
 
@@ -134,33 +196,33 @@ public class QuestionarioActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 respostas[numQuestao] = 4;
+                avancaQuestao();
+
             }
         });
     }
 
     public void mantemMarcado(){
+        System.out.println("mantemMarcado: "+respostas[numQuestao]);
+        this.opcoesRadio.clearCheck();
         if(respostas[numQuestao] != null){
             if(respostas[numQuestao] == 1){
                 radioDiscTot.setChecked(true);
+
             }
             else if(respostas[numQuestao] == 2){
                 radioDisc.setChecked(true);
+
             }
             else if(respostas[numQuestao] == 3){
                 radioConc.setChecked(true);
+
             }
             else if(respostas[numQuestao] == 4) {
                 radioConcTot.setChecked(true);
+
             }
-        }else {
-            desmarcarRadios();
         }
     }
 
-    public void desmarcarRadios(){
-        radioConcTot.setChecked(false);
-        radioConc.setChecked(false);
-        radioDisc.setChecked(false);
-        radioDiscTot.setChecked(false);
-    }
 }
