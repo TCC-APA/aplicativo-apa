@@ -23,6 +23,7 @@ public class QuestionarioActivity extends AppCompatActivity {
     private RadioButton radioConcTot;
     private Button botaoVoltar;
     private Button botaoProx;
+    private Button botaoEnviarResp;
 
     public static int numQuestao = 0;
     private String[] questoes;
@@ -41,6 +42,9 @@ public class QuestionarioActivity extends AppCompatActivity {
         posicao = (TextView) findViewById(R.id.posicaoQuest);
         questao = (TextView) findViewById(R.id.pergunta);
         opcoesRadio = (RadioGroup) findViewById(R.id.radioQuestionario);
+        botaoEnviarResp = (Button) findViewById(R.id.enviar_button);
+
+        desativarBotaoEnviar();
 
         coletaRespostas();
 
@@ -89,6 +93,7 @@ public class QuestionarioActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        desativarBotaoEnviar();
         questao.setText(questoes[numQuestao]);
         String pos = (numQuestao+1)+"/"+questoes.length;
         posicao.setText(pos);
@@ -128,7 +133,7 @@ public class QuestionarioActivity extends AppCompatActivity {
         }
         if(contador == questoes.length){
             if(primeiraNaoRespondidaAnterior == -1){
-                terminaQuestionario();
+                ativarBotaoEnviar();
 
             } else{
                 numQuestao = primeiraNaoRespondidaAnterior;
@@ -223,6 +228,22 @@ public class QuestionarioActivity extends AppCompatActivity {
 
             }
         }
+    }
+
+    protected void desativarBotaoEnviar(){
+        this.botaoEnviarResp.setEnabled(false);
+        this.botaoEnviarResp.setBackgroundColor(getResources().getColor(R.color.disabled_button));
+    }
+
+    protected void ativarBotaoEnviar(){
+        this.botaoEnviarResp.setEnabled(true);
+        this.botaoEnviarResp.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        this.botaoEnviarResp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                terminaQuestionario();
+            }
+        });
     }
 
 }

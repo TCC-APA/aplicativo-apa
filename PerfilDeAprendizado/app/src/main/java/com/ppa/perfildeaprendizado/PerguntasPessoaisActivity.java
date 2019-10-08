@@ -21,6 +21,7 @@ public class PerguntasPessoaisActivity extends AppCompatActivity {
     private Spinner genero;
     private LinearLayout form;
     private Button enviar;
+    private Button teste;
 
 //    TODO: botar validacao aqui
     @Override
@@ -35,6 +36,7 @@ public class PerguntasPessoaisActivity extends AppCompatActivity {
         senha = findViewById(R.id.senha);
         genero = findViewById(R.id.genero);
         enviar = findViewById(R.id.enviar);
+        teste = findViewById(R.id.button_teste);
 
         enviar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,6 +75,13 @@ public class PerguntasPessoaisActivity extends AppCompatActivity {
                 if(erros == 0){
                     sendMessage();
                 }
+            }
+        });
+
+        teste.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendMessage();
             }
         });
     }
