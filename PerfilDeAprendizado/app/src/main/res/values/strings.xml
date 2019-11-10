@@ -31,7 +31,7 @@
 
     <!--    FimQuestionarioActivity-->
     <string name="fim_questionario">"Obrigado! Todas as questões foram respondidas com sucesso. Deseja enviar as respostas?"</string>
-    <string name="enviar_respostas">"Enviar respostas"</string>
+    <string name="enviar_respostas">"Enviar"</string>
     <string name="voltar_inicio">"Voltar ao questionário"</string>
 
     <!--    PerguntasPessoaisActivity-->

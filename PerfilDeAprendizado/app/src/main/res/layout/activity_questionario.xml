@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#DBD9D9"
+    android:paddingBottom="10dp"
     tools:context=".QuestionarioActivity">
 
     <!--androidx.recyclerview.widget.RecyclerView
@@ -36,16 +37,70 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" /-->
 
-    <RadioGroup
-        android:id="@+id/radioQuestionario"
-        android:layout_width="377dp"
-        android:layout_height="242dp"
+    <Button
+        android:id="@+id/buttonVoltar"
+        android:layout_width="72dp"
+        android:layout_height="33dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginBottom="36dp"
+        android:background="@color/colorPrimary"
+        android:text="Voltar"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/pergunta"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/buttonProx"
+        android:layout_width="72dp"
+        android:layout_height="33dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="36dp"
+        android:background="@color/colorPrimary"
+        android:text="Próxima"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/pergunta"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/enviar_button"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="157dp"
+        android:layout_marginLeft="57dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="168dp"
+        android:layout_marginRight="68dp"
+        android:background="#90B0EC"
+        android:enabled="false"
+        android:text="@string/enviar_respostas"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.443"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioQuestionario"
+        app:layout_constraintVertical_bias="0.45" />
+
+    <RadioGroup
+        android:id="@+id/radioQuestionario"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="7dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="40dp"
         android:background="#FFFFFF"
+        android:isScrollContainer="true"
+        android:scrollbars="vertical"
+        android:overScrollMode="ifContentScrolls"
         android:padding="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -93,6 +148,21 @@
     </RadioGroup>
 
     <TextView
+        android:id="@+id/posicaoQuest"
+        android:layout_width="67dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="176dp"
+        android:layout_marginLeft="176dp"
+        android:layout_marginTop="33dp"
+        android:layout_marginEnd="168dp"
+        android:layout_marginRight="168dp"
+        android:text="     /"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:id="@+id/pergunta"
         android:layout_width="0dp"
         android:layout_height="350dp"
@@ -115,70 +185,6 @@
         app:layout_constraintHorizontal_bias="0.076"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/posicaoQuest" />
-
-    <TextView
-        android:id="@+id/posicaoQuest"
-        android:layout_width="67dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="176dp"
-        android:layout_marginLeft="176dp"
-        android:layout_marginTop="33dp"
-        android:layout_marginEnd="168dp"
-        android:layout_marginRight="168dp"
-        android:text="     /"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/buttonVoltar"
-        android:layout_width="72dp"
-        android:layout_height="33dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="35dp"
-        android:layout_marginBottom="36dp"
-        android:background="@color/colorPrimary"
-        android:text="Voltar"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/pergunta"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/buttonProx"
-        android:layout_width="72dp"
-        android:layout_height="33dp"
-        android:layout_marginTop="35dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="36dp"
-        android:background="@color/colorPrimary"
-        android:text="Próxima"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/pergunta"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/enviar_button"
-        android:layout_width="183dp"
-        android:layout_height="32dp"
-        android:layout_marginStart="157dp"
-        android:layout_marginLeft="157dp"
-        android:layout_marginEnd="168dp"
-        android:layout_marginRight="168dp"
-        android:background="#90B0EC"
-        android:enabled="false"
-        android:text="@string/enviar_respostas"
-        android:textColor="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.443"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioQuestionario"
-        app:layout_constraintVertical_bias="0.45" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
