@@ -1,10 +1,12 @@
-package restproj;
+package br.com.rest.config;
 
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
+
+import br.com.rest.api.LoginApi;
 
 @ApplicationPath("v1")
 public class AppConfig extends Application{
@@ -13,7 +15,7 @@ public class AppConfig extends Application{
 	
 	public AppConfig() {
 		System.out.println("AppConfig Criado!");
-		resources.add(R1.class);
+		resources.add(LoginApi.class);
 	}
 	
 	@Override
