@@ -5,6 +5,7 @@ import android.app.Activity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.app.Notification;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -25,6 +26,8 @@ import android.widget.Toast;
 
 import com.ppa.perfildeaprendizado.TermoActivity;
 import com.ppa.perfildeaprendizado.R;
+
+import java.util.concurrent.ExecutionException;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -121,11 +124,25 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadingProgressBar.setVisibility(View.VISIBLE);
-                loginViewModel.login(usernameEditText.getText().toString(),
-                        passwordEditText.getText().toString());
+                try {
+                    String retorno = new LoginTask(usernameEditText.getText().toString()).execute().get();
+                    loginButton.setText(retorno);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
             }
         });
+
+//        loginButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                loadingProgressBar.setVisibility(View.VISIBLE);
+//                loginViewModel.login(usernameEditText.getText().toString(),
+//                        passwordEditText.getText().toString());
+//            }
+//        });
     }
 
     private void updateUiWithUser(LoggedInUserView model) {
