@@ -5,7 +5,6 @@ import android.app.Activity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
-import android.app.Notification;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -26,6 +25,7 @@ import android.widget.Toast;
 
 import com.ppa.perfildeaprendizado.TermoActivity;
 import com.ppa.perfildeaprendizado.R;
+import com.ppa.perfildeaprendizado.task.LoginTask;
 
 import java.util.concurrent.ExecutionException;
 

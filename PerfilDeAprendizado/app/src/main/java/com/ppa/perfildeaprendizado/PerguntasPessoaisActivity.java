@@ -11,6 +11,10 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.ppa.perfildeaprendizado.data.model.Aluno;
+import com.ppa.perfildeaprendizado.task.InserirAlunoTask;
+import com.ppa.perfildeaprendizado.task.LoginTask;
+
 public class PerguntasPessoaisActivity extends AppCompatActivity {
 
     private EditText nome;
@@ -73,6 +77,8 @@ public class PerguntasPessoaisActivity extends AppCompatActivity {
                     erros += 1;
                 }
                 if(erros == 0){
+                    Aluno aluno = new Aluno("123456789", "1622122BCC", nome.getText().toString(), email.getText().toString(), turma.getText().toString(), Integer.valueOf(idade.getText().toString()), genero.getSelectedItem().toString(), senha.getText().toString());
+                    new InserirAlunoTask(aluno).execute();
                     sendMessage();
                 }
             }
