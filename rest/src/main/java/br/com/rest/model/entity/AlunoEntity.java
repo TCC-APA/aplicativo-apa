@@ -15,16 +15,60 @@ public class AlunoEntity {
 	private Integer id;
 	
 	@Column
-	private String nome;
-	
-	@Column
 	private String cpf;
-	
+
 	@Column
 	private String matricula;
+
+	@Column
+	private String nome;
+
+	@Column
+	private String email;
 	
 	@Column
+	private String turma;
+	
+	@Column
+	private int idade;
+	
+	@Column
+	private String genero;
+
+	@Column
 	private String senha;
+	
+	public String getEmail() {
+		return email;
+	}
+	
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+	public String getTurma() {
+		return turma;
+	}
+	
+	public void setTurma(String turma) {
+		this.turma = turma;
+	}
+	
+	public int getIdade() {
+		return idade;
+	}
+	
+	public void setIdade(int idade) {
+		this.idade = idade;
+	}
+	
+	public String getGenero() {
+		return genero;
+	}
+	
+	public void setGenero(String genero) {
+		this.genero = genero;
+	}
 
 	public Integer getId() {
 		return id;
@@ -71,10 +115,14 @@ public class AlunoEntity {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((genero == null) ? 0 : genero.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + idade;
 		result = prime * result + ((matricula == null) ? 0 : matricula.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + ((senha == null) ? 0 : senha.hashCode());
+		result = prime * result + ((turma == null) ? 0 : turma.hashCode());
 		return result;
 	}
 
@@ -92,10 +140,22 @@ public class AlunoEntity {
 				return false;
 		} else if (!cpf.equals(other.cpf))
 			return false;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
+			return false;
+		if (genero == null) {
+			if (other.genero != null)
+				return false;
+		} else if (!genero.equals(other.genero))
+			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
+			return false;
+		if (idade != other.idade)
 			return false;
 		if (matricula == null) {
 			if (other.matricula != null)
@@ -112,8 +172,20 @@ public class AlunoEntity {
 				return false;
 		} else if (!senha.equals(other.senha))
 			return false;
+		if (turma == null) {
+			if (other.turma != null)
+				return false;
+		} else if (!turma.equals(other.turma))
+			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "AlunoEntity [id=" + id + ", cpf=" + cpf + ", matricula=" + matricula + ", nome=" + nome + ", email="
+				+ email + ", turma=" + turma + ", idade=" + idade + ", genero=" + genero + ", senha=" + senha + "]";
+	}
+
 	
 	
 }
