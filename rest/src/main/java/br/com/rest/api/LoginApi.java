@@ -15,8 +15,9 @@ public class LoginApi {
 		
 	@POST
 	@Path("inserir")
-	public void inserirAluno(AlunoEntity aluno) {
-		AlunoServices.incluirAluno(aluno);
+	@Produces("application/octet-stream")
+	public String inserirAluno(AlunoEntity aluno) {
+		return AlunoServices.incluirAluno(aluno).toString();
 	}
 	
 	@GET

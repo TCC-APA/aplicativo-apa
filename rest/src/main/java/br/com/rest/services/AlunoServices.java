@@ -13,7 +13,7 @@ public class AlunoServices {
 	private static AlunoDAO alunoDao = AlunoDAO.getInstance();
 	
 	
-	public static boolean incluirAluno(AlunoEntity aluno) {
+	public static Boolean incluirAluno(AlunoEntity aluno) {
 		List<AlunoEntity> listaAlunos = alunoDao.findAll();
 		Boolean existeAluno = false;
 		for(AlunoEntity alunoBanco: listaAlunos) {
