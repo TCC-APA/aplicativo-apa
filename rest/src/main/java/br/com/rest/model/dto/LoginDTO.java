@@ -2,6 +2,7 @@ package br.com.rest.model.dto;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
+
 @XmlRootElement
 public class LoginDTO {
 
