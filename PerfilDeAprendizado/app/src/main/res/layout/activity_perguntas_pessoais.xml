@@ -6,99 +6,132 @@
     android:layout_height="match_parent"
     tools:context=".PerguntasPessoaisActivity">
 
-    <LinearLayout
-        android:id="@+id/form"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/perfilAluno"
+        <LinearLayout
+            android:id="@+id/form"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:text="@string/perfil_aluno"
-            android:textColor="#CD141414"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            app:fontFamily="sans-serif-black" />
+            android:orientation="vertical"
+            android:padding="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <EditText
-            android:id="@+id/nome"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:ems="10"
-            android:hint="@string/nome"
-            android:inputType="textPersonName" />
+            <TextView
+                android:id="@+id/perfilAluno"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:text="@string/perfil_aluno"
+                android:textColor="#CD141414"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:fontFamily="sans-serif-black" />
 
-        <EditText
-            android:id="@+id/email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:ems="10"
-            android:hint="@string/email"
-            android:inputType="textEmailAddress" />
+            <EditText
+                android:id="@+id/nome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:ems="10"
+                android:hint="@string/nome"
+                android:inputType="textPersonName" />
 
-        <EditText
-            android:id="@+id/turma"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:ems="10"
-            android:hint="@string/turma"
-            android:inputType="textShortMessage" />
+            <EditText
+                android:id="@+id/cpf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:ems="10"
+                android:hint="@string/cpf"
+                android:inputType="textPersonName"
+                android:maxLength="11" />
 
-        <EditText
-            android:id="@+id/idade"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:ems="10"
-            android:hint="@string/idade"
-            android:inputType="number" />
+            <EditText
+                android:id="@+id/matricula"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:ems="10"
+                android:hint="@string/matricula"
+                android:inputType="textPersonName" />
 
-        <Spinner
-            android:id="@+id/genero"
-            android:layout_width="match_parent"
-            android:layout_height="38dp"
-            android:layout_margin="10dp"
-            android:entries="@array/generos" />
+            <EditText
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:ems="10"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress" />
 
-        <EditText
-            android:id="@+id/senha"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:ems="10"
-            android:hint="@string/senha"
-            android:inputType="textPassword" />
+            <EditText
+                android:id="@+id/turma"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:ems="10"
+                android:hint="@string/turma"
+                android:inputType="textShortMessage" />
 
-        <Button
-            android:id="@+id/enviar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="80dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="80dp"
-            android:background="@color/colorPrimary"
-            android:padding="10dp"
-            android:text="Enviar"
-            android:textColor="#FFFFFF"
-            android:textSize="14sp" />
+            <EditText
+                android:id="@+id/idade"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:ems="10"
+                android:hint="@string/idade"
+                android:inputType="number" />
 
-        <Button
-            android:id="@+id/button_teste"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="Teste" />
+            <Spinner
+                android:id="@+id/genero"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:layout_margin="10dp"
+                android:entries="@array/generos" />
 
-    </LinearLayout>
+            <EditText
+                android:id="@+id/senha"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:ems="10"
+                android:hint="@string/senha"
+                android:inputType="textPassword" />
+
+            <EditText
+                android:id="@+id/confirmarSenha"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:ems="10"
+                android:hint="Repetir Senha"
+                android:inputType="textPersonName" />
+
+            <Button
+                android:id="@+id/enviar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="80dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="80dp"
+                android:background="@color/colorPrimary"
+                android:padding="10dp"
+                android:text="Enviar"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp" />
+
+            <Button
+                android:id="@+id/button_teste"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="Teste" />
+
+        </LinearLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

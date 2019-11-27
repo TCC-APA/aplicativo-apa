@@ -13,15 +13,19 @@ import android.widget.TextView;
 
 import com.ppa.perfildeaprendizado.data.model.Aluno;
 import com.ppa.perfildeaprendizado.task.InserirAlunoTask;
-import com.ppa.perfildeaprendizado.task.LoginTask;
+
+import java.util.concurrent.ExecutionException;
 
 public class PerguntasPessoaisActivity extends AppCompatActivity {
 
     private EditText nome;
+    private EditText cpf;
+    private EditText matricula;
     private EditText email;
     private EditText turma;
     private EditText idade;
     private EditText senha;
+    private EditText confirmarSenha;
     private Spinner genero;
     private LinearLayout form;
     private Button enviar;
@@ -34,10 +38,13 @@ public class PerguntasPessoaisActivity extends AppCompatActivity {
         setContentView(R.layout.activity_perguntas_pessoais);
         form = findViewById(R.id.form);
         nome = findViewById(R.id.nome);
+        cpf = findViewById(R.id.cpf);
+        matricula = findViewById(R.id.matricula);
         email = findViewById(R.id.email);
         turma = findViewById(R.id.turma);
         idade = findViewById(R.id.idade);
         senha = findViewById(R.id.senha);
+        confirmarSenha = findViewById(R.id.confirmarSenha);
         genero = findViewById(R.id.genero);
         enviar = findViewById(R.id.enviar);
         teste = findViewById(R.id.button_teste);
@@ -48,38 +55,61 @@ public class PerguntasPessoaisActivity extends AppCompatActivity {
                 int erros = 0;
                 if(nome.getText().toString().equals("")){
                     nome.setError(erroCampoObrigatorio());
-                    erros += 1;
+                    erros ++;
+                }
+                if(cpf.getText().toString().equals("")){
+                    cpf.setError(erroCampoObrigatorio());
+                    erros ++;
+                }
+                if(matricula.getText().toString().equals("")){
+                    matricula.setError(erroCampoObrigatorio());
+                    erros ++;
                 }
                 if(email.getText().toString().equals("")){
                     email.setError(erroCampoObrigatorio());
-                    erros += 1;
+                    erros ++;
                 }else if(!email.getText().toString().contains("@") || !email.getText().toString().contains(".")){
                     email.setError("Precisa ser um e-mail!");
-                    erros += 1;
+                    erros ++;
                 }
                 if(turma.getText().toString().equals("")){
                     turma.setError(erroCampoObrigatorio());
-                    erros += 1;
+                    erros ++;
                 }
                 if(idade.getText().toString().equals("")){
                     idade.setError(erroCampoObrigatorio());
-                    erros += 1;
+                    erros ++;
                 }
                 if(genero.getSelectedItem().equals(getResources().getStringArray(R.array.generos)[0])){
                     ((TextView)genero.getSelectedView()).setError("Escolha outra opção!");
-                    erros += 1;
+                    erros ++;
                 }
                 if(senha.getText().toString().equals("")){
                     senha.setError(erroCampoObrigatorio());
-                    erros += 1;
+                    erros ++;
                 }else if(senha.getText().toString().length() < 5){
                     senha.setError("A Senha Precisa ter no Mínimo 5 Dígitos!");
-                    erros += 1;
+                    erros++;
+                }
+                if(confirmarSenha.getText().toString().equals("")){
+                    confirmarSenha.setError(erroCampoObrigatorio());
+                    erros++;
+                }else if(!confirmarSenha.getText().toString().equals(senha.getText().toString())){
+                    confirmarSenha.setError("As Senhas Digitadas são Diferentes!");
+                    erros++;
                 }
                 if(erros == 0){
-                    Aluno aluno = new Aluno("123456789", "1622122BCC", nome.getText().toString(), email.getText().toString(), turma.getText().toString(), Integer.valueOf(idade.getText().toString()), genero.getSelectedItem().toString(), senha.getText().toString());
-                    new InserirAlunoTask(aluno).execute();
-                    sendMessage();
+                    Aluno aluno = new Aluno(cpf.getText().toString(), matricula.getText().toString(), nome.getText().toString(), email.getText().toString(), turma.getText().toString(), Integer.valueOf(idade.getText().toString()), genero.getSelectedItem().toString(), senha.getText().toString());
+                    try {
+                        Boolean b = new InserirAlunoTask(aluno).execute().get();
+                        if(b){
+                            sendMessage();
+                        }
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });

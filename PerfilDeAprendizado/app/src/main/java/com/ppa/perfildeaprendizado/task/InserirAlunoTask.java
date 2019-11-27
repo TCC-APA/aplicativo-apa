@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class InserirAlunoTask extends AsyncTask<Aluno, Void, Void> {
+public class InserirAlunoTask extends AsyncTask<Aluno, Void, Boolean> {
 
     private Aluno aluno;
 
@@ -22,10 +22,11 @@ public class InserirAlunoTask extends AsyncTask<Aluno, Void, Void> {
     }
 
     @Override
-    protected Void doInBackground(Aluno... alunos) {
+    protected Boolean doInBackground(Aluno... alunos) {
+        alunos = new Aluno[1];
         alunos[0] = aluno;
         try{
-            URL url = new URL("http://localhost:8080/rest/v1/login/inserir");
+            URL url = new URL("http://192.168.0.11:8080/rest/v1/login/inserir");
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("POST");
             connection.setRequestProperty("Content-type", "application/json");
@@ -39,15 +40,18 @@ public class InserirAlunoTask extends AsyncTask<Aluno, Void, Void> {
             os.write(input.getBytes());
             os.flush();
 
-            if(connection.getResponseCode() != HttpURLConnection.HTTP_ACCEPTED){
-                Log.e("ERRO", "Não foi possível acessar o WebService: " + connection.getResponseMessage());
+            if(connection.getResponseCode() != HttpURLConnection.HTTP_OK){
+                Log.e("ERRO", "Não foi possível acessar o WebService: " + connection.getResponseCode());
             }
+            connection.disconnect();
+            return true;
 
         } catch (MalformedURLException e) {
-            e.printStackTrace();
+            Log.e("ERRO", e.getMessage());
+            return false;
         } catch (IOException e){
-            e.printStackTrace();
+            Log.e("ERRO", e.getMessage());
+            return false;
         }
-        return null;
     }
 }

@@ -16,7 +16,7 @@ public class LoginDataSource {
             Aluno fakeUser =
                     new Aluno(
                             java.util.UUID.randomUUID().toString(),
-                            "Jane Doe", "jane_doe@gmail.com", "BCC", 20, "Feminino");
+                            "1622333GGG", "Jane Doe", "jane_doe@gmail.com", "BCC", 20, "Feminino", "123445");
             return new Result.Success<>(fakeUser);
         } catch (Exception e) {
             return new Result.Error(new IOException("Error logging in", e));

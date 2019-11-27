@@ -5,16 +5,17 @@ package com.ppa.perfildeaprendizado.data.model;
  */
 public class Aluno {
 
+    private Integer id;
     private String cpf;
     private String matricula;
     private String nome;
     private String email;
     private String turma;
-    private int idade;
+    private Integer idade;
     private String genero;
     private String senha;
 
-    public Aluno(String cpf, String matricula, String nome, String email, String turma, int idade, String genero, String senha) {
+    public Aluno(String cpf, String matricula, String nome, String email, String turma, Integer idade, String genero, String senha) {
         this.cpf = cpf;
         this.matricula = matricula;
         this.nome = nome;
@@ -23,6 +24,14 @@ public class Aluno {
         this.idade = idade;
         this.genero = genero;
         this.senha = senha;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getCpf() {
@@ -65,11 +74,11 @@ public class Aluno {
         this.turma = turma;
     }
 
-    public int getIdade() {
+    public Integer getIdade() {
         return idade;
     }
 
-    public void setIdade(int idade) {
+    public void setIdade(Integer idade) {
         this.idade = idade;
     }
 
@@ -89,13 +98,16 @@ public class Aluno {
         this.senha = senha;
     }
 
-    public String toString(){
-        return "CPF: " + cpf
-                + "Matrícula: " + matricula
-                + "Nome: " + nome
-                + "Email: " + email
-                + "Turma: " + turma
-                + "Idade: " + idade
-                + "Gênero: " + genero;
+    @Override
+    public String toString() {
+        return "Aluno{" +
+                "cpf='" + cpf + '\'' +
+                ", matricula='" + matricula + '\'' +
+                ", nome='" + nome + '\'' +
+                ", email='" + email + '\'' +
+                ", turma='" + turma + '\'' +
+                ", idade=" + idade +
+                ", genero='" + genero + '\'' +
+                '}';
     }
 }
