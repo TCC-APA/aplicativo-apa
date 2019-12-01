@@ -7,6 +7,7 @@ import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
 import br.com.rest.api.LoginApi;
+import br.com.rest.api.MonitoracaoApi;
 
 @ApplicationPath("v1")
 public class AppConfig extends Application{
@@ -16,6 +17,7 @@ public class AppConfig extends Application{
 	public AppConfig() {
 		System.out.println("AppConfig Criado!");
 		resources.add(LoginApi.class);
+		resources.add(MonitoracaoApi.class);
 	}
 	
 	@Override

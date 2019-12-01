@@ -37,6 +37,18 @@ public class AlunoEntity {
 
 	@Column
 	private String senha;
+
+	@Column
+	private Integer perfilAtivo;
+	
+	@Column
+	private Integer perfilReflexivo;
+	
+	@Column
+	private Integer perfilPragmatico;
+	
+	@Column
+	private Integer perfilTeorico;
 	
 	public String getEmail() {
 		return email;
@@ -109,6 +121,38 @@ public class AlunoEntity {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
+		
+	public Integer getPerfilAtivo() {
+		return perfilAtivo;
+	}
+	
+	public void setPerfilAtivo(Integer perfilAtivo) {
+		this.perfilAtivo = perfilAtivo;
+	}
+	
+	public Integer getPerfilReflexivo() {
+		return perfilReflexivo;
+	}
+	
+	public void setPerfilReflexivo(Integer perfilReflexivo) {
+		this.perfilReflexivo = perfilReflexivo;
+	}
+	
+	public Integer getPerfilPragmatico() {
+		return perfilPragmatico;
+	}
+	
+	public void setPerfilPragmatico(Integer perfilPragmatico) {
+		this.perfilPragmatico = perfilPragmatico;
+	}
+	
+	public Integer getPerfilTeorico() {
+		return perfilTeorico;
+	}
+	
+	public void setPerfilTeorico(Integer perfilTeorico) {
+		this.perfilTeorico = perfilTeorico;
+	}
 
 	@Override
 	public int hashCode() {
@@ -121,6 +165,10 @@ public class AlunoEntity {
 		result = prime * result + idade;
 		result = prime * result + ((matricula == null) ? 0 : matricula.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result + ((perfilAtivo == null) ? 0 : perfilAtivo.hashCode());
+		result = prime * result + ((perfilPragmatico == null) ? 0 : perfilPragmatico.hashCode());
+		result = prime * result + ((perfilReflexivo == null) ? 0 : perfilReflexivo.hashCode());
+		result = prime * result + ((perfilTeorico == null) ? 0 : perfilTeorico.hashCode());
 		result = prime * result + ((senha == null) ? 0 : senha.hashCode());
 		result = prime * result + ((turma == null) ? 0 : turma.hashCode());
 		return result;
@@ -167,6 +215,26 @@ public class AlunoEntity {
 				return false;
 		} else if (!nome.equals(other.nome))
 			return false;
+		if (perfilAtivo == null) {
+			if (other.perfilAtivo != null)
+				return false;
+		} else if (!perfilAtivo.equals(other.perfilAtivo))
+			return false;
+		if (perfilPragmatico == null) {
+			if (other.perfilPragmatico != null)
+				return false;
+		} else if (!perfilPragmatico.equals(other.perfilPragmatico))
+			return false;
+		if (perfilReflexivo == null) {
+			if (other.perfilReflexivo != null)
+				return false;
+		} else if (!perfilReflexivo.equals(other.perfilReflexivo))
+			return false;
+		if (perfilTeorico == null) {
+			if (other.perfilTeorico != null)
+				return false;
+		} else if (!perfilTeorico.equals(other.perfilTeorico))
+			return false;
 		if (senha == null) {
 			if (other.senha != null)
 				return false;
@@ -183,9 +251,8 @@ public class AlunoEntity {
 	@Override
 	public String toString() {
 		return "AlunoEntity [id=" + id + ", cpf=" + cpf + ", matricula=" + matricula + ", nome=" + nome + ", email="
-				+ email + ", turma=" + turma + ", idade=" + idade + ", genero=" + genero + ", senha=" + senha + "]";
+				+ email + ", turma=" + turma + ", idade=" + idade + ", genero=" + genero + ", senha=" + senha
+				+ ", perfilAtivo=" + perfilAtivo + ", perfilReflexivo=" + perfilReflexivo + ", perfilPragmatico="
+				+ perfilPragmatico + ", perfilTeorico=" + perfilTeorico + "]";
 	}
-
-	
-	
 }
