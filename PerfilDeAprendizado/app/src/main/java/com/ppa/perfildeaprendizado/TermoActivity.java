@@ -11,6 +11,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.ppa.perfildeaprendizado.data.model.Aluno;
 import com.ppa.perfildeaprendizado.ui.login.LoginActivity;
 
 public class TermoActivity extends AppCompatActivity {
@@ -41,12 +42,13 @@ public class TermoActivity extends AppCompatActivity {
     }
 
     public void iniciarPerguntasPessoais(){
-        Intent intent = new Intent(this, PerguntasPessoaisActivity.class);
+        Aluno aluno = (Aluno) getIntent().getSerializableExtra(Aluno.class.getSimpleName());
+        Intent intent = new Intent(this, QuestionarioActivity.class);
+        intent.putExtra(Aluno.class.getSimpleName(), aluno);
         startActivity(intent);
     }
 
     public void voltarLogin(){
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
+        finish();
     }
 }

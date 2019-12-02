@@ -1,51 +1,67 @@
 package com.ppa.perfildeaprendizado.task;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.ppa.perfildeaprendizado.data.model.Aluno;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Scanner;
 
-public class LoginTask extends AsyncTask<Void, Void, String> {
+public class LoginTask extends AsyncTask<Void, Void, Aluno> {
 
-    public String email;
+    private String matricula;
+    private String senha;
 
-    public LoginTask(String email){
-        this.email = email;
+    public LoginTask(String matricula, String senha){
+        this.matricula = matricula;
+        this.senha = senha;
     }
 
     @Override
-    protected String doInBackground(Void... voids) {
+    protected Aluno doInBackground(Void... voids) {
         StringBuilder resposta = new StringBuilder();
 
-        if(this.email != null){
+        if(this.matricula != null && this.senha != null){
             try{
-                URL url = new URL("http://192.168.0.11:8080/rest/v1/teste/testeurl?cpf=" + this.email);
-
+                URL url = new URL("http://192.168.0.11:8080/rest/v1/login");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setRequestMethod("GET");
+                connection.setRequestMethod("POST");
                 connection.setRequestProperty("Content-type", "application/json");
                 connection.setRequestProperty("Accept", "application/json");
                 connection.setDoOutput(true);
-                connection.setConnectTimeout(50000);
-                connection.connect();
+                connection.setDoInput(true);
+                connection.setConnectTimeout(5000);
 
-                Scanner scanner = new Scanner(url.openStream());
+                String input = "{\"matricula\":\"" + matricula + "\",\"senha\":\"" + senha + "\"}";
+
+                OutputStream os = connection.getOutputStream();
+                os.write(input.getBytes());
+                os.flush();
+                os.close();
+
+                Scanner scanner = new Scanner((InputStream) connection.getContent());
                 while (scanner.hasNext()) {
                     resposta.append(scanner.next());
                 }
+
+                if(connection.getResponseCode() != HttpURLConnection.HTTP_OK){
+                    Log.e("ERRO", "Não foi possível acessar o WebService: " + connection.getResponseCode());
+                }
+
+                connection.disconnect();
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }catch (IOException e){
                 e.printStackTrace();
             }
         }
-        //Retorno para quando for mexer com objeto Aluno: return new Gson().fromJson(resposta.toString(), Aluno.class);
-        return resposta.substring(resposta.indexOf(":")+2, resposta.length()-2);
+        return new Gson().fromJson(resposta.toString(), Aluno.class);
     }
 }

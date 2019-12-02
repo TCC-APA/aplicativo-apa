@@ -8,7 +8,7 @@
     <string name="action_sign_in">Entrar</string>
     <string name="button_first_access">Primeiro Acesso</string>
     <string name="action_sign_in_short">Sign in</string>
-    <string name="welcome">"Bem-Vindo(a) !"</string>
+    <string name="welcome">"Bem-Vindo(a), "</string>
     <string name="invalid_username">Não é um e-mail válido</string>
     <string name="invalid_password">Senha deve ter mais de 5 caracteres</string>
     <string name="login_failed">"Login Falhou"</string>

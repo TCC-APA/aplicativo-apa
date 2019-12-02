@@ -23,8 +23,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ppa.perfildeaprendizado.PerguntasPessoaisActivity;
+import com.ppa.perfildeaprendizado.ResultadoActivity;
 import com.ppa.perfildeaprendizado.TermoActivity;
 import com.ppa.perfildeaprendizado.R;
+import com.ppa.perfildeaprendizado.data.model.Aluno;
 import com.ppa.perfildeaprendizado.task.LoginTask;
 
 import java.util.concurrent.ExecutionException;
@@ -70,25 +73,25 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        loginViewModel.getLoginResult().observe(this, new Observer<LoginResult>() {
-            @Override
-            public void onChanged(@Nullable LoginResult loginResult) {
-                if (loginResult == null) {
-                    return;
-                }
-                loadingProgressBar.setVisibility(View.GONE);
-                if (loginResult.getError() != null) {
-                    showLoginFailed(loginResult.getError());
-                }
-                if (loginResult.getSuccess() != null) {
-                    updateUiWithUser(loginResult.getSuccess());
-                }
-                setResult(Activity.RESULT_OK);
-
-                //Complete and destroy login activity once successful
-                finish();
-            }
-        });
+//        loginViewModel.getLoginResult().observe(this, new Observer<LoginResult>() {
+//            @Override
+//            public void onChanged(@Nullable LoginResult loginResult) {
+//                if (loginResult == null) {
+//                    return;
+//                }
+//                loadingProgressBar.setVisibility(View.GONE);
+//                if (loginResult.getError() != null) {
+//                    showLoginFailed(loginResult.getError());
+//                }
+//                if (loginResult.getSuccess() != null) {
+//                    updateUiWithUser();
+//                }
+//                setResult(Activity.RESULT_OK);
+//
+//                //Complete and destroy login activity once successful
+//                finish();
+//            }
+//        });
 
         TextWatcher afterTextChangedListener = new TextWatcher() {
             @Override
@@ -124,12 +127,17 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Aluno aluno = null;
                 try {
-                    String retorno = new LoginTask(usernameEditText.getText().toString()).execute().get();
-                    loginButton.setText(retorno);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    aluno = new LoginTask(usernameEditText.getText().toString(), passwordEditText.getText().toString()).execute().get();
+                    if(aluno != null) {
+                        updateUiWithUser(aluno);
+                    }else {
+                        showLoginFailed("Login Falhou!");
+                    }
                 } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
@@ -145,18 +153,20 @@ public class LoginActivity extends AppCompatActivity {
 //        });
     }
 
-    private void updateUiWithUser(LoggedInUserView model) {
-        String welcome = getString(R.string.welcome) + model.getDisplayName();
-        // TODO : initiate successful logged in experience
+    private void updateUiWithUser(Aluno aluno) {
+        String welcome = getString(R.string.welcome) + aluno.getNome() + "!";
         Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(LoginActivity.this, ResultadoActivity.class);
+        intent.putExtra(Aluno.class.getSimpleName(), aluno);
+        startActivity(intent);
     }
 
-    private void showLoginFailed(@StringRes Integer errorString) {
+    private void showLoginFailed(String errorString) {
         Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
     }
 
     private void iniciarQuestionario(){
-        Intent intent = new Intent(this, TermoActivity.class);
+        Intent intent = new Intent(this, PerguntasPessoaisActivity.class);
         startActivity(intent);
     }
 }

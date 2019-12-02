@@ -100,16 +100,7 @@ public class PerguntasPessoaisActivity extends AppCompatActivity {
                 }
                 if(erros == 0){
                     Aluno aluno = new Aluno(cpf.getText().toString(), matricula.getText().toString(), nome.getText().toString(), email.getText().toString(), turma.getText().toString(), Integer.valueOf(idade.getText().toString()), genero.getSelectedItem().toString(), senha.getText().toString());
-                    try {
-                        Boolean b = new InserirAlunoTask(aluno).execute().get();
-                        if(b){
-                            sendMessage();
-                        }
-                    } catch (ExecutionException e) {
-                        e.printStackTrace();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    sendMessage(aluno);
                 }
             }
         });
@@ -117,13 +108,14 @@ public class PerguntasPessoaisActivity extends AppCompatActivity {
         teste.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendMessage();
+                sendMessage(null);
             }
         });
     }
 
-    public void sendMessage(){
-        Intent intent = new Intent(PerguntasPessoaisActivity.this, MenuQuestionariosActivity.class);
+    public void sendMessage(Aluno aluno){
+        Intent intent = new Intent(PerguntasPessoaisActivity.this, TermoActivity.class);
+        intent.putExtra(Aluno.class.getSimpleName(), aluno);
         startActivity(intent);
     }
 

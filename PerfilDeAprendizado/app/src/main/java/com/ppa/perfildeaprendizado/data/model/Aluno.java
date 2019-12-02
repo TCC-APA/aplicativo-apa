@@ -1,9 +1,13 @@
 package com.ppa.perfildeaprendizado.data.model;
 
+import android.os.Parcelable;
+
+import java.io.Serializable;
+
 /**
  * Data class that captures user information for logged in users retrieved from LoginRepository
  */
-public class Aluno {
+public class Aluno implements Serializable {
 
     private Integer id;
     private String cpf;
@@ -14,6 +18,14 @@ public class Aluno {
     private Integer idade;
     private String genero;
     private String senha;
+    private Integer perfilAtivo;
+    private Integer perfilReflexivo;
+    private Integer perfilPragmatico;
+    private Integer perfilTeorico;
+
+    public Aluno(){
+
+    }
 
     public Aluno(String cpf, String matricula, String nome, String email, String turma, Integer idade, String genero, String senha) {
         this.cpf = cpf;
@@ -96,6 +108,45 @@ public class Aluno {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public Integer getPerfilAtivo() {
+        return perfilAtivo;
+    }
+
+    public void setPerfilAtivo(Integer perfilAtivo) {
+        this.perfilAtivo = perfilAtivo;
+    }
+
+    public Integer getPerfilReflexivo() {
+        return perfilReflexivo;
+    }
+
+    public void setPerfilReflexivo(Integer perfilReflexivo) {
+        this.perfilReflexivo = perfilReflexivo;
+    }
+
+    public Integer getPerfilPragmatico() {
+        return perfilPragmatico;
+    }
+
+    public void setPerfilPragmatico(Integer perfilPragmatico) {
+        this.perfilPragmatico = perfilPragmatico;
+    }
+
+    public Integer getPerfilTeorico() {
+        return perfilTeorico;
+    }
+
+    public void setPerfilTeorico(Integer perfilTeorico) {
+        this.perfilTeorico = perfilTeorico;
+    }
+
+    public boolean temPerfis(){
+        if(this.perfilAtivo == null || this.perfilPragmatico == null || this.perfilReflexivo == null || this.perfilTeorico == null){
+            return false;
+        }
+        return true;
     }
 
     @Override

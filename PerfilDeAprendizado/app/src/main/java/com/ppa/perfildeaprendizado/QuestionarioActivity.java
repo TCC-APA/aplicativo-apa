@@ -10,6 +10,8 @@ import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.ppa.perfildeaprendizado.data.model.Aluno;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 public class QuestionarioActivity extends AppCompatActivity {
@@ -161,7 +163,9 @@ public class QuestionarioActivity extends AppCompatActivity {
     }
 
     public void terminaQuestionario(){
-        Intent intent = new Intent(QuestionarioActivity.this, FimQuestionarioActivity.class);
+        Aluno aluno = (Aluno) getIntent().getSerializableExtra(Aluno.class.getSimpleName());
+        Intent intent = new Intent(QuestionarioActivity.this, ResultadoActivity.class);
+        intent.putExtra(Aluno.class.getSimpleName(), aluno);
         startActivity(intent);
     }
 
