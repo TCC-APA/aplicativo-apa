@@ -12,7 +12,7 @@ public class MonitoracaoApi {
 	@Path("")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String ping() {
-		return "Status de servidor: ok";
+		return "Status de servidor: ok!";
 	}
 }
 
