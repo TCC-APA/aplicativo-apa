@@ -8,35 +8,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @XmlRootElement
-public class AlunoEntity {
+public class AlunoEntity extends Usuario {
 	
-	@Id
-	@GeneratedValue
-	private Integer id;
-	
-	@Column
-	private String cpf;
-
 	@Column
 	private String matricula;
 
 	@Column
-	private String nome;
-
-	@Column
-	private String email;
-	
-	@Column
 	private String turma;
-	
-	@Column
-	private int idade;
-	
-	@Column
-	private String genero;
-
-	@Column
-	private String senha;
 
 	@Column
 	private Integer perfilAtivo;
