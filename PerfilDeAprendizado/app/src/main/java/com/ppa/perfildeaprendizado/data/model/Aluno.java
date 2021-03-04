@@ -10,10 +10,8 @@ import java.io.Serializable;
 public class Aluno implements Serializable {
 
     private Integer id;
-    private String cpf;
     private String matricula;
     private String nome;
-    private String email;
     private String turma;
     private Integer idade;
     private String genero;
@@ -27,11 +25,9 @@ public class Aluno implements Serializable {
 
     }
 
-    public Aluno(String cpf, String matricula, String nome, String email, String turma, Integer idade, String genero, String senha) {
-        this.cpf = cpf;
+    public Aluno(String matricula, String nome, String turma, Integer idade, String genero, String senha) {
         this.matricula = matricula;
         this.nome = nome;
-        this.email = email;
         this.turma = turma;
         this.idade = idade;
         this.genero = genero;
@@ -44,14 +40,6 @@ public class Aluno implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
     }
 
     public String getMatricula() {
@@ -68,14 +56,6 @@ public class Aluno implements Serializable {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getTurma() {
@@ -152,10 +132,8 @@ public class Aluno implements Serializable {
     @Override
     public String toString() {
         return "Aluno{" +
-                "cpf='" + cpf + '\'' +
                 ", matricula='" + matricula + '\'' +
                 ", nome='" + nome + '\'' +
-                ", email='" + email + '\'' +
                 ", turma='" + turma + '\'' +
                 ", idade=" + idade +
                 ", genero='" + genero + '\'' +

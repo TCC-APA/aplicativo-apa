@@ -42,16 +42,6 @@
                 android:inputType="textPersonName" />
 
             <EditText
-                android:id="@+id/cpf"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:ems="10"
-                android:hint="@string/cpf"
-                android:inputType="textPersonName"
-                android:maxLength="11" />
-
-            <EditText
                 android:id="@+id/matricula"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -59,15 +49,6 @@
                 android:ems="10"
                 android:hint="@string/matricula"
                 android:inputType="textPersonName" />
-
-            <EditText
-                android:id="@+id/email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:ems="10"
-                android:hint="@string/email"
-                android:inputType="textEmailAddress" />
 
             <EditText
                 android:id="@+id/turma"
@@ -124,13 +105,6 @@
                 android:text="Enviar"
                 android:textColor="#FFFFFF"
                 android:textSize="14sp" />
-
-            <Button
-                android:id="@+id/button_teste"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:text="Teste" />
 
         </LinearLayout>
     </ScrollView>
