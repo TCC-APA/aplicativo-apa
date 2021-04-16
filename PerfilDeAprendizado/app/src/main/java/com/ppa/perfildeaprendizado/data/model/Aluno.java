@@ -12,7 +12,6 @@ public class Aluno implements Serializable {
     private Integer id;
     private String matricula;
     private String nome;
-    private String turma;
     private Integer idade;
     private String genero;
     private String senha;
@@ -25,10 +24,9 @@ public class Aluno implements Serializable {
 
     }
 
-    public Aluno(String matricula, String nome, String turma, Integer idade, String genero, String senha) {
+    public Aluno(String matricula, String nome, Integer idade, String genero, String senha) {
         this.matricula = matricula;
         this.nome = nome;
-        this.turma = turma;
         this.idade = idade;
         this.genero = genero;
         this.senha = senha;
@@ -56,14 +54,6 @@ public class Aluno implements Serializable {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public String getTurma() {
-        return turma;
-    }
-
-    public void setTurma(String turma) {
-        this.turma = turma;
     }
 
     public Integer getIdade() {
@@ -132,11 +122,10 @@ public class Aluno implements Serializable {
     @Override
     public String toString() {
         return "Aluno{" +
-                ", matricula='" + matricula + '\'' +
                 ", nome='" + nome + '\'' +
-                ", turma='" + turma + '\'' +
                 ", idade=" + idade +
                 ", genero='" + genero + '\'' +
+                ", matricula='" + matricula + '\'' +
                 '}';
     }
 }
