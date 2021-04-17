@@ -51,15 +51,6 @@
                 android:inputType="textPersonName" />
 
             <EditText
-                android:id="@+id/turma"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:ems="10"
-                android:hint="@string/turma"
-                android:inputType="textShortMessage" />
-
-            <EditText
                 android:id="@+id/idade"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

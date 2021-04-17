@@ -20,7 +20,6 @@ public class PerguntasPessoaisActivity extends AppCompatActivity {
 
     private EditText nome;
     private EditText matricula;
-    private EditText turma;
     private EditText idade;
     private EditText senha;
     private EditText confirmarSenha;
@@ -36,7 +35,6 @@ public class PerguntasPessoaisActivity extends AppCompatActivity {
         form = findViewById(R.id.form);
         nome = findViewById(R.id.nome);
         matricula = findViewById(R.id.matricula);
-        turma = findViewById(R.id.turma);
         idade = findViewById(R.id.idade);
         senha = findViewById(R.id.senha);
         confirmarSenha = findViewById(R.id.confirmarSenha);
@@ -55,10 +53,7 @@ public class PerguntasPessoaisActivity extends AppCompatActivity {
                     matricula.setError(erroCampoObrigatorio());
                     erros++;
                 }
-                if (turma.getText().toString().equals("")) {
-                    turma.setError(erroCampoObrigatorio());
-                    erros++;
-                }
+
                 if (idade.getText().toString().equals("")) {
                     idade.setError(erroCampoObrigatorio());
                     erros++;
@@ -82,7 +77,7 @@ public class PerguntasPessoaisActivity extends AppCompatActivity {
                     erros++;
                 }
                 if (erros == 0) {
-                    Aluno aluno = new Aluno(matricula.getText().toString(), nome.getText().toString(), turma.getText().toString(), Integer.valueOf(idade.getText().toString()), genero.getSelectedItem().toString(), senha.getText().toString());
+                    Aluno aluno = new Aluno(matricula.getText().toString(), nome.getText().toString(), Integer.valueOf(idade.getText().toString()), genero.getSelectedItem().toString(), senha.getText().toString());
                     sendMessage(aluno);
                 }
             }
