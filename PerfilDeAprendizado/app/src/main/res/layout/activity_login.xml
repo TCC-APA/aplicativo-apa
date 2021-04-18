@@ -13,27 +13,29 @@
 
   <Button
       android:id="@+id/login"
-      android:layout_width="112dp"
-      android:layout_height="57dp"
+      android:layout_width="115dp"
+      android:layout_height="40dp"
       android:layout_gravity="start"
       android:layout_marginStart="48dp"
       android:layout_marginTop="16dp"
       android:layout_marginEnd="48dp"
       android:layout_marginBottom="64dp"
+      android:background="@drawable/roundedbuttongray"
       android:enabled="false"
       android:text="@string/action_sign_in"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.497"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/password"
-      app:layout_constraintVertical_bias="0.2" />
+      app:layout_constraintVertical_bias="0.25" />
 
   <EditText
       android:id="@+id/password"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:layout_marginStart="24dp"
-      android:layout_marginTop="8dp"
+      android:layout_marginTop="20dp"
       android:layout_marginEnd="24dp"
 
       android:hint="@string/prompt_password"
@@ -50,14 +52,13 @@
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:layout_marginStart="24dp"
-      android:layout_marginTop="192dp"
+      android:layout_marginTop="312dp"
       android:layout_marginEnd="24dp"
 
       android:hint="@string/matricula"
       android:inputType="text"
       android:selectAllOnFocus="true"
       app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHorizontal_bias="0.0"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent" />
 
@@ -79,14 +80,26 @@
 
   <Button
       android:id="@+id/primAcesso"
-      android:layout_width="168dp"
-      android:layout_height="58dp"
-      android:background="@color/colorPrimary"
+      android:layout_width="200dp"
+      android:layout_height="50dp"
+      android:background="@drawable/roundedbutton"
       android:text="@string/button_first_access"
       android:textColor="#FFFF"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      app:layout_constraintVertical_bias="0.120000005" />
+      app:layout_constraintVertical_bias="0.24000001" />
+
+  <View
+      android:id="@+id/divider"
+      android:layout_width="0dp"
+      android:layout_height="1dp"
+      android:layout_marginTop="60dp"
+      android:layout_marginBottom="45dp"
+      android:background="#CCCCCC"
+      app:layout_constraintBottom_toTopOf="@+id/username"
+      app:layout_constraintTop_toBottomOf="@+id/primAcesso"
+      tools:layout_editor_absoluteX="16dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

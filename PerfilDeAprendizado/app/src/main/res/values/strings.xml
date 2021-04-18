@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">Perfil De Aprendizado</string>
+    <string name="app_name">APA</string>
 
     <!--    LoginActivity-->
-    <string name="title_activity_login">Perfil De Aprendizado</string>
+    <string name="title_activity_login">APA</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Senha</string>
     <string name="action_sign_in">Entrar</string>
@@ -31,11 +31,11 @@
 
     <!--    FimQuestionarioActivity-->
     <string name="fim_questionario">"Obrigado! Todas as questões foram respondidas com sucesso. Deseja enviar as respostas?"</string>
-    <string name="enviar_respostas">"Enviar"</string>
+    <string name="enviar_respostas">"Enviar Respostas"</string>
     <string name="voltar_inicio">"Voltar ao questionário"</string>
 
     <!--    PerguntasPessoaisActivity-->
-    <string name="perfil_aluno">"Perfil do(a) Aluno(a)"</string>
+    <string name="perfil_aluno">"Perfil do Discente"</string>
     <string name="nome">"Nome Completo"</string>
     <string name="email">"E-mail"</string>
     <string name="turma">"Turma"</string>

@@ -91,9 +91,9 @@
                 android:layout_marginLeft="80dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="80dp"
-                android:background="@color/colorPrimary"
+                android:background="@drawable/roundedbutton"
                 android:padding="10dp"
-                android:text="Enviar"
+                android:text="Prosseguir"
                 android:textColor="#FFFFFF"
                 android:textSize="14sp" />
 
