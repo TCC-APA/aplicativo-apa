@@ -1,7 +1,5 @@
 package com.ppa.perfildeaprendizado.ui.login;
 
-import android.app.Activity;
-
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -9,7 +7,6 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.text.Editable;
@@ -24,9 +21,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ppa.perfildeaprendizado.PerguntasPessoaisActivity;
-import com.ppa.perfildeaprendizado.ResultadoActivity;
-import com.ppa.perfildeaprendizado.TermoActivity;
 import com.ppa.perfildeaprendizado.R;
+import com.ppa.perfildeaprendizado.ResultadoActivity;
 import com.ppa.perfildeaprendizado.data.model.Aluno;
 import com.ppa.perfildeaprendizado.task.LoginTask;
 

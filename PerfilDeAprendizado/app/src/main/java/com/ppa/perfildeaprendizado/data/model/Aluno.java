@@ -3,6 +3,9 @@ package com.ppa.perfildeaprendizado.data.model;
 import android.os.Parcelable;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Data class that captures user information for logged in users retrieved from LoginRepository

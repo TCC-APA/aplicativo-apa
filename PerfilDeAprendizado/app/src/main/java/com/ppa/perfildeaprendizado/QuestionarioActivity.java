@@ -29,7 +29,7 @@ public class QuestionarioActivity extends AppCompatActivity {
 
     public static int numQuestao = 0;
     private String[] questoes;
-    protected static Integer[] respostas;
+    public static Integer[] respostas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

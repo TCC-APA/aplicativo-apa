@@ -2,17 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ppa.perfildeaprendizado">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
-    <supports-screens
-        android:smallScreens="true"
-        android:normalScreens="true"
-        android:largeScreens="true"
-        android:xlargeScreens="true"
-        android:anyDensity="true"
-        android:resizeable="true"/>
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -21,8 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".MenuQuestionariosActivity"/>
-        <activity android:name=".ResultadoActivity" />
+        <activity android:name=".DetalhesEstilosActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ResultadoActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".MenuQuestionariosActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".FimQuestionarioActivity"
             android:screenOrientation="portrait" />
@@ -31,21 +25,32 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".PerguntasPessoaisActivity"
-            android:screenOrientation="portrait"
-            />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.login.LoginActivity"
             android:label="@string/title_activity_login"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
                 <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".TermoActivity"
             android:screenOrientation="portrait" />
     </application>
+
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:resizeable="true"
+        android:smallScreens="true"
+        android:xlargeScreens="true" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

@@ -50,19 +50,32 @@
     <string name="reflexivo">"Reflexivo"</string>
     <string name="teorico">"Teórico"</string>
     <string name="pragmático">"Pragmático"</string>
+    <string name="estilos_resultado">Perfil de Aprendizagem</string>
+    <string name="editar_perfil">Editar Dados</string>
+    <string name="grafico_titulo">Gráfico de Grau de Pertinência dos Estilos</string>
+    <string name="estilo_predominante">Seu Estilo de Aprendizagem predominante</string>
+    <string name="caracteristicas_estilo">Características desse estilo</string>
+    <string name="aprendizado_estilo">Tem facilidade para aprender quando...</string>
+    <string name="ver_mais_botao">Ver Mais</string>
+    <string name="caracteristicas">Pessoas do estilo Ativo costumam se beneficiar de novas experiências, possuem a mente aberta e se sentem entusiasmadas ao realizarem novas tarefas.</string>
+    <string name="aprendizado">Lidam com atividades curtas que apresentem desafios ou tenham resultados imediatos.</string>
 
     <!--    Gêneros Perfil Aprendizado-->
+    <string name="escolha_questionario">"Escolha um questionário para responder"</string>
+
+    <!--    Menu Questionarios-->
+    <string name="title_activity_resultado">ResultadoActivity</string>
+
+    <!--    Editar Perfil-->
+
+
+    <!--    Questionario-->
     <string-array name="generos">
         <item>"Gênero"</item>
         <item>"Feminino"</item>
         <item>"Masculino"</item>
         <item>"Outro"</item>
     </string-array>
-
-    <!--    Menu Questionarios-->
-    <string name="escolha_questionario">"Escolha um questionário para responder"</string>
-
-    <!--    Questionario-->
     <string-array name="perguntas">
         <item>"Normalmente resolvo os problemas de forma metódica, ou seja, passo-a-passo."</item>
         <item>"Geralmente ajo sem medir as consequências."</item>
