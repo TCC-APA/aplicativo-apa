@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import androidx.annotation.NonNull;
+
 public class Questionario implements Serializable {
 
     private Long id;
@@ -78,5 +80,18 @@ public class Questionario implements Serializable {
             this.valoresAlternativas = new ArrayList<ValorAlternativa>();
 
         this.valoresAlternativas.add(valorAlternativa);
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "QuestionarioDTO{" +
+                "  estilosIndexados='" + estilosIndexados + '\'' +
+                "  id='" + id + '\'' +
+                ", nome=" + nome +
+                ", questoes='" + questoes + '\'' +
+                ", valoresAlternativas='" + valoresAlternativas + '\'' +
+                "}";
+
     }
 }

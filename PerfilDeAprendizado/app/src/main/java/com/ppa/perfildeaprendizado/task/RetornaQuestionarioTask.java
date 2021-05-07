@@ -6,6 +6,7 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
 import com.ppa.perfildeaprendizado.data.model.Questionario;
 
@@ -26,6 +27,7 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class RetornaQuestionarioTask extends AsyncTask<Void, Void, List<Questionario>> {
@@ -50,12 +52,16 @@ public class RetornaQuestionarioTask extends AsyncTask<Void, Void, List<Question
                 connection.setRequestProperty("Accept", "application/json");
                 connection.setConnectTimeout(5000);
 
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream(), "utf-8"));
+//                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream(), "utf-8"));
 
+                Scanner scanner = new Scanner((InputStream) connection.getContent());
+                while (scanner.hasNext()) {
+                    resposta.append(scanner.next());
+                }
 //                JSONArray jsonArray = new JSONArray(bufferedReader.readLine());
 //                JSONObject jsonObject = jsonArray.getJSONObject(0);
 //                JSONArray jsonArray1 = jsonObject.getJSONArray("resultado");
-                JSONObject jsonObject = new JSONObject(bufferedReader.readLine());
+                JSONObject jsonObject = new JSONObject(resposta.toString());
                 questionarios.add(new Gson().fromJson(jsonObject.toString(), Questionario.class));
 //                JSONArray jsonArray = jsonObject.getJSONArray("resultado");
 //
