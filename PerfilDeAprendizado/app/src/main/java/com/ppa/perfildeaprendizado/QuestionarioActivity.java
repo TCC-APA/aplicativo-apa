@@ -2,12 +2,10 @@ package com.ppa.perfildeaprendizado;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.ppa.perfildeaprendizado.data.model.Aluno;
@@ -19,10 +17,11 @@ public class QuestionarioActivity extends AppCompatActivity {
     private TextView questao;
     private TextView posicao;
     private RadioGroup opcoesRadio;
-    private RadioButton radioDiscTot;
-    private RadioButton radioDisc;
-    private RadioButton radioConc;
-    private RadioButton radioConcTot;
+    private RadioButton radioNunca;
+    private RadioButton radioAlgumasVezes;
+    private RadioButton radioMuitasVezes;
+    private RadioButton radioQuaseSempre;
+    private RadioButton radioSempre;
     private Button botaoVoltar;
     private Button botaoProx;
     private Button botaoEnviarResp;
@@ -170,12 +169,13 @@ public class QuestionarioActivity extends AppCompatActivity {
     }
 
     public void coletaRespostas(){
-        this.radioDiscTot = findViewById(R.id.radioDiscTot);
-        this.radioDisc = findViewById(R.id.radioDisc);
-        this.radioConc = findViewById(R.id.radioConc);
-        this.radioConcTot = findViewById(R.id.radioConcTot);
+        this.radioNunca = findViewById(R.id.radioNunca);
+        this.radioAlgumasVezes = findViewById(R.id.radioAlgVezes);
+        this.radioMuitasVezes = findViewById(R.id.radioMuitasVezes);
+        this.radioQuaseSempre = findViewById(R.id.radioQseSempre);
+        this.radioSempre = findViewById(R.id.radioSempre);
 
-        radioDiscTot.setOnClickListener(new View.OnClickListener() {
+        radioNunca.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 respostas[numQuestao] = 1;
@@ -183,7 +183,7 @@ public class QuestionarioActivity extends AppCompatActivity {
             }
         });
 
-        radioDisc.setOnClickListener(new View.OnClickListener() {
+        radioAlgumasVezes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 respostas[numQuestao] = 2;
@@ -192,7 +192,7 @@ public class QuestionarioActivity extends AppCompatActivity {
             }
         });
 
-        radioConc.setOnClickListener(new View.OnClickListener() {
+        radioMuitasVezes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 respostas[numQuestao] = 3;
@@ -201,10 +201,19 @@ public class QuestionarioActivity extends AppCompatActivity {
             }
         });
 
-        radioConcTot.setOnClickListener(new View.OnClickListener() {
+        radioQuaseSempre.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 respostas[numQuestao] = 4;
+                avancaQuestao();
+
+            }
+        });
+
+        radioSempre.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                respostas[numQuestao] = 5;
                 avancaQuestao();
 
             }
@@ -216,19 +225,23 @@ public class QuestionarioActivity extends AppCompatActivity {
         this.opcoesRadio.clearCheck();
         if(respostas[numQuestao] != null){
             if(respostas[numQuestao] == 1){
-                radioDiscTot.setChecked(true);
+                radioNunca.setChecked(true);
 
             }
             else if(respostas[numQuestao] == 2){
-                radioDisc.setChecked(true);
+                radioAlgumasVezes.setChecked(true);
 
             }
             else if(respostas[numQuestao] == 3){
-                radioConc.setChecked(true);
+                radioMuitasVezes.setChecked(true);
 
             }
             else if(respostas[numQuestao] == 4) {
-                radioConcTot.setChecked(true);
+                radioQuaseSempre.setChecked(true);
+
+            }
+            else if(respostas[numQuestao] == 5) {
+                radioSempre.setChecked(true);
 
             }
         }
@@ -236,12 +249,12 @@ public class QuestionarioActivity extends AppCompatActivity {
 
     protected void desativarBotaoEnviar(){
         this.botaoEnviarResp.setEnabled(false);
-        this.botaoEnviarResp.setBackgroundColor(getResources().getColor(R.color.disabled_button));
+        this.botaoEnviarResp.setBackground(getResources().getDrawable(R.drawable.roundedbuttondisabled));
     }
 
     protected void ativarBotaoEnviar(){
         this.botaoEnviarResp.setEnabled(true);
-        this.botaoEnviarResp.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        this.botaoEnviarResp.setBackground(getResources().getDrawable(R.drawable.roundedbutton));
         this.botaoEnviarResp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

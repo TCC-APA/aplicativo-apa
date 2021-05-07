@@ -28,7 +28,7 @@ public class InserirAlunoTask extends AsyncTask<Void, Void, String> {
         StringBuilder resposta = new StringBuilder();
         if(aluno != null) {
             try {
-                URL url = new URL("http://192.168.0.11:8080/apa/aluno");
+                URL url = new URL("http://ec2-13-58-169-218.us-east-2.compute.amazonaws.com:8080/apa/aluno");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
                 connection.setRequestProperty("Content-type", "application/json");

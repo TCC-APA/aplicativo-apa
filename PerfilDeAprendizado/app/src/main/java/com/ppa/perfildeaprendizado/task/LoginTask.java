@@ -30,7 +30,7 @@ public class LoginTask extends AsyncTask<Void, Void, Aluno> {
 
         if(this.matricula != null && this.senha != null){
             try{
-                URL url = new URL("http://192.168.0.11:8080/apa/aluno/login");
+                URL url = new URL("http://ec2-13-58-169-218.us-east-2.compute.amazonaws.com:8080/apa/aluno/login");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
                 connection.setRequestProperty("Content-type", "application/json");

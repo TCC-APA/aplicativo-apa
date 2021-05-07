@@ -18,9 +18,6 @@
         <activity android:name=".MenuQuestionariosActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".FimQuestionarioActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".QuestionarioActivity"
             android:screenOrientation="portrait" />
         <activity

@@ -86,7 +86,7 @@ public class PerguntasPessoaisActivity extends AppCompatActivity {
     }
 
     public void sendMessage(Aluno aluno){
-        Intent intent = new Intent(PerguntasPessoaisActivity.this, TermoActivity.class);
+        Intent intent = new Intent(PerguntasPessoaisActivity.this, MenuQuestionariosActivity.class);
         intent.putExtra(Aluno.class.getSimpleName(), aluno);
         startActivity(intent);
     }

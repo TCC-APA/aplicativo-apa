@@ -1,5 +1,6 @@
 package com.ppa.perfildeaprendizado.ui.estilos;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -24,8 +25,10 @@ import com.github.mikephil.charting.data.RadarDataSet;
 import com.github.mikephil.charting.data.RadarEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IRadarDataSet;
+import com.ppa.perfildeaprendizado.DetalhesEstilosActivity;
 import com.ppa.perfildeaprendizado.QuestionarioActivity;
 import com.ppa.perfildeaprendizado.R;
+import com.ppa.perfildeaprendizado.ResultadoActivity;
 import com.ppa.perfildeaprendizado.data.model.Aluno;
 import com.ppa.perfildeaprendizado.task.InserirAlunoTask;
 
@@ -55,16 +58,25 @@ public class EstilosFragment extends Fragment {
         textoCaracteristicas = root.findViewById(R.id.text_caracteristicas);
         textoAprendizadoEstilo = root.findViewById(R.id.text_aprendizado_estilo);
         radarChart = root.findViewById(R.id.radarChart);
+        botaoVerMais = root.findViewById(R.id.button_ver_mais);
 
         aluno = (Aluno) getActivity().getIntent().getSerializableExtra(Aluno.class.getSimpleName());
 
-        if(aluno != null) {
-            if (aluno.temPerfis()) {
-                mostrarResultadosLogin();
-            } else {
-                mostrarResultadosQuestionario();
+//        if(aluno != null) {
+//            if (aluno.temPerfis()) {
+//                mostrarResultadosLogin();
+//            } else {
+//                mostrarResultadosQuestionario();
+//            }
+//        }
+
+        botaoVerMais.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), DetalhesEstilosActivity.class);
+                startActivity(intent);
             }
-        }
+        });
 
 
 
@@ -77,30 +89,30 @@ public class EstilosFragment extends Fragment {
         return root;
     }
 
-    public void fazerGrafico(){
+//    public void fazerGrafico(){
+//
+//        radarChart.setBackgroundColor(Color.WHITE);
+//        radarChart.getDescription().setEnabled(false);
+//        radarChart.setWebLineWidth(1f);
+//        radarChart.setWebColor(Color.BLUE);
+//        radarChart.setWebAlpha(100);
+//
+//
+//        radarChart.animateXY(1400, 1400, Easing.EaseInOutQuad, Easing.EaseInOutQuad);
+//        XAxis xAxis = radarChart.getXAxis();
+//        xAxis.setTextSize(9f);
+//        xAxis.setYOffset(0);
+//        xAxis.setXOffset(0);
+//        xAxis.setValueFormatter(new IndexAxisValueFormatter(getLabels()));
+//
+//        YAxis yAxis = radarChart.getYAxis();
+//        yAxis.setLabelCount(NumEstilos, false);
+//        yAxis.setTextSize(9f);
+//        yAxis.setAxisMaximum(MIN);
+//        yAxis.setAxisMaximum(MAX);
 
-        radarChart.setBackgroundColor(Color.WHITE);
-        radarChart.getDescription().setEnabled(false);
-        radarChart.setWebLineWidth(1f);
-        radarChart.setWebColor(Color.BLUE);
-        radarChart.setWebAlpha(100);
-
-
-        radarChart.animateXY(1400, 1400, Easing.EaseInOutQuad, Easing.EaseInOutQuad);
-        XAxis xAxis = radarChart.getXAxis();
-        xAxis.setTextSize(9f);
-        xAxis.setYOffset(0);
-        xAxis.setXOffset(0);
-        xAxis.setValueFormatter(new IndexAxisValueFormatter(getLabels()));
-
-        YAxis yAxis = radarChart.getYAxis();
-        yAxis.setLabelCount(NumEstilos, false);
-        yAxis.setTextSize(9f);
-        yAxis.setAxisMaximum(MIN);
-        yAxis.setAxisMaximum(MAX);
-
-        radarChart.setData(getData());
-        radarChart.invalidate();
+//        radarChart.setData(getData());
+//        radarChart.invalidate();
 
 
        /* RadarDataSet radarDataSet = new RadarDataSet(getData(), "");
@@ -121,116 +133,116 @@ public class EstilosFragment extends Fragment {
         radarDataSet.setValueTextSize(18f);
         radarDataSet.setFormLineWidth(3f);
         */
-    }
+//    }
 
-    public void mostrarResultadosLogin(){
-        fazerGrafico();
-    }
+//    public void mostrarResultadosLogin(){
+//        fazerGrafico();
+//    }
 
-    private RadarData getData(){
-        List<RadarEntry> entries = new ArrayList<>();
-        entries.add(new RadarEntry(aluno.getPerfilAtivo()));
-        entries.add(new RadarEntry(aluno.getPerfilReflexivo()));
-        entries.add(new RadarEntry(aluno.getPerfilTeorico()));
-        entries.add(new RadarEntry(aluno.getPerfilPragmatico()));
-
-        RadarDataSet set = new RadarDataSet(entries, aluno.getNome());
-        set.setColor(Color.rgb(103, 110, 129));
-        set.setFillColor(Color.rgb(103, 110, 129));
-        set.setDrawFilled(true);
-        set.setFillAlpha(180);
-        set.setLineWidth(2f);
-        set.setDrawHighlightCircleEnabled(true);
-        set.setDrawHighlightIndicators(false);
-
-        ArrayList<IRadarDataSet> sets = new ArrayList<>();
-        sets.add(set);
-
-        RadarData data = new RadarData(sets);
-        data.setValueTextSize(8f);
-        data.setDrawValues(false);
-        data.setValueTextColor(Color.WHITE);
-
-        return data;
-    }
-
-    private String[] getLabels(){
-        return new String[] { getString(R.string.ativo), getString(R.string.reflexivo), getString(R.string.teorico), getString(R.string.pragmático) };
-
-    }
-
-    public void mostrarResultadosQuestionario(){
-        Integer[] respostas = QuestionarioActivity.respostas;
-
-        if(respostas.length == 40) {
-            int ativo = 0;
-            int reflexivo = 0;
-            int teorico = 0;
-            int pragmatico = 0;
-
-            ativo += respostas[2-1];
-            ativo += respostas[7-1];
-            ativo += respostas[12-1];
-            ativo += respostas[15-1];
-            ativo += respostas[16-1];
-            ativo += respostas[19-1];
-            ativo += respostas[22-1];
-            ativo += respostas[25-1];
-            ativo += respostas[34-1];
-            ativo += respostas[39-1];
-
-            reflexivo += respostas[4-1];
-            reflexivo += respostas[13-1];
-            reflexivo += respostas[14-1];
-            reflexivo += respostas[18-1];
-            reflexivo += respostas[20-1];
-            reflexivo += respostas[23-1];
-            reflexivo += respostas[27-1];
-            reflexivo += respostas[29-1];
-            reflexivo += respostas[32-1];
-            reflexivo += respostas[40-1];
-
-            teorico += respostas[1-1];
-            teorico += respostas[5-1];
-            teorico += respostas[10-1];
-            teorico += respostas[11-1];
-            teorico += respostas[21-1];
-            teorico += respostas[24-1];
-            teorico += respostas[30-1];
-            teorico += respostas[31-1];
-            teorico += respostas[33-1];
-            teorico += respostas[36-1];
-
-            pragmatico += respostas[3-1];
-            pragmatico += respostas[6-1];
-            pragmatico += respostas[8-1];
-            pragmatico += respostas[9-1];
-            pragmatico += respostas[17-1];
-            pragmatico += respostas[26-1];
-            pragmatico += respostas[28-1];
-            pragmatico += respostas[35-1];
-            pragmatico += respostas[37-1];
-            pragmatico += respostas[38-1];
-
-            aluno.setPerfilAtivo(ativo);
-            aluno.setPerfilReflexivo(reflexivo);
-            aluno.setPerfilTeorico(teorico);
-            aluno.setPerfilPragmatico(pragmatico);
-
-            fazerGrafico();
-
-            try {
-                String b = new InserirAlunoTask(aluno).execute().get();
-                if (b.equals("true")) {
-                    Toast.makeText(this.getActivity(), "Perfil cadastrado com sucesso!", Toast.LENGTH_LONG).show();
-                } else {
-                    Toast.makeText(this.getActivity(), "Erro ao cadastrar perfil", Toast.LENGTH_LONG).show();
-                }
-            } catch (ExecutionException e) {
-                e.printStackTrace();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-    }
+//    private RadarData getData(){
+//        List<RadarEntry> entries = new ArrayList<>();
+//        entries.add(new RadarEntry(aluno.getPerfilAtivo()));
+//        entries.add(new RadarEntry(aluno.getPerfilReflexivo()));
+//        entries.add(new RadarEntry(aluno.getPerfilTeorico()));
+//        entries.add(new RadarEntry(aluno.getPerfilPragmatico()));
+//
+//        RadarDataSet set = new RadarDataSet(entries, aluno.getNome());
+//        set.setColor(Color.rgb(103, 110, 129));
+//        set.setFillColor(Color.rgb(103, 110, 129));
+//        set.setDrawFilled(true);
+//        set.setFillAlpha(180);
+//        set.setLineWidth(2f);
+//        set.setDrawHighlightCircleEnabled(true);
+//        set.setDrawHighlightIndicators(false);
+//
+//        ArrayList<IRadarDataSet> sets = new ArrayList<>();
+//        sets.add(set);
+//
+//        RadarData data = new RadarData(sets);
+//        data.setValueTextSize(8f);
+//        data.setDrawValues(false);
+//        data.setValueTextColor(Color.WHITE);
+//
+//        return data;
+//    }
+//
+//    private String[] getLabels(){
+//        return new String[] { getString(R.string.ativo), getString(R.string.reflexivo), getString(R.string.teorico), getString(R.string.pragmático) };
+//
+//    }
+//
+//    public void mostrarResultadosQuestionario(){
+//        Integer[] respostas = QuestionarioActivity.respostas;
+//
+//        if(respostas.length == 40) {
+//            int ativo = 0;
+//            int reflexivo = 0;
+//            int teorico = 0;
+//            int pragmatico = 0;
+//
+//            ativo += respostas[2-1];
+//            ativo += respostas[7-1];
+//            ativo += respostas[12-1];
+//            ativo += respostas[15-1];
+//            ativo += respostas[16-1];
+//            ativo += respostas[19-1];
+//            ativo += respostas[22-1];
+//            ativo += respostas[25-1];
+//            ativo += respostas[34-1];
+//            ativo += respostas[39-1];
+//
+//            reflexivo += respostas[4-1];
+//            reflexivo += respostas[13-1];
+//            reflexivo += respostas[14-1];
+//            reflexivo += respostas[18-1];
+//            reflexivo += respostas[20-1];
+//            reflexivo += respostas[23-1];
+//            reflexivo += respostas[27-1];
+//            reflexivo += respostas[29-1];
+//            reflexivo += respostas[32-1];
+//            reflexivo += respostas[40-1];
+//
+//            teorico += respostas[1-1];
+//            teorico += respostas[5-1];
+//            teorico += respostas[10-1];
+//            teorico += respostas[11-1];
+//            teorico += respostas[21-1];
+//            teorico += respostas[24-1];
+//            teorico += respostas[30-1];
+//            teorico += respostas[31-1];
+//            teorico += respostas[33-1];
+//            teorico += respostas[36-1];
+//
+//            pragmatico += respostas[3-1];
+//            pragmatico += respostas[6-1];
+//            pragmatico += respostas[8-1];
+//            pragmatico += respostas[9-1];
+//            pragmatico += respostas[17-1];
+//            pragmatico += respostas[26-1];
+//            pragmatico += respostas[28-1];
+//            pragmatico += respostas[35-1];
+//            pragmatico += respostas[37-1];
+//            pragmatico += respostas[38-1];
+//
+//            aluno.setPerfilAtivo(ativo);
+//            aluno.setPerfilReflexivo(reflexivo);
+//            aluno.setPerfilTeorico(teorico);
+//            aluno.setPerfilPragmatico(pragmatico);
+//
+//            fazerGrafico();
+//
+//            try {
+//                String b = new InserirAlunoTask(aluno).execute().get();
+//                if (b.equals("true")) {
+//                    Toast.makeText(this.getActivity(), "Perfil cadastrado com sucesso!", Toast.LENGTH_LONG).show();
+//                } else {
+//                    Toast.makeText(this.getActivity(), "Erro ao cadastrar perfil", Toast.LENGTH_LONG).show();
+//                }
+//            } catch (ExecutionException e) {
+//                e.printStackTrace();
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//    }
 }

@@ -95,11 +95,13 @@
       android:id="@+id/divider"
       android:layout_width="0dp"
       android:layout_height="1dp"
+      android:layout_marginStart="16dp"
       android:layout_marginTop="60dp"
       android:layout_marginBottom="45dp"
       android:background="#CCCCCC"
       app:layout_constraintBottom_toTopOf="@+id/username"
-      app:layout_constraintTop_toBottomOf="@+id/primAcesso"
-      tools:layout_editor_absoluteX="16dp" />
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/primAcesso" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

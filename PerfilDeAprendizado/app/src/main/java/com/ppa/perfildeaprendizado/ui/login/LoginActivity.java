@@ -20,9 +20,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ppa.perfildeaprendizado.MenuQuestionariosActivity;
 import com.ppa.perfildeaprendizado.PerguntasPessoaisActivity;
 import com.ppa.perfildeaprendizado.R;
 import com.ppa.perfildeaprendizado.ResultadoActivity;
+import com.ppa.perfildeaprendizado.TermoActivity;
 import com.ppa.perfildeaprendizado.data.model.Aluno;
 import com.ppa.perfildeaprendizado.task.LoginTask;
 
@@ -152,7 +154,7 @@ public class LoginActivity extends AppCompatActivity {
     private void updateUiWithUser(Aluno aluno) {
         String welcome = getString(R.string.welcome) + aluno.getNome() + "!";
         Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
-        Intent intent = new Intent(LoginActivity.this, ResultadoActivity.class);
+        Intent intent = new Intent(LoginActivity.this, MenuQuestionariosActivity.class);
         intent.putExtra(Aluno.class.getSimpleName(), aluno);
         startActivity(intent);
     }
@@ -162,7 +164,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void iniciarQuestionario(){
-        Intent intent = new Intent(this, PerguntasPessoaisActivity.class);
+        Intent intent = new Intent(this, TermoActivity.class);
         startActivity(intent);
     }
 }

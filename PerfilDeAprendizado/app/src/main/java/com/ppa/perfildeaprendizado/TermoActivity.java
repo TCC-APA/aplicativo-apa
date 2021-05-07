@@ -43,7 +43,7 @@ public class TermoActivity extends AppCompatActivity {
 
     public void iniciarPerguntasPessoais(){
         Aluno aluno = (Aluno) getIntent().getSerializableExtra(Aluno.class.getSimpleName());
-        Intent intent = new Intent(this, QuestionarioActivity.class);
+        Intent intent = new Intent(this, PerguntasPessoaisActivity.class);
         intent.putExtra(Aluno.class.getSimpleName(), aluno);
         startActivity(intent);
     }

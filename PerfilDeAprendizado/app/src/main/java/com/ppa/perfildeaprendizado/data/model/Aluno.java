@@ -18,10 +18,6 @@ public class Aluno implements Serializable {
     private Integer idade;
     private String genero;
     private String senha;
-    private Integer perfilAtivo;
-    private Integer perfilReflexivo;
-    private Integer perfilPragmatico;
-    private Integer perfilTeorico;
 
     public Aluno(){
 
@@ -83,49 +79,10 @@ public class Aluno implements Serializable {
         this.senha = senha;
     }
 
-    public Integer getPerfilAtivo() {
-        return perfilAtivo;
-    }
-
-    public void setPerfilAtivo(Integer perfilAtivo) {
-        this.perfilAtivo = perfilAtivo;
-    }
-
-    public Integer getPerfilReflexivo() {
-        return perfilReflexivo;
-    }
-
-    public void setPerfilReflexivo(Integer perfilReflexivo) {
-        this.perfilReflexivo = perfilReflexivo;
-    }
-
-    public Integer getPerfilPragmatico() {
-        return perfilPragmatico;
-    }
-
-    public void setPerfilPragmatico(Integer perfilPragmatico) {
-        this.perfilPragmatico = perfilPragmatico;
-    }
-
-    public Integer getPerfilTeorico() {
-        return perfilTeorico;
-    }
-
-    public void setPerfilTeorico(Integer perfilTeorico) {
-        this.perfilTeorico = perfilTeorico;
-    }
-
-    public boolean temPerfis(){
-        if(this.perfilAtivo == null || this.perfilPragmatico == null || this.perfilReflexivo == null || this.perfilTeorico == null){
-            return false;
-        }
-        return true;
-    }
-
     @Override
     public String toString() {
         return "Aluno{" +
-                ", nome='" + nome + '\'' +
+                "  nome='" + nome + '\'' +
                 ", idade=" + idade +
                 ", genero='" + genero + '\'' +
                 ", matricula='" + matricula + '\'' +
