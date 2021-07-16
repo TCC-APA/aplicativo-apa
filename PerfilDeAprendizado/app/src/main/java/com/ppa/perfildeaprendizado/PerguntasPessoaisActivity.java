@@ -2,6 +2,7 @@ package com.ppa.perfildeaprendizado;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ppa.perfildeaprendizado.data.model.Aluno;
 import com.ppa.perfildeaprendizado.task.InserirAlunoTask;
@@ -27,7 +29,6 @@ public class PerguntasPessoaisActivity extends AppCompatActivity {
     private LinearLayout form;
     private Button enviar;
 
-//    TODO: botar validacao aqui
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,7 +79,18 @@ public class PerguntasPessoaisActivity extends AppCompatActivity {
                 }
                 if (erros == 0) {
                     Aluno aluno = new Aluno(matricula.getText().toString(), nome.getText().toString(), Integer.valueOf(idade.getText().toString()), genero.getSelectedItem().toString(), senha.getText().toString());
-                    sendMessage(aluno);
+                    try {
+                        String resposta = new InserirAlunoTask(aluno).execute().get();
+                        if(resposta != null) {
+                            sendMessage(aluno);
+                        }else {
+                            Toast.makeText(getApplicationContext(), "Ocorreu um problema no salvamento dos seus dados. Verifique sua conexão.", Toast.LENGTH_LONG);
+                        }
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });

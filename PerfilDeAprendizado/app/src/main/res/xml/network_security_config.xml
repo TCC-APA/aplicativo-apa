@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <domain-config>
+        <domain includeSubdomains="true">http://ec2-13-58-169-218.us-east-2.compute.amazonaws.com:8080/</domain>
+    </domain-config>
+</network-security-config>

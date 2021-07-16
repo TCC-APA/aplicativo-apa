@@ -4,7 +4,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.google.gson.Gson;
-import com.ppa.perfildeaprendizado.data.model.Aluno;
+import com.ppa.perfildeaprendizado.data.model.PerfilRespostas;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -14,23 +14,20 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Scanner;
 
-public class LoginTask extends AsyncTask<Void, Void, Aluno> {
+public class InserirPontuacaoAlunoTask extends AsyncTask<Void, Void, String> {
 
-    private String matricula;
-    private String senha;
+    private PerfilRespostas perfilRespostas;
 
-    public LoginTask(String matricula, String senha){
-        this.matricula = matricula;
-        this.senha = senha;
+    public InserirPontuacaoAlunoTask(PerfilRespostas perfilRespostas){
+        this.perfilRespostas = perfilRespostas;
     }
 
     @Override
-    protected Aluno doInBackground(Void... voids) {
+    protected String doInBackground(Void... voids) {
         StringBuilder resposta = new StringBuilder();
-
-        if(this.matricula != null && this.senha != null){
-            try{
-                URL url = new URL("http://ec2-13-58-169-218.us-east-2.compute.amazonaws.com:8080/apa/aluno/login");
+        if(perfilRespostas != null) {
+            try {
+                URL url = new URL("http://ec2-13-58-169-218.us-east-2.compute.amazonaws.com:8080/apa/pontuacao");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
                 connection.setRequestProperty("Content-type", "application/json");
@@ -39,7 +36,8 @@ public class LoginTask extends AsyncTask<Void, Void, Aluno> {
                 connection.setDoInput(true);
                 connection.setConnectTimeout(5000);
 
-                String input = "{\"matricula\":\"" + matricula + "\",\"senha\":\"" + senha + "\"}";
+                Gson gson = new Gson();
+                String input = gson.toJson(perfilRespostas);
 
                 OutputStream os = connection.getOutputStream();
                 os.write(input.getBytes());
@@ -51,18 +49,18 @@ public class LoginTask extends AsyncTask<Void, Void, Aluno> {
                     resposta.append(scanner.next());
                 }
 
-                if(connection.getResponseCode() != HttpURLConnection.HTTP_OK){
+                if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
                     Log.e("ERRO", "Não foi possível acessar o WebService: " + connection.getResponseCode());
                     return null;
                 }
-
                 connection.disconnect();
+
             } catch (MalformedURLException e) {
-                e.printStackTrace();
-            }catch (IOException e){
-                e.printStackTrace();
+                Log.e("ERRO", e.getMessage());
+            } catch (IOException e) {
+                Log.e("ERRO", e.getMessage());
             }
         }
-        return new Gson().fromJson(resposta.toString(), Aluno.class);
+        return resposta.toString();
     }
 }

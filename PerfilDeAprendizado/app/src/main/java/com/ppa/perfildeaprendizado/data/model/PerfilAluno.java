@@ -1,11 +1,14 @@
 package com.ppa.perfildeaprendizado.data.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-public class PerfilAluno {
+import androidx.annotation.NonNull;
+
+public class PerfilAluno implements Serializable {
 
     private Long idPerfil;
     private String matriculaAluno;
@@ -96,5 +99,21 @@ public class PerfilAluno {
                 this.estilos = new ArrayList<Estilo>();
         }
         this.estilos.add(estilo);
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "PerfilAluno{" +
+                "  idPerfil=" + idPerfil +
+                ", matriculaAluno='" + matriculaAluno + '\'' +
+                ", nomeAluno='" + nomeAluno + '\'' +
+                ", idAluno=" + idAluno +
+                ", estilos=" + estilos.toString() +
+                ", dataRealizado='" + dataRealizado + '\'' +
+                ", nomeQuestionario='" + nomeQuestionario + '\'' +
+                ", idQuestionario=" + idQuestionario +
+                ", pontuacaoPorEstilo=" + pontuacaoPorEstilo.toString() +
+                '}';
     }
 }

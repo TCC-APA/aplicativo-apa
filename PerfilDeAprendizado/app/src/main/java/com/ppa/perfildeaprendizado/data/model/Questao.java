@@ -29,7 +29,7 @@ public class Questao {
     @Override
     public String toString() {
         return "Questao{" +
-                " idQuestao='" + idQuestao + '\'' +
+                " idQuestao=" + idQuestao +
                 ", texto='" + texto + '\'' +
                 ", estiloKey='" + estiloKey + "'}";
     }

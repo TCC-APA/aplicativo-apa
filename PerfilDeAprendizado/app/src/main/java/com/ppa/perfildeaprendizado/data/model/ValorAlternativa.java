@@ -20,7 +20,10 @@ public class ValorAlternativa {
 
     @Override
     public String toString() {
-        return "ValorAlternativaDTO [valor=" + valor + ", textoAlternativa=" + textoAlternativa + "]";
+        return "ValorAlternativa{" +
+                "  valor=" + valor +
+                ", textoAlternativa=" + textoAlternativa + '\'' +
+                '}';
     }
 
 }

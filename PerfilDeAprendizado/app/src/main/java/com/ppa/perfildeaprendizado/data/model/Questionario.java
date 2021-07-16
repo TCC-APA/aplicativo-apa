@@ -87,7 +87,7 @@ public class Questionario implements Serializable {
     public String toString() {
         return "QuestionarioDTO{" +
                 "  estilosIndexados='" + estilosIndexados + '\'' +
-                "  id='" + id + '\'' +
+                "  id=" + id +
                 ", nome=" + nome +
                 ", questoes='" + questoes + '\'' +
                 ", valoresAlternativas='" + valoresAlternativas + '\'' +

@@ -1,6 +1,8 @@
 package com.ppa.perfildeaprendizado.data.model;
 
-public class Estilo {
+import java.io.Serializable;
+
+public class Estilo implements Serializable {
 
     private Long id;
     private String nome;
@@ -54,7 +56,11 @@ public class Estilo {
 
     @Override
     public String toString() {
-        return "EstiloDTO [id=" + id + ", nome=" + nome + ", caracteristicas=" + caracteristicas + ", sugestoes="
-                + sugestoes + "]";
+        return "Estilo{" +
+                "  id=" + id +
+                ", nome=" + nome + '\'' +
+                ", caracteristicas='" + caracteristicas + '\'' +
+                ", sugestoes='" + sugestoes + '\'' +
+                '}';
     }
 }

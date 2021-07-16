@@ -28,7 +28,7 @@ public class InserirAlunoTask extends AsyncTask<Void, Void, String> {
         StringBuilder resposta = new StringBuilder();
         if(aluno != null) {
             try {
-                URL url = new URL("http://ec2-13-58-169-218.us-east-2.compute.amazonaws.com:8080/apa/aluno");
+                URL url = new URL("http://ec2-13-58-169-218.us-east-2.compute.amazonaws.com:8080/apa/aluno?turmaDefault=true");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
                 connection.setRequestProperty("Content-type", "application/json");
@@ -52,6 +52,7 @@ public class InserirAlunoTask extends AsyncTask<Void, Void, String> {
 
                 if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
                     Log.e("ERRO", "Não foi possível acessar o WebService: " + connection.getResponseCode());
+                    return null;
                 }
                 connection.disconnect();
 
