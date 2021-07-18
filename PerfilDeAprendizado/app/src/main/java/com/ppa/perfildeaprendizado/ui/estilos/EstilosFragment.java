@@ -8,13 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.RadarChart;
@@ -26,15 +19,19 @@ import com.github.mikephil.charting.data.RadarEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IRadarDataSet;
 import com.ppa.perfildeaprendizado.DetalhesEstilosActivity;
-import com.ppa.perfildeaprendizado.QuestionarioActivity;
 import com.ppa.perfildeaprendizado.R;
-import com.ppa.perfildeaprendizado.ResultadoActivity;
 import com.ppa.perfildeaprendizado.data.model.Aluno;
-import com.ppa.perfildeaprendizado.task.InserirAlunoTask;
+import com.ppa.perfildeaprendizado.data.model.Estilo;
+import com.ppa.perfildeaprendizado.data.model.PerfilAluno;
+import com.ppa.perfildeaprendizado.task.BuscarPerfilAlunoTask;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 
 public class EstilosFragment extends Fragment {
 
@@ -49,6 +46,8 @@ public class EstilosFragment extends Fragment {
     private RadarChart radarChart;
 
     private Aluno aluno = new Aluno();
+    private PerfilAluno perfilAluno;
+    private List<RadarEntry> radarEntries = new ArrayList<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         estilosViewModel = ViewModelProviders.of(this).get(EstilosViewModel.class);
@@ -59,8 +58,23 @@ public class EstilosFragment extends Fragment {
         textoAprendizadoEstilo = root.findViewById(R.id.text_aprendizado_estilo);
         radarChart = root.findViewById(R.id.radarChart);
         botaoVerMais = root.findViewById(R.id.button_ver_mais);
+        textoEstilo.setText("");
+        textoCaracteristicas.setText("");
+        textoAprendizadoEstilo.setText("");
 
         aluno = (Aluno) getActivity().getIntent().getSerializableExtra(Aluno.class.getSimpleName());
+
+        try {
+            perfilAluno = new BuscarPerfilAlunoTask(aluno.getMatricula(), 48L).execute().get();
+            if(perfilAluno != null){
+                fazerGrafico();
+                preencherTextosPerfilPredominante();
+            }
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
 //        if(aluno != null) {
 //            if (aluno.temPerfis()) {
@@ -74,45 +88,38 @@ public class EstilosFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), DetalhesEstilosActivity.class);
+                intent.putExtra(PerfilAluno.class.getSimpleName(), perfilAluno);
                 startActivity(intent);
             }
         });
 
-
-
-//        estilosViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-//            @Override
-//            public void onChanged(@Nullable String s) {
-//                textView.setText(s);
-//            }
-//        });
         return root;
     }
 
-//    public void fazerGrafico(){
-//
-//        radarChart.setBackgroundColor(Color.WHITE);
-//        radarChart.getDescription().setEnabled(false);
-//        radarChart.setWebLineWidth(1f);
-//        radarChart.setWebColor(Color.BLUE);
-//        radarChart.setWebAlpha(100);
-//
-//
-//        radarChart.animateXY(1400, 1400, Easing.EaseInOutQuad, Easing.EaseInOutQuad);
-//        XAxis xAxis = radarChart.getXAxis();
-//        xAxis.setTextSize(9f);
-//        xAxis.setYOffset(0);
-//        xAxis.setXOffset(0);
-//        xAxis.setValueFormatter(new IndexAxisValueFormatter(getLabels()));
-//
-//        YAxis yAxis = radarChart.getYAxis();
-//        yAxis.setLabelCount(NumEstilos, false);
-//        yAxis.setTextSize(9f);
-//        yAxis.setAxisMaximum(MIN);
-//        yAxis.setAxisMaximum(MAX);
+    public void fazerGrafico(){
 
-//        radarChart.setData(getData());
-//        radarChart.invalidate();
+        radarChart.setBackgroundColor(Color.WHITE);
+        radarChart.getDescription().setEnabled(false);
+        radarChart.setWebLineWidth(1f);
+        radarChart.setWebColor(Color.BLUE);
+        radarChart.setWebAlpha(100);
+
+
+        radarChart.animateXY(1400, 1400, Easing.EaseInOutQuad, Easing.EaseInOutQuad);
+        XAxis xAxis = radarChart.getXAxis();
+        xAxis.setTextSize(9f);
+        xAxis.setYOffset(0);
+        xAxis.setXOffset(0);
+        xAxis.setValueFormatter(new IndexAxisValueFormatter(getLabels()));
+
+        YAxis yAxis = radarChart.getYAxis();
+        yAxis.setLabelCount(NumEstilos, false);
+        yAxis.setTextSize(9f);
+        yAxis.setAxisMaximum(MIN);
+        yAxis.setAxisMaximum(MAX);
+
+        radarChart.setData(getData());
+        radarChart.invalidate();
 
 
        /* RadarDataSet radarDataSet = new RadarDataSet(getData(), "");
@@ -133,43 +140,78 @@ public class EstilosFragment extends Fragment {
         radarDataSet.setValueTextSize(18f);
         radarDataSet.setFormLineWidth(3f);
         */
-//    }
+    }
 
 //    public void mostrarResultadosLogin(){
 //        fazerGrafico();
 //    }
 
-//    private RadarData getData(){
-//        List<RadarEntry> entries = new ArrayList<>();
-//        entries.add(new RadarEntry(aluno.getPerfilAtivo()));
-//        entries.add(new RadarEntry(aluno.getPerfilReflexivo()));
-//        entries.add(new RadarEntry(aluno.getPerfilTeorico()));
-//        entries.add(new RadarEntry(aluno.getPerfilPragmatico()));
-//
-//        RadarDataSet set = new RadarDataSet(entries, aluno.getNome());
-//        set.setColor(Color.rgb(103, 110, 129));
-//        set.setFillColor(Color.rgb(103, 110, 129));
-//        set.setDrawFilled(true);
-//        set.setFillAlpha(180);
-//        set.setLineWidth(2f);
-//        set.setDrawHighlightCircleEnabled(true);
-//        set.setDrawHighlightIndicators(false);
-//
-//        ArrayList<IRadarDataSet> sets = new ArrayList<>();
-//        sets.add(set);
-//
-//        RadarData data = new RadarData(sets);
-//        data.setValueTextSize(8f);
-//        data.setDrawValues(false);
-//        data.setValueTextColor(Color.WHITE);
-//
-//        return data;
-//    }
-//
-//    private String[] getLabels(){
-//        return new String[] { getString(R.string.ativo), getString(R.string.reflexivo), getString(R.string.teorico), getString(R.string.pragmático) };
-//
-//    }
+    private RadarData getData() {
+
+        if(radarEntries != null && !radarEntries.isEmpty()) {
+            RadarDataSet set = new RadarDataSet(radarEntries, aluno.getNome());
+            set.setColor(Color.rgb(103, 110, 129));
+            set.setFillColor(Color.rgb(103, 110, 129));
+            set.setDrawFilled(true);
+            set.setFillAlpha(180);
+            set.setLineWidth(2f);
+            set.setDrawHighlightCircleEnabled(true);
+            set.setDrawHighlightIndicators(false);
+
+            ArrayList<IRadarDataSet> sets = new ArrayList<>();
+            sets.add(set);
+
+            RadarData data = new RadarData(sets);
+            data.setValueTextSize(8f);
+            data.setDrawValues(false);
+            data.setValueTextColor(Color.WHITE);
+
+            return data;
+        }
+        return null;
+    }
+
+    private String[] getLabels(){
+        if (perfilAluno.getPontuacaoPorEstilo() != null && !perfilAluno.getPontuacaoPorEstilo().isEmpty()) {
+            String[] labels = new String[perfilAluno.getEstilos().size()];
+            Estilo[] estilos = (Estilo[]) perfilAluno.getPontuacaoPorEstilo().keySet().toArray();
+
+            Long pontuacaoAux;
+
+            for (int i = 0; i <= perfilAluno.getPontuacaoPorEstilo().size(); i++) {
+                labels[i] = estilos[i].getNome();
+                pontuacaoAux = perfilAluno.getPontuacaoPorEstilo().get(estilos[i]);
+                if(pontuacaoAux != null) {
+                    radarEntries.add(new RadarEntry(pontuacaoAux));
+                }
+            }
+            return labels;
+        }
+        return null;
+    }
+
+    public void preencherTextosPerfilPredominante(){
+        if (perfilAluno.getPontuacaoPorEstilo() != null && !perfilAluno.getPontuacaoPorEstilo().isEmpty()) {
+            Estilo[] estilos = (Estilo[]) perfilAluno.getPontuacaoPorEstilo().keySet().toArray();
+
+            Long pontuacaoAux;
+            Long maiorPontuacao = 0L;
+            Estilo estiloPredominante = null;
+
+            for (int i = 0; i <= perfilAluno.getPontuacaoPorEstilo().size(); i++) {
+                pontuacaoAux = perfilAluno.getPontuacaoPorEstilo().get(estilos[i]);
+                if(pontuacaoAux > maiorPontuacao) {
+                    maiorPontuacao = pontuacaoAux;
+                    estiloPredominante = estilos[i];
+                }
+            }
+            if(estiloPredominante != null) {
+                textoEstilo.setText(estiloPredominante.getNome());
+                textoCaracteristicas.setText(estiloPredominante.getCaracteristicas());
+                textoAprendizadoEstilo.setText(estiloPredominante.getSugestoes());
+            }
+        }
+    }
 //
 //    public void mostrarResultadosQuestionario(){
 //        Integer[] respostas = QuestionarioActivity.respostas;
