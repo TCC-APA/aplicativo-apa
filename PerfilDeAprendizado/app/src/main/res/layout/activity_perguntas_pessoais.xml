@@ -51,13 +51,23 @@
                 android:inputType="textPersonName" />
 
             <EditText
+                android:id="@+id/dataNasc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:ems="10"
+                android:hint="@string/data_nascimento"
+                android:inputType="date" />
+
+            <EditText
                 android:id="@+id/idade"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:ems="10"
                 android:hint="@string/idade"
-                android:inputType="number" />
+                android:inputType="number"
+                android:visibility="gone" />
 
             <Spinner
                 android:id="@+id/genero"

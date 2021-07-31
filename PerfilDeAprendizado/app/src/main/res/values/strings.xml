@@ -35,6 +35,7 @@
     <!--    PerguntasPessoaisActivity-->
     <string name="perfil_aluno">"Perfil do Discente"</string>
     <string name="nome">"Nome Completo"</string>
+    <string name="data_nascimento">"Data Nascimento"</string>
     <string name="idade">"Idade"</string>
     <string name="senha">"Senha"</string>
     <string name="matricula">"Matrícula"</string>

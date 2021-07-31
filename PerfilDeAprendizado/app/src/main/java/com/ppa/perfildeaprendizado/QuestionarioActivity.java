@@ -13,7 +13,6 @@ import com.ppa.perfildeaprendizado.data.model.Aluno;
 import com.ppa.perfildeaprendizado.data.model.PerfilRespostas;
 import com.ppa.perfildeaprendizado.data.model.Questao;
 import com.ppa.perfildeaprendizado.data.model.Questionario;
-import com.ppa.perfildeaprendizado.task.InserirAlunoTask;
 import com.ppa.perfildeaprendizado.task.InserirPontuacaoAlunoTask;
 
 import java.text.SimpleDateFormat;
@@ -200,7 +199,7 @@ public class QuestionarioActivity extends AppCompatActivity {
     public void inserirPontuacaoPerfil(Aluno aluno){
 
         perfilRespostas = new PerfilRespostas();
-        Map<Long, Long> estilosPontuacao = new HashMap<>();
+        Map<String, Long> estilosPontuacao = new HashMap<>();
 
         if(respostas.length == 40) {
             Long ativo = 0L;
@@ -219,7 +218,7 @@ public class QuestionarioActivity extends AppCompatActivity {
             ativo += respostas[34-1];
             ativo += respostas[39-1];
 
-            estilosPontuacao.put(51L,ativo);
+            estilosPontuacao.put("51",ativo);
 
             reflexivo += respostas[4-1];
             reflexivo += respostas[13-1];
@@ -232,7 +231,7 @@ public class QuestionarioActivity extends AppCompatActivity {
             reflexivo += respostas[32-1];
             reflexivo += respostas[40-1];
 
-            estilosPontuacao.put(50L,reflexivo);
+            estilosPontuacao.put("50",reflexivo);
 
             teorico += respostas[1-1];
             teorico += respostas[5-1];
@@ -245,7 +244,7 @@ public class QuestionarioActivity extends AppCompatActivity {
             teorico += respostas[33-1];
             teorico += respostas[36-1];
 
-            estilosPontuacao.put(49L,teorico);
+            estilosPontuacao.put("49",teorico);
 
             pragmatico += respostas[3-1];
             pragmatico += respostas[6-1];
@@ -258,13 +257,12 @@ public class QuestionarioActivity extends AppCompatActivity {
             pragmatico += respostas[37-1];
             pragmatico += respostas[38-1];
 
-            estilosPontuacao.put(52L,pragmatico);
+            estilosPontuacao.put("52",pragmatico);
 
-            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+            SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
             Date date = new Date();
 
             perfilRespostas.setMatriculaAluno(aluno.getMatricula());
-            perfilRespostas.setIdAluno(aluno.getId());
             perfilRespostas.setDataRealizado(formatter.format(date));
             perfilRespostas.setIdQuestionario(48L);
             perfilRespostas.setPontuacaoPorEstilo(estilosPontuacao);

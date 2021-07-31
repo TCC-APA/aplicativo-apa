@@ -1,18 +1,16 @@
 package com.ppa.perfildeaprendizado;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
-import android.view.ViewDebug;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.ppa.perfildeaprendizado.data.model.Aluno;
 import com.ppa.perfildeaprendizado.ui.login.LoginActivity;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class TermoActivity extends AppCompatActivity {
 

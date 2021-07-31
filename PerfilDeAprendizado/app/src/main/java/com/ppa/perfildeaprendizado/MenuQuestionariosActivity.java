@@ -1,26 +1,20 @@
 package com.ppa.perfildeaprendizado;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.RadioButton;
 
 import com.ppa.perfildeaprendizado.data.model.Aluno;
 import com.ppa.perfildeaprendizado.data.model.PerfilAluno;
-import com.ppa.perfildeaprendizado.data.model.PerfilRespostas;
 import com.ppa.perfildeaprendizado.data.model.Questionario;
 import com.ppa.perfildeaprendizado.task.BuscarPerfilAlunoTask;
 import com.ppa.perfildeaprendizado.task.RetornaQuestionarioTask;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.ExecutionException;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MenuQuestionariosActivity extends AppCompatActivity {
 

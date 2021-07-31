@@ -3,30 +3,19 @@ package com.ppa.perfildeaprendizado.task;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.ppa.perfildeaprendizado.data.model.PerfilAluno;
-import com.ppa.perfildeaprendizado.data.model.Questionario;
-import com.ppa.perfildeaprendizado.requests.GsonRequest;
 
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 
 public class BuscarPerfilAlunoTask extends AsyncTask<Void, Void, PerfilAluno> {
@@ -58,13 +47,13 @@ public class BuscarPerfilAlunoTask extends AsyncTask<Void, Void, PerfilAluno> {
                     resposta.append(scanner.nextLine());
                 }
 
-                JsonArray jsonArray = (JsonArray) new JsonParser().parse(resposta.toString()).getAsJsonObject().get("questionarios");
+                JsonObject jsonObject = new JsonParser().parse(resposta.toString()).getAsJsonObject();
 
                 GsonBuilder gsonBuilder = new GsonBuilder();
                 gsonBuilder = gsonBuilder.setPrettyPrinting();
                 Gson gson = gsonBuilder.create();
-                if(jsonArray != null) {
-                    perfilAluno = gson.fromJson(jsonArray.get(0), PerfilAluno.class);
+                if(jsonObject != null) {
+                    perfilAluno = gson.fromJson(jsonObject, PerfilAluno.class);
                 }else{
                     return null;
                 }

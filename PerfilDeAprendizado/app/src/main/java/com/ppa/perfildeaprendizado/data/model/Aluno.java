@@ -1,11 +1,7 @@
 package com.ppa.perfildeaprendizado.data.model;
 
-import android.os.Parcelable;
-
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.Date;
 
 /**
  * Data class that captures user information for logged in users retrieved from LoginRepository
@@ -15,7 +11,7 @@ public class Aluno implements Serializable {
     private Long id;
     private String matricula;
     private String nome;
-    private Integer idade;
+    private Date dataNascimento;
     private String genero;
     private String senha;
 
@@ -23,10 +19,10 @@ public class Aluno implements Serializable {
 
     }
 
-    public Aluno(String matricula, String nome, Integer idade, String genero, String senha) {
+    public Aluno(String matricula, String nome, Date dataNascimento, String genero, String senha) {
         this.matricula = matricula;
         this.nome = nome;
-        this.idade = idade;
+        this.dataNascimento = dataNascimento;
         this.genero = genero;
         this.senha = senha;
     }
@@ -55,12 +51,12 @@ public class Aluno implements Serializable {
         this.nome = nome;
     }
 
-    public Integer getIdade() {
-        return idade;
+    public Date getDataNascimento() {
+        return dataNascimento;
     }
 
-    public void setIdade(Integer idade) {
-        this.idade = idade;
+    public void setDataNascimento(Date dataNascimento) {
+        this.dataNascimento = dataNascimento;
     }
 
     public String getGenero() {
@@ -83,7 +79,7 @@ public class Aluno implements Serializable {
     public String toString() {
         return "Aluno{" +
                 "  nome='" + nome + '\'' +
-                ", idade=" + idade +
+                ", dataNascimento=" + dataNascimento.toString() +
                 ", genero='" + genero + '\'' +
                 ", matricula='" + matricula + '\'' +
                 '}';

@@ -7,10 +7,9 @@ import androidx.annotation.NonNull;
 
 public class PerfilRespostas implements Serializable {
     private String matriculaAluno;
-    private Long idAluno;
     private String dataRealizado;
     private Long idQuestionario;
-    private Map<Long, Long> pontuacaoPorEstilo; //Key: Id Estilo, Value: pontuacao
+    private Map<String, Long> pontuacaoPorEstilo; //Key: Id Estilo, Value: pontuacao
 
     public String getMatriculaAluno() {
         return matriculaAluno;
@@ -18,14 +17,6 @@ public class PerfilRespostas implements Serializable {
 
     public void setMatriculaAluno(String matriculaAluno) {
         this.matriculaAluno = matriculaAluno;
-    }
-
-    public Long getIdAluno() {
-        return idAluno;
-    }
-
-    public void setIdAluno(Long idAluno) {
-        this.idAluno = idAluno;
     }
 
     public String getDataRealizado() {
@@ -44,11 +35,11 @@ public class PerfilRespostas implements Serializable {
         this.idQuestionario = idQuestionario;
     }
 
-    public Map<Long, Long> getPontuacaoPorEstilo() {
+    public Map<String, Long> getPontuacaoPorEstilo() {
         return pontuacaoPorEstilo;
     }
 
-    public void setPontuacaoPorEstilo(Map<Long, Long> pontuacaoPorEstilo) {
+    public void setPontuacaoPorEstilo(Map<String, Long> pontuacaoPorEstilo) {
         this.pontuacaoPorEstilo = pontuacaoPorEstilo;
     }
 
@@ -57,10 +48,9 @@ public class PerfilRespostas implements Serializable {
     public String toString() {
         return "PerfilRespostas{" +
                 "  matriculaAluno='" + matriculaAluno + '\'' +
-                ", idAluno=" + idAluno +
                 ", dataRealizado='" + dataRealizado + '\'' +
                 ", idQuestionario=" + idQuestionario +
-                ", pontuacaoPorEstilo='" + pontuacaoPorEstilo + '\'' +
+                ", pontuacaoPorEstilo='" + pontuacaoPorEstilo.toString() + '\'' +
                 '}';
     }
 }

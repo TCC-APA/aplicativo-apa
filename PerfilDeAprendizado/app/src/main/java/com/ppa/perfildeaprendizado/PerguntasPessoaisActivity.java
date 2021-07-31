@@ -1,8 +1,5 @@
 package com.ppa.perfildeaprendizado;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -16,13 +13,17 @@ import android.widget.Toast;
 import com.ppa.perfildeaprendizado.data.model.Aluno;
 import com.ppa.perfildeaprendizado.task.InserirAlunoTask;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.concurrent.ExecutionException;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class PerguntasPessoaisActivity extends AppCompatActivity {
 
     private EditText nome;
     private EditText matricula;
-    private EditText idade;
+    private EditText dataNascimento;
     private EditText senha;
     private EditText confirmarSenha;
     private Spinner genero;
@@ -36,7 +37,7 @@ public class PerguntasPessoaisActivity extends AppCompatActivity {
         form = findViewById(R.id.form);
         nome = findViewById(R.id.nome);
         matricula = findViewById(R.id.matricula);
-        idade = findViewById(R.id.idade);
+        dataNascimento = findViewById(R.id.dataNasc);
         senha = findViewById(R.id.senha);
         confirmarSenha = findViewById(R.id.confirmarSenha);
         genero = findViewById(R.id.genero);
@@ -55,8 +56,8 @@ public class PerguntasPessoaisActivity extends AppCompatActivity {
                     erros++;
                 }
 
-                if (idade.getText().toString().equals("")) {
-                    idade.setError(erroCampoObrigatorio());
+                if (dataNascimento.getText().toString().equals("")) {
+                    dataNascimento.setError(erroCampoObrigatorio());
                     erros++;
                 }
                 if (genero.getSelectedItem().equals(getResources().getStringArray(R.array.generos)[0])) {
@@ -78,8 +79,10 @@ public class PerguntasPessoaisActivity extends AppCompatActivity {
                     erros++;
                 }
                 if (erros == 0) {
-                    Aluno aluno = new Aluno(matricula.getText().toString(), nome.getText().toString(), Integer.valueOf(idade.getText().toString()), genero.getSelectedItem().toString(), senha.getText().toString());
+                    SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+                    Aluno aluno = null;
                     try {
+                        aluno = new Aluno(matricula.getText().toString(), nome.getText().toString(), formato.parse(dataNascimento.getText().toString()), genero.getSelectedItem().toString(), senha.getText().toString());
                         String resposta = new InserirAlunoTask(aluno).execute().get();
                         if(resposta != null) {
                             sendMessage(aluno);
@@ -89,6 +92,8 @@ public class PerguntasPessoaisActivity extends AppCompatActivity {
                     } catch (ExecutionException e) {
                         e.printStackTrace();
                     } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } catch (ParseException e) {
                         e.printStackTrace();
                     }
                 }

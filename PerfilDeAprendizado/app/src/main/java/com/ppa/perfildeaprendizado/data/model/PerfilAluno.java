@@ -18,7 +18,7 @@ public class PerfilAluno implements Serializable {
     private Date dataRealizado;
     private String nomeQuestionario;
     private Long idQuestionario;
-    private Map<Estilo, Long> pontuacaoPorEstilo;
+    private Map<String, Long> pontuacaoPorEstilo;
 
     public Long getIdPerfil() {
         return idPerfil;
@@ -76,11 +76,11 @@ public class PerfilAluno implements Serializable {
         this.idQuestionario = idQuestionario;
     }
 
-    public Map<Estilo, Long> getPontuacaoPorEstilo() {
+    public Map<String, Long> getPontuacaoPorEstilo() {
         return pontuacaoPorEstilo;
     }
 
-    public void setPontuacaoPorEstilo(Map<Estilo, Long> pontuacaoPorEstilo) {
+    public void setPontuacaoPorEstilo(Map<String, Long> pontuacaoPorEstilo) {
         this.pontuacaoPorEstilo = pontuacaoPorEstilo;
     }
 
