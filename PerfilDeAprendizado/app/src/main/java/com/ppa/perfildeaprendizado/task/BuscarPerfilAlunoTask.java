@@ -18,7 +18,7 @@ import java.net.ProtocolException;
 import java.net.URL;
 import java.util.Scanner;
 
-public class BuscarPerfilAlunoTask extends AsyncTask<Void, Void, PerfilAluno> {
+public class BuscarPerfilAlunoTask extends AsyncTask<Object, Void, PerfilAluno> {
     String matricula;
     Long idQuestionario;
     PerfilAluno perfilAluno;
@@ -30,7 +30,7 @@ public class BuscarPerfilAlunoTask extends AsyncTask<Void, Void, PerfilAluno> {
     }
 
     @Override
-    protected PerfilAluno doInBackground(Void... voids) {
+    protected PerfilAluno doInBackground(Object... params) {
         StringBuilder resposta = new StringBuilder();
 
         if (this.matricula != null && idQuestionario != null) {
@@ -52,7 +52,7 @@ public class BuscarPerfilAlunoTask extends AsyncTask<Void, Void, PerfilAluno> {
                 GsonBuilder gsonBuilder = new GsonBuilder();
                 gsonBuilder = gsonBuilder.setPrettyPrinting();
                 Gson gson = gsonBuilder.create();
-                if(jsonObject != null) {
+                if(jsonObject != null && jsonObject.get("erros") == null) {
                     perfilAluno = gson.fromJson(jsonObject, PerfilAluno.class);
                 }else{
                     return null;

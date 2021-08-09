@@ -1,7 +1,9 @@
 package com.ppa.perfildeaprendizado.data.model;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * Data class that captures user information for logged in users retrieved from LoginRepository
@@ -11,7 +13,8 @@ public class Aluno implements Serializable {
     private Long id;
     private String matricula;
     private String nome;
-    private Date dataNascimento;
+    private String dataNascimento;
+    private Long idade;
     private String genero;
     private String senha;
 
@@ -19,12 +22,13 @@ public class Aluno implements Serializable {
 
     }
 
-    public Aluno(String matricula, String nome, Date dataNascimento, String genero, String senha) {
+    public Aluno(String matricula, String nome, String dataNascimento, String genero, String senha) {
         this.matricula = matricula;
         this.nome = nome;
         this.dataNascimento = dataNascimento;
         this.genero = genero;
         this.senha = senha;
+        this.idade = null;
     }
 
     public Long getId() {
@@ -51,11 +55,11 @@ public class Aluno implements Serializable {
         this.nome = nome;
     }
 
-    public Date getDataNascimento() {
+    public String getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(Date dataNascimento) {
+    public void setDataNascimento(String dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 
@@ -79,9 +83,10 @@ public class Aluno implements Serializable {
     public String toString() {
         return "Aluno{" +
                 "  nome='" + nome + '\'' +
-                ", dataNascimento=" + dataNascimento.toString() +
+                ", dataNascimento='" + dataNascimento + '\'' +
                 ", genero='" + genero + '\'' +
                 ", matricula='" + matricula + '\'' +
+                ", idade='" + idade + '\'' +
                 '}';
     }
 }

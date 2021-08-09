@@ -1,9 +1,11 @@
 package com.ppa.perfildeaprendizado;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -15,6 +17,9 @@ import com.ppa.perfildeaprendizado.task.InserirAlunoTask;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,6 +34,8 @@ public class PerguntasPessoaisActivity extends AppCompatActivity {
     private Spinner genero;
     private LinearLayout form;
     private Button enviar;
+    private DatePickerDialog datePickerDialog;
+    private Calendar dataNascAux = Calendar.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +49,22 @@ public class PerguntasPessoaisActivity extends AppCompatActivity {
         confirmarSenha = findViewById(R.id.confirmarSenha);
         genero = findViewById(R.id.genero);
         enviar = findViewById(R.id.enviar);
+        dataNascimento.setActivated(false);
+        dataNascimento.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Calendar calendar = Calendar.getInstance();
+                datePickerDialog = new DatePickerDialog(PerguntasPessoaisActivity.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        dataNascAux.set(year, month, dayOfMonth);
+                        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+                        dataNascimento.setText(formato.format(dataNascAux.getTime()));
+                    }
+                }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+                datePickerDialog.show();
+            }
+        });
 
         enviar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,10 +102,10 @@ public class PerguntasPessoaisActivity extends AppCompatActivity {
                     erros++;
                 }
                 if (erros == 0) {
-                    SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+                    SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
                     Aluno aluno = null;
                     try {
-                        aluno = new Aluno(matricula.getText().toString(), nome.getText().toString(), formato.parse(dataNascimento.getText().toString()), genero.getSelectedItem().toString(), senha.getText().toString());
+                        aluno = new Aluno(matricula.getText().toString(), nome.getText().toString(), formato.format(dataNascAux.getTime()), genero.getSelectedItem().toString(), senha.getText().toString());
                         String resposta = new InserirAlunoTask(aluno).execute().get();
                         if(resposta != null) {
                             sendMessage(aluno);
@@ -92,8 +115,6 @@ public class PerguntasPessoaisActivity extends AppCompatActivity {
                     } catch (ExecutionException e) {
                         e.printStackTrace();
                     } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    } catch (ParseException e) {
                         e.printStackTrace();
                     }
                 }

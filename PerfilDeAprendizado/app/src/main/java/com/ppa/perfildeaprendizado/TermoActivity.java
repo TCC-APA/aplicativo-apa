@@ -16,7 +16,7 @@ public class TermoActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        LoginActivity.loadingProgressBar.setVisibility(View.GONE);
+//        LoginActivity.loadingProgressBar.setVisibility(View.GONE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_termo);
         final TextView textoTermo = findViewById(R.id.textoTermo);
