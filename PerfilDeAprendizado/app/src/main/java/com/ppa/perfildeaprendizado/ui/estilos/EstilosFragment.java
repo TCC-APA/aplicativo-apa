@@ -41,7 +41,7 @@ public class EstilosFragment extends Fragment {
     private TextView textoCaracteristicas;
     private TextView textoAprendizadoEstilo;
     private Button botaoVerMais;
-    private static final float MAX = 50, MIN = 0f;
+    private static final float MAX = 100f, MIN = 0f;
     private static final int NumEstilos = 4;
     private RadarChart radarChart;
 
@@ -67,7 +67,7 @@ public class EstilosFragment extends Fragment {
         try {
             perfilAluno = new BuscarPerfilAlunoTask(aluno.getMatricula(), 48L).execute().get();
             if(perfilAluno != null){
-                fazerGrafico();
+                fazerGrafico(perfilAluno.getEstilos().size());
                 preencherTextosPerfilPredominante();
             }
         } catch (ExecutionException e) {
@@ -88,8 +88,64 @@ public class EstilosFragment extends Fragment {
         return root;
     }
 
-    public void fazerGrafico(){
+    public void fazerGrafico(int qtdEstilos){
+       /* ArrayList<RadarEntry> radarEntryList = new ArrayList<>();
+        radarEntryList.add(new RadarEntry( 30));
+        radarEntryList.add(new RadarEntry( 45));
+        radarEntryList.add(new RadarEntry( 60));
+        radarEntryList.add(new RadarEntry( 73));
 
+        RadarDataSet radarDataSet = new RadarDataSet(radarEntryList, "teste");
+       // radarDataSet.setColor(Color.BLUE);
+        radarDataSet.setLineWidth(2f);
+        radarDataSet.setValueTextColor(Color.BLACK);
+        radarDataSet.setValueTextSize(14f);
+        radarDataSet.setFillAlpha(50);
+        //radarDataSet.setFillColor(Color.CYAN);
+
+        radarDataSet.setColor(Color.rgb(103, 110, 129));
+        radarDataSet.setFillColor(Color.rgb(103, 110, 129));
+        radarDataSet.setDrawFilled(true);
+        radarDataSet.setFillAlpha(180);
+        radarDataSet.setLineWidth(2f);
+        radarDataSet.setDrawHighlightCircleEnabled(true);
+        radarDataSet.setDrawHighlightIndicators(false);
+
+        RadarData radarDate = new RadarData();
+        radarDate.addDataSet(radarDataSet);
+
+        String[] labels = {"label1", "label2", "label3", "label4"}; FUNCIONA*/
+
+
+
+        radarChart.setBackgroundColor(Color.WHITE);
+        radarChart.getDescription().setEnabled(false);
+        radarChart.setWebLineWidth(1f);
+        radarChart.getLegend().setEnabled(false);
+        radarChart.animateXY(1400, 1400, Easing.EaseInOutQuad, Easing.EaseInOutQuad);
+        radarChart.setWebAlpha(100);
+
+
+        XAxis xAxis = radarChart.getXAxis();
+        xAxis.setValueFormatter(new IndexAxisValueFormatter(getLabels()));
+
+        YAxis yAxis = radarChart.getYAxis();
+        yAxis.setAxisMinimum(MIN);
+        yAxis.setAxisMaximum(MAX);
+        yAxis.setLabelCount(1, true);
+
+        radarChart.setData(getData());
+
+
+
+
+
+
+
+        /*
+        radarChart.setWebColor(Color.BLUE);
+        radarChart.setWebAlpha(100);
+        radarChart.getLegend().setEnabled(false);
         radarChart.setBackgroundColor(Color.WHITE);
         radarChart.getDescription().setEnabled(false);
         radarChart.setWebLineWidth(1f);
@@ -109,31 +165,44 @@ public class EstilosFragment extends Fragment {
         yAxis.setLabelCount(NumEstilos, false);
         yAxis.setTextSize(9f);
         yAxis.setAxisMaximum(MIN);
-        yAxis.setAxisMaximum(MAX);
+        yAxis.setAxisMinimum(MAX);
 
         radarChart.setData(getData());
-        radarChart.invalidate();
+        //radarChart.invalidate();*/
     }
 
     private RadarData getData() {
 
         if(radarEntries != null && !radarEntries.isEmpty()) {
-            RadarDataSet set = new RadarDataSet(radarEntries, aluno.getNome());
-            set.setColor(Color.rgb(103, 110, 129));
+            RadarDataSet radarDataSet = new RadarDataSet(radarEntries, aluno.getNome());
+
+            /*set.setColor(Color.rgb(103, 110, 129));
             set.setFillColor(Color.rgb(103, 110, 129));
             set.setDrawFilled(true);
             set.setFillAlpha(180);
             set.setLineWidth(2f);
             set.setDrawHighlightCircleEnabled(true);
-            set.setDrawHighlightIndicators(false);
+            set.setDrawHighlightIndicators(false);*/
+            radarDataSet.setLineWidth(2f);
+            radarDataSet.setValueTextColor(Color.BLACK);
+            radarDataSet.setValueTextSize(14f);
+            radarDataSet.setFillAlpha(50);
+            //radarDataSet.setFillColor(Color.CYAN);
+
+            radarDataSet.setColor(Color.rgb(103, 110, 129));
+            radarDataSet.setFillColor(Color.rgb(103, 110, 129));
+            radarDataSet.setDrawFilled(true);
+            radarDataSet.setFillAlpha(180);
+            radarDataSet.setLineWidth(2f);
+            radarDataSet.setDrawHighlightCircleEnabled(true);
+            radarDataSet.setDrawHighlightIndicators(false);
 
             ArrayList<IRadarDataSet> sets = new ArrayList<>();
-            sets.add(set);
+            sets.add(radarDataSet);
 
             RadarData data = new RadarData(sets);
-            data.setValueTextSize(8f);
-            data.setDrawValues(false);
-            data.setValueTextColor(Color.WHITE);
+            data.setDrawValues(true);
+            data.setValueTextColor(Color.BLACK);
 
             return data;
         }
