@@ -25,6 +25,7 @@ public class InserirPontuacaoAlunoTask extends AsyncTask<Void, Void, String> {
     @Override
     protected String doInBackground(Void... voids) {
         StringBuilder resposta = new StringBuilder();
+        String redactedResponse = "";
         if(perfilRespostas != null) {
             try {
                 URL url = new URL("http://ec2-13-58-169-218.us-east-2.compute.amazonaws.com:8080/apa/perfil/pontuacao");
@@ -51,15 +52,16 @@ public class InserirPontuacaoAlunoTask extends AsyncTask<Void, Void, String> {
 
                 if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
                     Log.e("ERRO", "Não foi possível acessar o WebService: " + connection.getResponseCode());
+                    redactedResponse = "Ocorreu um erro ao inserir sua pontuação.";
                 }
                 connection.disconnect();
+                redactedResponse = "Pontuação cadastrada com sucesso!";
 
-            } catch (MalformedURLException e) {
+            } catch (Exception e) {
                 Log.e("ERRO", e.getMessage());
-            } catch (IOException e) {
-                Log.e("ERRO", e.getMessage());
+                redactedResponse = "Ocorreu um erro ao inserir sua pontuação.";
             }
         }
-        return resposta.toString();
+        return redactedResponse;
     }
 }

@@ -10,12 +10,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ppa.perfildeaprendizado.data.model.Aluno;
+import com.ppa.perfildeaprendizado.data.model.Estilo;
 import com.ppa.perfildeaprendizado.data.model.PerfilRespostas;
 import com.ppa.perfildeaprendizado.data.model.Questao;
 import com.ppa.perfildeaprendizado.data.model.Questionario;
 import com.ppa.perfildeaprendizado.task.InserirPontuacaoAlunoTask;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -54,7 +56,7 @@ public class QuestionarioActivity extends AppCompatActivity {
         if(questionario != null) {
             this.questoes = questionario.getQuestoes();
             if(questoes != null && !questoes.isEmpty()) {
-                respostas = new Integer[this.questoes.size()];
+                respostas = new Integer[questoes.size()];
 
                 numQuestao = 0;
                 botaoVoltar = (Button) findViewById(R.id.buttonVoltar);
@@ -196,95 +198,45 @@ public class QuestionarioActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    private void getPontuacaoByEstilo(){
+
+    }
+
     public void inserirPontuacaoPerfil(Aluno aluno){
 
         perfilRespostas = new PerfilRespostas();
         Map<String, Long> estilosPontuacao = new HashMap<>();
+        Map<String, Estilo> estilosIndexados = questionario.getEstilosIndexados();
+        if(estilosIndexados != null && estilosIndexados.size() > 0) {
+            for (String key : estilosIndexados.keySet()){
+                Estilo e = estilosIndexados.get(key);
+                estilosPontuacao.put(e.getId().toString(), 0L);
+            }
 
-        if(respostas.length == 40) {
-            Long ativo = 0L;
-            Long reflexivo = 0L;
-            Long teorico = 0L;
-            Long pragmatico = 0L;
+            if (respostas != null && respostas.length > 0) {
+                for (int i = 0; i < questoes.size(); i++) {
+                    Questao questao = questoes.get(i);
+                    Integer respostaValue = respostas[i];
+                    Estilo estilo = estilosIndexados.get(questao.getEstiloKey());
 
-            ativo += respostas[2-1];
-            ativo += respostas[7-1];
-            ativo += respostas[12-1];
-            ativo += respostas[15-1];
-            ativo += respostas[16-1];
-            ativo += respostas[19-1];
-            ativo += respostas[22-1];
-            ativo += respostas[25-1];
-            ativo += respostas[34-1];
-            ativo += respostas[39-1];
-
-            estilosPontuacao.put("51",ativo);
-
-            reflexivo += respostas[4-1];
-            reflexivo += respostas[13-1];
-            reflexivo += respostas[14-1];
-            reflexivo += respostas[18-1];
-            reflexivo += respostas[20-1];
-            reflexivo += respostas[23-1];
-            reflexivo += respostas[27-1];
-            reflexivo += respostas[29-1];
-            reflexivo += respostas[32-1];
-            reflexivo += respostas[40-1];
-
-            estilosPontuacao.put("50",reflexivo);
-
-            teorico += respostas[1-1];
-            teorico += respostas[5-1];
-            teorico += respostas[10-1];
-            teorico += respostas[11-1];
-            teorico += respostas[21-1];
-            teorico += respostas[24-1];
-            teorico += respostas[30-1];
-            teorico += respostas[31-1];
-            teorico += respostas[33-1];
-            teorico += respostas[36-1];
-
-            estilosPontuacao.put("49",teorico);
-
-            pragmatico += respostas[3-1];
-            pragmatico += respostas[6-1];
-            pragmatico += respostas[8-1];
-            pragmatico += respostas[9-1];
-            pragmatico += respostas[17-1];
-            pragmatico += respostas[26-1];
-            pragmatico += respostas[28-1];
-            pragmatico += respostas[35-1];
-            pragmatico += respostas[37-1];
-            pragmatico += respostas[38-1];
-
-            estilosPontuacao.put("52",pragmatico);
-
-            SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-            Date date = new Date();
-
-            perfilRespostas.setMatriculaAluno(aluno.getMatricula());
-            perfilRespostas.setDataRealizado(formatter.format(date));
-            perfilRespostas.setIdQuestionario(48L);
-            perfilRespostas.setPontuacaoPorEstilo(estilosPontuacao);
-
-//            aluno.setPerfilAtivo(ativo);
-//            aluno.setPerfilReflexivo(reflexivo);
-//            aluno.setPerfilTeorico(teorico);
-//            aluno.setPerfilPragmatico(pragmatico);
-
-//            fazerGrafico();
-
-            try {
-                String b = new InserirPontuacaoAlunoTask(perfilRespostas).execute().get();
-                if (b.equals("true")) {
-                    Toast.makeText(this, "Pontuação cadastrado com sucesso!", Toast.LENGTH_LONG).show();
-                } else {
-                    Toast.makeText(this, "Erro ao cadastrar pontuação", Toast.LENGTH_LONG).show();
+                    String estiloId = estilo.getId().toString();
+                    estilosPontuacao.put(estiloId, estilosPontuacao.get(estiloId) + respostaValue);
                 }
-            } catch (ExecutionException e) {
-                e.printStackTrace();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+                SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+                Date date = new Date();
+
+                perfilRespostas.setMatriculaAluno(aluno.getMatricula());
+                perfilRespostas.setDataRealizado(formatter.format(date));
+                perfilRespostas.setIdQuestionario(48L);
+                perfilRespostas.setPontuacaoPorEstilo(estilosPontuacao);
+
+                try {
+                    String b = new InserirPontuacaoAlunoTask(perfilRespostas).execute().get();
+                    Toast.makeText(this, b, Toast.LENGTH_LONG).show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(this, "Ocorreu um erro inesperado", Toast.LENGTH_LONG).show();
+                }
             }
         }
     }

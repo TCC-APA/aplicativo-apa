@@ -41,8 +41,7 @@ public class EstilosFragment extends Fragment {
     private TextView textoCaracteristicas;
     private TextView textoAprendizadoEstilo;
     private Button botaoVerMais;
-    private static final float MAX = 100f, MIN = 0f;
-    private static final int NumEstilos = 4;
+    private static final float MAX = 50f, MIN = 0f;
     private RadarChart radarChart;
 
     private Aluno aluno = new Aluno();
@@ -67,7 +66,7 @@ public class EstilosFragment extends Fragment {
         try {
             perfilAluno = new BuscarPerfilAlunoTask(aluno.getMatricula(), 48L).execute().get();
             if(perfilAluno != null){
-                fazerGrafico(perfilAluno.getEstilos().size());
+                fazerGrafico();
                 preencherTextosPerfilPredominante();
             }
         } catch (ExecutionException e) {
@@ -88,36 +87,7 @@ public class EstilosFragment extends Fragment {
         return root;
     }
 
-    public void fazerGrafico(int qtdEstilos){
-       /* ArrayList<RadarEntry> radarEntryList = new ArrayList<>();
-        radarEntryList.add(new RadarEntry( 30));
-        radarEntryList.add(new RadarEntry( 45));
-        radarEntryList.add(new RadarEntry( 60));
-        radarEntryList.add(new RadarEntry( 73));
-
-        RadarDataSet radarDataSet = new RadarDataSet(radarEntryList, "teste");
-       // radarDataSet.setColor(Color.BLUE);
-        radarDataSet.setLineWidth(2f);
-        radarDataSet.setValueTextColor(Color.BLACK);
-        radarDataSet.setValueTextSize(14f);
-        radarDataSet.setFillAlpha(50);
-        //radarDataSet.setFillColor(Color.CYAN);
-
-        radarDataSet.setColor(Color.rgb(103, 110, 129));
-        radarDataSet.setFillColor(Color.rgb(103, 110, 129));
-        radarDataSet.setDrawFilled(true);
-        radarDataSet.setFillAlpha(180);
-        radarDataSet.setLineWidth(2f);
-        radarDataSet.setDrawHighlightCircleEnabled(true);
-        radarDataSet.setDrawHighlightIndicators(false);
-
-        RadarData radarDate = new RadarData();
-        radarDate.addDataSet(radarDataSet);
-
-        String[] labels = {"label1", "label2", "label3", "label4"}; FUNCIONA*/
-
-
-
+    public void fazerGrafico(){
         radarChart.setBackgroundColor(Color.WHITE);
         radarChart.getDescription().setEnabled(false);
         radarChart.setWebLineWidth(1f);
@@ -135,60 +105,15 @@ public class EstilosFragment extends Fragment {
         yAxis.setLabelCount(1, true);
 
         radarChart.setData(getData());
-
-
-
-
-
-
-
-        /*
-        radarChart.setWebColor(Color.BLUE);
-        radarChart.setWebAlpha(100);
-        radarChart.getLegend().setEnabled(false);
-        radarChart.setBackgroundColor(Color.WHITE);
-        radarChart.getDescription().setEnabled(false);
-        radarChart.setWebLineWidth(1f);
-        radarChart.setWebColor(Color.BLUE);
-        radarChart.setWebAlpha(100);
-        radarChart.getLegend().setEnabled(false);
-
-
-        radarChart.animateXY(1400, 1400, Easing.EaseInOutQuad, Easing.EaseInOutQuad);
-        XAxis xAxis = radarChart.getXAxis();
-        xAxis.setTextSize(9f);
-        xAxis.setYOffset(0);
-        xAxis.setXOffset(0);
-        xAxis.setValueFormatter(new IndexAxisValueFormatter(getLabels()));
-
-        YAxis yAxis = radarChart.getYAxis();
-        yAxis.setLabelCount(NumEstilos, false);
-        yAxis.setTextSize(9f);
-        yAxis.setAxisMaximum(MIN);
-        yAxis.setAxisMinimum(MAX);
-
-        radarChart.setData(getData());
-        //radarChart.invalidate();*/
     }
 
     private RadarData getData() {
-
         if(radarEntries != null && !radarEntries.isEmpty()) {
             RadarDataSet radarDataSet = new RadarDataSet(radarEntries, aluno.getNome());
-
-            /*set.setColor(Color.rgb(103, 110, 129));
-            set.setFillColor(Color.rgb(103, 110, 129));
-            set.setDrawFilled(true);
-            set.setFillAlpha(180);
-            set.setLineWidth(2f);
-            set.setDrawHighlightCircleEnabled(true);
-            set.setDrawHighlightIndicators(false);*/
             radarDataSet.setLineWidth(2f);
             radarDataSet.setValueTextColor(Color.BLACK);
             radarDataSet.setValueTextSize(14f);
             radarDataSet.setFillAlpha(50);
-            //radarDataSet.setFillColor(Color.CYAN);
-
             radarDataSet.setColor(Color.rgb(103, 110, 129));
             radarDataSet.setFillColor(Color.rgb(103, 110, 129));
             radarDataSet.setDrawFilled(true);
