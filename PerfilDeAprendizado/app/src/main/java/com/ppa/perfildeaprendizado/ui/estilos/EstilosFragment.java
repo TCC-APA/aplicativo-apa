@@ -39,7 +39,7 @@ public class EstilosFragment extends Fragment {
 
     private TextView textoEstilo;
     private TextView textoCaracteristicas;
-    private TextView textoAprendizadoEstilo;
+    //private TextView textoAprendizadoEstilo;
     private Button botaoVerMais;
     private static final float MAX = 50f, MIN = 0f;
     private RadarChart radarChart;
@@ -54,12 +54,12 @@ public class EstilosFragment extends Fragment {
 
         textoEstilo = root.findViewById(R.id.text_estilo);
         textoCaracteristicas = root.findViewById(R.id.text_caracteristicas);
-        textoAprendizadoEstilo = root.findViewById(R.id.text_aprendizado_estilo);
+        //textoAprendizadoEstilo = root.findViewById(R.id.text_aprendizado_estilo);
         radarChart = root.findViewById(R.id.radarChart);
         botaoVerMais = root.findViewById(R.id.button_ver_mais);
         textoEstilo.setText("");
         textoCaracteristicas.setText("");
-        textoAprendizadoEstilo.setText("");
+        //textoAprendizadoEstilo.setText("");
 
         aluno = (Aluno) getActivity().getIntent().getSerializableExtra(Aluno.class.getSimpleName());
 
@@ -171,7 +171,7 @@ public class EstilosFragment extends Fragment {
             if(estiloPredominante != null) {
                 textoEstilo.setText(estiloPredominante.getNome());
                 textoCaracteristicas.setText(estiloPredominante.getCaracteristicas());
-                textoAprendizadoEstilo.setText(estiloPredominante.getSugestoes());
+//                textoAprendizadoEstilo.setText(estiloPredominante.getSugestoes());
             }
         }
     }
