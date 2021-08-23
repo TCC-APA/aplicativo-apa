@@ -14,10 +14,13 @@ import com.ppa.perfildeaprendizado.data.model.Estilo;
 import com.ppa.perfildeaprendizado.data.model.PerfilRespostas;
 import com.ppa.perfildeaprendizado.data.model.Questao;
 import com.ppa.perfildeaprendizado.data.model.Questionario;
+import com.ppa.perfildeaprendizado.data.model.ValorAlternativa;
 import com.ppa.perfildeaprendizado.task.InserirPontuacaoAlunoTask;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -40,11 +43,13 @@ public class QuestionarioActivity extends AppCompatActivity {
     private Button botaoProx;
     private Button botaoEnviarResp;
 
+    private Integer alternativasSize = 0;
     public static int numQuestao = 0;
     private List<Questao> questoes;
     public static Integer[] respostas;
     private Questionario questionario;
     private PerfilRespostas perfilRespostas;
+    private List<ValorAlternativa> valoresAlternativas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,9 +58,9 @@ public class QuestionarioActivity extends AppCompatActivity {
         this.questionario = MenuQuestionariosActivity.questionarioEscolhido;
 
 //        this.questionario = (Questionario) getIntent().getSerializableExtra(Questionario.class.getSimpleName());
-        if(questionario != null) {
+        if (questionario != null) {
             this.questoes = questionario.getQuestoes();
-            if(questoes != null && !questoes.isEmpty()) {
+            if (questoes != null && !questoes.isEmpty()) {
                 respostas = new Integer[questoes.size()];
 
                 numQuestao = 0;
@@ -74,15 +79,15 @@ public class QuestionarioActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
 
-                        if(numQuestao == questoes.size()-1){
+                        if (numQuestao == questoes.size() - 1) {
                             numQuestao = 0;
                             questao.setText(questoes.get(numQuestao).getTexto());
-                            String pos = (numQuestao+1)+"/"+questoes.size();
+                            String pos = (numQuestao + 1) + "/" + questoes.size();
                             posicao.setText(pos);
                         } else {
                             numQuestao++;
                             questao.setText(questoes.get(numQuestao).getTexto());
-                            String pos = (numQuestao+1)+"/"+questoes.size();
+                            String pos = (numQuestao + 1) + "/" + questoes.size();
                             posicao.setText(pos);
                         }
                         mantemMarcado();
@@ -93,15 +98,15 @@ public class QuestionarioActivity extends AppCompatActivity {
                 botaoVoltar.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if(numQuestao > 0){
+                        if (numQuestao > 0) {
                             numQuestao--;
                             questao.setText(questoes.get(numQuestao).getTexto());
-                            String pos = (numQuestao+1)+"/"+questoes.size();
+                            String pos = (numQuestao + 1) + "/" + questoes.size();
                             posicao.setText(pos);
                         } else {
-                            numQuestao = questoes.size()-1;
+                            numQuestao = questoes.size() - 1;
                             questao.setText(questoes.get(numQuestao).getTexto());
-                            String pos = (numQuestao+1)+"/"+questoes.size();
+                            String pos = (numQuestao + 1) + "/" + questoes.size();
                             posicao.setText(pos);
                         }
                         mantemMarcado();
@@ -116,7 +121,7 @@ public class QuestionarioActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        if(questoes != null) {
+        if (questoes != null) {
             desativarBotaoEnviar();
             questao.setText(questoes.get(numQuestao).getTexto());
             String pos = (numQuestao + 1) + "/" + questoes.size();
@@ -125,12 +130,12 @@ public class QuestionarioActivity extends AppCompatActivity {
         }
     }
 
-    public List<Questao> getQuestoes(){
+    public List<Questao> getQuestoes() {
         return this.questoes;
 
     }
 
-    public void retornaQuestao(){
+    public void retornaQuestao() {
 
     }
 
@@ -187,28 +192,28 @@ public class QuestionarioActivity extends AppCompatActivity {
 
     }
 
-    public void terminaQuestionario(){
+    public void terminaQuestionario() {
         Aluno aluno = (Aluno) getIntent().getSerializableExtra(Aluno.class.getSimpleName());
         inserirPontuacaoPerfil(aluno);
         Intent intent = new Intent(QuestionarioActivity.this, ResultadoActivity.class);
-        if(perfilRespostas != null){
+        if (perfilRespostas != null) {
             intent.putExtra(PerfilRespostas.class.getSimpleName(), perfilRespostas);
         }
         intent.putExtra(Aluno.class.getSimpleName(), aluno);
         startActivity(intent);
     }
 
-    private void getPontuacaoByEstilo(){
+    private void getPontuacaoByEstilo() {
 
     }
 
-    public void inserirPontuacaoPerfil(Aluno aluno){
+    public void inserirPontuacaoPerfil(Aluno aluno) {
 
         perfilRespostas = new PerfilRespostas();
         Map<String, Long> estilosPontuacao = new HashMap<>();
         Map<String, Estilo> estilosIndexados = questionario.getEstilosIndexados();
-        if(estilosIndexados != null && estilosIndexados.size() > 0) {
-            for (String key : estilosIndexados.keySet()){
+        if (estilosIndexados != null && estilosIndexados.size() > 0) {
+            for (String key : estilosIndexados.keySet()) {
                 Estilo e = estilosIndexados.get(key);
                 estilosPontuacao.put(e.getId().toString(), 0L);
             }
@@ -241,91 +246,136 @@ public class QuestionarioActivity extends AppCompatActivity {
         }
     }
 
-    public void coletaRespostas(){
+    public void coletaRespostas() {
         this.radioNunca = findViewById(R.id.radioNunca);
         this.radioAlgumasVezes = findViewById(R.id.radioAlgVezes);
         this.radioMuitasVezes = findViewById(R.id.radioMuitasVezes);
         this.radioQuaseSempre = findViewById(R.id.radioQseSempre);
         this.radioSempre = findViewById(R.id.radioSempre);
-
-        radioNunca.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                respostas[numQuestao] = 1;
-                avancaQuestao();
+        if (this.questionario != null) {
+            valoresAlternativas = this.questionario.getValoresAlternativas();
+            Collections.sort(valoresAlternativas, new Comparator<ValorAlternativa>() {
+                @Override
+                public int compare(ValorAlternativa o1, ValorAlternativa o2) {
+                    return o1.getValor().compareTo(o2.getValor());
+                }
+            });
+            alternativasSize = valoresAlternativas.size();
+            if (alternativasSize >= 1) {
+                radioNunca.setVisibility(View.VISIBLE);
+                radioNunca.setText(valoresAlternativas.get(0).getTextoAlternativa());
+                radioNunca.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        respostas[numQuestao] = valoresAlternativas.get(0).getValor();
+                        avancaQuestao();
+                    }
+                });
+            } else {
+                radioNunca.setVisibility(View.GONE);
             }
-        });
 
-        radioAlgumasVezes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                respostas[numQuestao] = 2;
-                avancaQuestao();
+            if (alternativasSize >= 2) {
+                radioAlgumasVezes.setVisibility(View.VISIBLE);
+                radioAlgumasVezes.setText(valoresAlternativas.get(1).getTextoAlternativa());
+                radioAlgumasVezes.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        respostas[numQuestao] = valoresAlternativas.get(1).getValor();
+                        avancaQuestao();
 
+                    }
+                });
+            } else {
+                radioAlgumasVezes.setVisibility(View.GONE);
             }
-        });
 
-        radioMuitasVezes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                respostas[numQuestao] = 3;
-                avancaQuestao();
+            if (alternativasSize >= 3) {
+                radioMuitasVezes.setVisibility(View.VISIBLE);
+                radioMuitasVezes.setText(valoresAlternativas.get(2).getTextoAlternativa());
+                radioMuitasVezes.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        respostas[numQuestao] = valoresAlternativas.get(2).getValor();
+                        avancaQuestao();
 
+                    }
+                });
+            } else {
+                radioMuitasVezes.setVisibility(View.GONE);
             }
-        });
 
-        radioQuaseSempre.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                respostas[numQuestao] = 4;
-                avancaQuestao();
+            if (alternativasSize >= 4) {
+                radioQuaseSempre.setVisibility(View.VISIBLE);
+                radioQuaseSempre.setText(valoresAlternativas.get(3).getTextoAlternativa());
+                radioQuaseSempre.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        respostas[numQuestao] = valoresAlternativas.get(3).getValor();
+                        avancaQuestao();
 
+                    }
+                });
+            } else {
+                radioQuaseSempre.setVisibility(View.GONE);
             }
-        });
 
-        radioSempre.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                respostas[numQuestao] = 5;
-                avancaQuestao();
+            if (alternativasSize >= 5) {
+                radioSempre.setVisibility(View.VISIBLE);
+                radioSempre.setText(valoresAlternativas.get(4).getTextoAlternativa());
+                radioSempre.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        respostas[numQuestao] = valoresAlternativas.get(4).getValor();
+                        avancaQuestao();
 
+                    }
+                });
+            } else {
+                radioSempre.setVisibility(View.GONE);
             }
-        });
+        }
+
     }
 
-    public void mantemMarcado(){
-        System.out.println("mantemMarcado: "+respostas[numQuestao]);
+    public void mantemMarcado() {
+        System.out.println("mantemMarcado: " + respostas[numQuestao]);
         this.opcoesRadio.clearCheck();
-        if(respostas[numQuestao] != null){
-            if(respostas[numQuestao] == 1){
-                radioNunca.setChecked(true);
-
+        if (respostas[numQuestao] != null) {
+            if(alternativasSize >= 1){
+                if (respostas[numQuestao] == valoresAlternativas.get(0).getValor()) {
+                    radioNunca.setChecked(true);
+                }
             }
-            else if(respostas[numQuestao] == 2){
-                radioAlgumasVezes.setChecked(true);
-
+            if(alternativasSize >= 2){
+                if (respostas[numQuestao] == valoresAlternativas.get(1).getValor()) {
+                    radioAlgumasVezes.setChecked(true);
+                }
             }
-            else if(respostas[numQuestao] == 3){
-                radioMuitasVezes.setChecked(true);
-
+            if(alternativasSize >= 3){
+                if (respostas[numQuestao] == valoresAlternativas.get(2).getValor()) {
+                    radioMuitasVezes.setChecked(true);
+                }
             }
-            else if(respostas[numQuestao] == 4) {
-                radioQuaseSempre.setChecked(true);
-
+            if(alternativasSize >= 4){
+                if (respostas[numQuestao] == valoresAlternativas.get(3).getValor()) {
+                    radioQuaseSempre.setChecked(true);
+                }
             }
-            else if(respostas[numQuestao] == 5) {
-                radioSempre.setChecked(true);
-
+            if(alternativasSize >= 5){
+                if (respostas[numQuestao] == valoresAlternativas.get(4).getValor()) {
+                    radioSempre.setChecked(true);
+                }
             }
         }
     }
 
-    protected void desativarBotaoEnviar(){
+    protected void desativarBotaoEnviar() {
         this.botaoEnviarResp.setEnabled(false);
         this.botaoEnviarResp.setBackground(getResources().getDrawable(R.drawable.roundedbuttondisabled));
     }
 
-    protected void ativarBotaoEnviar(){
+    protected void ativarBotaoEnviar() {
         this.botaoEnviarResp.setEnabled(true);
         this.botaoEnviarResp.setBackground(getResources().getDrawable(R.drawable.roundedbutton));
         this.botaoEnviarResp.setOnClickListener(new View.OnClickListener() {
