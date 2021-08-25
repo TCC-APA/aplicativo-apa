@@ -1,6 +1,8 @@
 package com.ppa.perfildeaprendizado.data.model;
 
-public class Questao {
+import java.io.Serializable;
+
+public class Questao implements Serializable {
 
     private Long idQuestao;
     private String texto;

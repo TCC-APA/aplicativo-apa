@@ -1,6 +1,5 @@
 package com.ppa.perfildeaprendizado.ui.estilos;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,6 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.RadarChart;
@@ -18,20 +21,20 @@ import com.github.mikephil.charting.data.RadarDataSet;
 import com.github.mikephil.charting.data.RadarEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IRadarDataSet;
-import com.ppa.perfildeaprendizado.DetalhesEstilosActivity;
 import com.ppa.perfildeaprendizado.R;
+import com.ppa.perfildeaprendizado.data.DetalhesEstilosVO;
 import com.ppa.perfildeaprendizado.data.model.Aluno;
 import com.ppa.perfildeaprendizado.data.model.Estilo;
 import com.ppa.perfildeaprendizado.data.model.PerfilAluno;
+import com.ppa.perfildeaprendizado.data.model.Questionario;
+import com.ppa.perfildeaprendizado.data.model.RangePontuacaoClassificacao;
 import com.ppa.perfildeaprendizado.task.BuscarPerfilAlunoTask;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
 
 public class EstilosFragment extends Fragment {
 
@@ -44,7 +47,8 @@ public class EstilosFragment extends Fragment {
     private static final float MAX = 50f, MIN = 0f;
     private RadarChart radarChart;
 
-    private Aluno aluno = new Aluno();
+    private Aluno aluno;
+    private Questionario questionario;
     private PerfilAluno perfilAluno;
     private List<RadarEntry> radarEntries = new ArrayList<>();
 
@@ -62,6 +66,7 @@ public class EstilosFragment extends Fragment {
         //textoAprendizadoEstilo.setText("");
 
         aluno = (Aluno) getActivity().getIntent().getSerializableExtra(Aluno.class.getSimpleName());
+        questionario = (Questionario) getActivity().getIntent().getSerializableExtra(Questionario.class.getSimpleName());
 
         try {
             perfilAluno = new BuscarPerfilAlunoTask(aluno.getMatricula(), 48L).execute().get();
@@ -74,7 +79,7 @@ public class EstilosFragment extends Fragment {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
+/*
         botaoVerMais.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,7 +87,7 @@ public class EstilosFragment extends Fragment {
                 intent.putExtra(PerfilAluno.class.getSimpleName(), perfilAluno);
                 startActivity(intent);
             }
-        });
+        });*/
 
         return root;
     }
@@ -154,6 +159,82 @@ public class EstilosFragment extends Fragment {
     }
 
     public void preencherTextosPerfilPredominante(){
+        Map<Integer, List<Estilo>> estilosOrdenadosByPredominancia = new HashMap<>();
+        Map<Long, RangePontuacaoClassificacao> idEstilosRange = new HashMap<>();
+        List<Estilo> estilos = perfilAluno.getEstilos();
+
+        if (perfilAluno.getPontuacaoPorEstilo() != null && !perfilAluno.getPontuacaoPorEstilo().isEmpty()) {
+            List<RangePontuacaoClassificacao> ranges = questionario.getRanges();
+
+            if(ranges != null && !ranges.isEmpty()){
+                for(String estiloIndex: questionario.getEstilosIndexados().keySet()){
+                    Estilo estiloAtual = questionario.getEstilosIndexados().get(estiloIndex);
+                    String estiloId = estiloAtual.getId().toString();
+                    Long pontuacaoEstilo = perfilAluno.getPontuacaoPorEstilo() != null && perfilAluno.getPontuacaoPorEstilo().containsKey(estiloId) ?
+                            perfilAluno.getPontuacaoPorEstilo().get(estiloId) : 0L;
+
+                    List<RangePontuacaoClassificacao> rangesDoEstilo = new ArrayList<>();
+                    for(RangePontuacaoClassificacao range: ranges){
+                        if(range.getEstiloKey().equals(estiloIndex)){
+                            rangesDoEstilo.add(range);
+                        }
+                    }
+                    for(int i = 0; i<rangesDoEstilo.size(); i++){
+                        RangePontuacaoClassificacao rangeEstilo = rangesDoEstilo.get(i);
+                        if(pontuacaoEstilo >= rangeEstilo.getMinValue() && pontuacaoEstilo <= rangeEstilo.getMaxValue()){
+                            List<Estilo> listaEstiloForRange = new ArrayList<>();
+                            if(estilosOrdenadosByPredominancia.containsKey(i) && estilosOrdenadosByPredominancia.get(i) != null)
+                                listaEstiloForRange.addAll(estilosOrdenadosByPredominancia.get(i));
+
+                            listaEstiloForRange.add(estiloAtual);
+                            idEstilosRange.put(estiloAtual.getId(), rangeEstilo);
+                            estilosOrdenadosByPredominancia.put(i, listaEstiloForRange);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        List<Estilo> estilosPredominantes = new ArrayList<>();
+        List<Estilo> estilosNaoPredominantes = new ArrayList<>();
+
+        divideEstilosByPredominancia(estilosOrdenadosByPredominancia, estilosPredominantes, estilosNaoPredominantes, estilos.size());
+
+        DetalhesEstilosVO vo = new DetalhesEstilosVO();
+        vo.setEstilosNaoPredominantes(estilosNaoPredominantes);
+        vo.setEstilosPredominantes(estilosPredominantes);
+        vo.setIdEstiloRange(idEstilosRange);
+
+        StringBuilder strPredominantes = new StringBuilder();
+        StringBuilder strCaracteristicas = new StringBuilder();
+        for(Estilo e: estilosPredominantes){
+            strPredominantes.append("\"" + e.getNome() + "\", " );
+            strCaracteristicas.append(e.getCaracteristicas() + "\n\n");
+        }
+
+        String textoPredominantes  = strPredominantes.substring(0, strPredominantes.length() - 2);
+        String caracteristicas = strCaracteristicas.substring(0, strCaracteristicas.length() - 2);
+        textoEstilo.setText(textoPredominantes);
+        textoCaracteristicas.setText(caracteristicas);
+    }
+
+    private void divideEstilosByPredominancia(Map<Integer, List<Estilo>> estilosOrdenadosByPredominancia, List<Estilo> estilosPredominantes, List<Estilo> estilosNaoPredominantes, int estilosSize) {
+        Boolean predominanteEncontrado = false;
+        for(int i = estilosSize - 1; i >= 0; i--){
+            if(!predominanteEncontrado){
+                if(estilosOrdenadosByPredominancia.containsKey(i)){
+                    estilosPredominantes.addAll(estilosOrdenadosByPredominancia.get(i));
+                    predominanteEncontrado = true;
+                }
+            } else {
+                if(estilosOrdenadosByPredominancia.containsKey(i)){
+                    estilosNaoPredominantes.addAll(estilosOrdenadosByPredominancia.get(i));
+                }
+            }
+        }
+    }
+
+    private void getEstilosPredominantes(){
         if (perfilAluno.getPontuacaoPorEstilo() != null && !perfilAluno.getPontuacaoPorEstilo().isEmpty()) {
             List<Estilo> estilos = perfilAluno.getEstilos();
 

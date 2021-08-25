@@ -1,6 +1,8 @@
 package com.ppa.perfildeaprendizado.data.model;
 
-public class ValorAlternativa {
+import java.io.Serializable;
+
+public class ValorAlternativa implements Serializable {
 
     private Integer valor;
     private String textoAlternativa;

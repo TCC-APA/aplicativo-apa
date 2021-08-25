@@ -199,6 +199,7 @@ public class QuestionarioActivity extends AppCompatActivity {
         if (perfilRespostas != null) {
             intent.putExtra(PerfilRespostas.class.getSimpleName(), perfilRespostas);
         }
+        intent.putExtra(Questionario.class.getSimpleName(), questionario);
         intent.putExtra(Aluno.class.getSimpleName(), aluno);
         startActivity(intent);
     }

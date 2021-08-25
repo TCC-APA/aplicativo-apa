@@ -54,6 +54,8 @@ public class MenuQuestionariosActivity extends AppCompatActivity {
             if(perfilAluno != null){
                 Intent intent = new Intent(MenuQuestionariosActivity.this, ResultadoActivity.class);
                 intent.putExtra(Aluno.class.getSimpleName(), aluno);
+                //TODO trocar isso pra pegar o questionario escolhido
+                intent.putExtra(Questionario.class.getSimpleName(), questionarios.get(0));
                 startActivity(intent);
             }else {
                 Intent intent = new Intent(MenuQuestionariosActivity.this, QuestionarioActivity.class);

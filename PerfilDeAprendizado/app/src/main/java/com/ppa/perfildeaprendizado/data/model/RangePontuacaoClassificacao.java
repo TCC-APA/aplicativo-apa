@@ -1,6 +1,8 @@
 package com.ppa.perfildeaprendizado.data.model;
 
-public class RangePontuacaoClassificacao {
+import java.io.Serializable;
+
+public class RangePontuacaoClassificacao implements Serializable {
 
     private Integer minValue;
     private Integer maxValue;

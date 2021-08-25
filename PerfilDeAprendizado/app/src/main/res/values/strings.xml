@@ -49,7 +49,8 @@
     <string name="estilos_resultado">Perfil de Aprendizagem</string>
     <string name="editar_perfil">Editar Dados</string>
     <string name="grafico_titulo">Gráfico de Grau de Pertinência dos Estilos</string>
-    <string name="estilo_predominante">Seu Estilo de Aprendizagem predominante</string>
+    <string name="estilo_predominante">Seu(s) Estilo(s) de Aprendizagem predominante(s):</string>
+    <string name="outros_estilos">Estes estilos não condizem com o seu perfil:</string>
     <string name="caracteristicas_estilo">Características desse estilo</string>
     <string name="aprendizado_estilo">Tem facilidade para aprender quando...</string>
     <string name="ver_mais_botao">Ver Mais</string>
