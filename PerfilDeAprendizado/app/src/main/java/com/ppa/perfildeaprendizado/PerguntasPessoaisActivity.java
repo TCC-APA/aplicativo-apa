@@ -47,7 +47,7 @@ public class PerguntasPessoaisActivity extends AppCompatActivity {
         confirmarSenha = findViewById(R.id.confirmarSenha);
         genero = findViewById(R.id.genero);
         enviar = findViewById(R.id.enviar);
-        dataNascimento.setActivated(false);
+        dataNascimento.setFocusable(false);
         dataNascimento.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

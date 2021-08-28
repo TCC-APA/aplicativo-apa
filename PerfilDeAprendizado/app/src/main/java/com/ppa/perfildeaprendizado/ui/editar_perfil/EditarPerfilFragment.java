@@ -1,10 +1,12 @@
 package com.ppa.perfildeaprendizado.ui.editar_perfil;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -13,6 +15,8 @@ import com.ppa.perfildeaprendizado.R;
 import com.ppa.perfildeaprendizado.data.model.Aluno;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -29,6 +33,8 @@ public class EditarPerfilFragment extends Fragment {
     private Spinner genero;
     private LinearLayout form;
     private Button enviar;
+    private DatePickerDialog datePickerDialog;
+    private Calendar dataNascAux = Calendar.getInstance();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -44,6 +50,22 @@ public class EditarPerfilFragment extends Fragment {
         confirmarSenha = root.findViewById(R.id.confirmarSenha);
         genero = root.findViewById(R.id.genero);
         enviar = root.findViewById(R.id.enviar);
+        dataNascimento.setFocusable(false);
+        dataNascimento.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Calendar calendar = Calendar.getInstance();
+                datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        dataNascAux.set(year, month, dayOfMonth);
+                        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+                        dataNascimento.setText(formato.format(dataNascAux.getTime()));
+                    }
+                }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+                datePickerDialog.show();
+            }
+        });
 
         nome.setText(aluno.getNome());
         matricula.setText(aluno.getMatricula());
