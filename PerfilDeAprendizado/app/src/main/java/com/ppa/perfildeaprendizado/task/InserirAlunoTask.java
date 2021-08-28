@@ -15,7 +15,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
-public class InserirAlunoTask extends AsyncTask<Void, Void, String> {
+public class InserirAlunoTask extends AsyncTask<Void, Void, Aluno> {
 
     private Aluno aluno;
 
@@ -24,7 +24,7 @@ public class InserirAlunoTask extends AsyncTask<Void, Void, String> {
     }
 
     @Override
-    protected String doInBackground(Void... voids) {
+    protected Aluno doInBackground(Void... voids) {
         StringBuilder resposta = new StringBuilder();
         if(aluno != null) {
             try {
@@ -62,6 +62,6 @@ public class InserirAlunoTask extends AsyncTask<Void, Void, String> {
                 Log.e("ERRO", e.getMessage());
             }
         }
-        return resposta.toString();
+        return new Gson().fromJson(resposta.toString(), Aluno.class);
     }
 }

@@ -15,10 +15,8 @@ import android.widget.Toast;
 import com.ppa.perfildeaprendizado.data.model.Aluno;
 import com.ppa.perfildeaprendizado.task.InserirAlunoTask;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
@@ -106,9 +104,13 @@ public class PerguntasPessoaisActivity extends AppCompatActivity {
                     Aluno aluno = null;
                     try {
                         aluno = new Aluno(matricula.getText().toString(), nome.getText().toString(), formato.format(dataNascAux.getTime()), genero.getSelectedItem().toString(), senha.getText().toString());
-                        String resposta = new InserirAlunoTask(aluno).execute().get();
-                        if(resposta != null) {
-                            sendMessage(aluno);
+                        aluno = new InserirAlunoTask(aluno).execute().get();
+                        if(aluno != null) {
+                            if(aluno.getErros() != null && !aluno.getErros().isEmpty()){
+                                matricula.setError("Essa matrícula já foi cadastrada.");
+                            }else {
+                                sendMessage(aluno);
+                            }
                         }else {
                             Toast.makeText(getApplicationContext(), "Ocorreu um problema no salvamento dos seus dados. Verifique sua conexão.", Toast.LENGTH_LONG);
                         }
