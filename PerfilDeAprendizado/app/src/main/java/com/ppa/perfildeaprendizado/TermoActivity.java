@@ -47,7 +47,6 @@ public class TermoActivity extends AppCompatActivity {
     }
 
     public void voltarLogin(){
-        LoginActivity.loadingProgressBar.setVisibility(View.GONE);
         finish();
     }
 }

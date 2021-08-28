@@ -1,9 +1,7 @@
 package com.ppa.perfildeaprendizado.data.model;
 
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
+import java.util.List;
 
 /**
  * Data class that captures user information for logged in users retrieved from LoginRepository
@@ -17,6 +15,7 @@ public class Aluno implements Serializable {
     private Long idade;
     private String genero;
     private String senha;
+    private List<String> erros;
 
     public Aluno(){
 
@@ -77,6 +76,14 @@ public class Aluno implements Serializable {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public List<String> getErros() {
+        return erros;
+    }
+
+    public void setErros(List<String> erros) {
+        this.erros = erros;
     }
 
     @Override
