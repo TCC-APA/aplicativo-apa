@@ -60,7 +60,7 @@ public class MenuQuestionarioAdapter extends RecyclerView.Adapter<MenuQuestionar
                 holder.statusQuestionario.setText("Respondido em: " + dataRespondido);
                 holder.imagemStatusVerde.setVisibility(View.VISIBLE);
                 holder.imagemStatusCinza.setVisibility(View.GONE);
-                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                holder.botaoVerResultado.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         activity.goToResultado(entity);
@@ -119,6 +119,9 @@ public class MenuQuestionarioAdapter extends RecyclerView.Adapter<MenuQuestionar
 
         @BindView(R.id.respnovamente)
         Button botaoResponderNovamente;
+
+        @BindView(R.id.verresultado)
+        Button botaoVerResultado;
 
 
         public MenuQuestionarioViewHolder(View itemView) {

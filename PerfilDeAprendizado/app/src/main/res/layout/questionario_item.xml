@@ -55,19 +55,40 @@
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/respnovamente"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="25dp"
-        android:layout_marginBottom="10dp"
-        android:layout_weight="1"
-        android:background="@drawable/roundedbutton"
-        android:scrollbarAlwaysDrawVerticalTrack="false"
-        android:text="Responder Novamente"
-        android:textColor="@color/background"
-        android:textSize="12sp" />
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/verresultado"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/roundedbutton"
+            android:scrollbarAlwaysDrawVerticalTrack="false"
+            android:text="Ver Resultado"
+            android:textColor="@color/background"
+            android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/respnovamente"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/roundedbuttonsecondary"
+            android:scrollbarAlwaysDrawVerticalTrack="false"
+            android:text="Responder Novamente"
+            android:textColor="@color/background"
+            android:textSize="12sp" />
+    </LinearLayout>
 
 </LinearLayout>
