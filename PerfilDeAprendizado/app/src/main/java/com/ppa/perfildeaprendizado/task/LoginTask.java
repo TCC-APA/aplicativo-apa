@@ -4,6 +4,9 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.ppa.perfildeaprendizado.data.model.Aluno;
 
 import java.io.IOException;
@@ -18,6 +21,7 @@ public class LoginTask extends AsyncTask<Void, Void, Aluno> {
 
     private String matricula;
     private String senha;
+    private Aluno aluno;
 
     public LoginTask(String matricula, String senha){
         this.matricula = matricula;
@@ -47,9 +51,16 @@ public class LoginTask extends AsyncTask<Void, Void, Aluno> {
                 os.close();
 
                 Scanner scanner = new Scanner((InputStream) connection.getContent());
-                while (scanner.hasNext()) {
-                    resposta.append(scanner.next());
+                while (scanner.hasNextLine()) {
+                    resposta.append(scanner.nextLine());
                 }
+
+                JsonObject jsonObject = new JsonParser().parse(resposta.toString()).getAsJsonObject();
+
+                GsonBuilder gsonBuilder = new GsonBuilder();
+                gsonBuilder = gsonBuilder.setPrettyPrinting();
+                Gson gson = gsonBuilder.create();
+                aluno = gson.fromJson(jsonObject, Aluno.class);
 
                 if(connection.getResponseCode() != HttpURLConnection.HTTP_OK){
                     Log.e("ERRO", "Não foi possível acessar o WebService: " + connection.getResponseCode());
@@ -63,6 +74,6 @@ public class LoginTask extends AsyncTask<Void, Void, Aluno> {
                 e.printStackTrace();
             }
         }
-        return new Gson().fromJson(resposta.toString(), Aluno.class);
+        return aluno;
     }
 }

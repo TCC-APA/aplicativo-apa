@@ -51,6 +51,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:ems="10"
+                android:enabled="false"
                 android:hint="@string/matricula"
                 android:inputType="textPersonName" />
 

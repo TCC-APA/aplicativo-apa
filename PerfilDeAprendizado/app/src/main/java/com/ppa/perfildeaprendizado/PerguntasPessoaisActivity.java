@@ -100,7 +100,7 @@ public class PerguntasPessoaisActivity extends AppCompatActivity {
                     erros++;
                 }
                 if (erros == 0) {
-                    SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+                    SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault());
                     Aluno aluno = null;
                     try {
                         aluno = new Aluno(matricula.getText().toString(), nome.getText().toString(), formato.format(dataNascAux.getTime()), genero.getSelectedItem().toString(), senha.getText().toString());
