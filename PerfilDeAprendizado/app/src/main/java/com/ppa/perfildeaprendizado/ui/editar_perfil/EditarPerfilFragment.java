@@ -1,6 +1,7 @@
 package com.ppa.perfildeaprendizado.ui.editar_perfil;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ppa.perfildeaprendizado.DetalhesEstilosActivity;
+import com.ppa.perfildeaprendizado.MenuQuestionariosActivity;
 import com.ppa.perfildeaprendizado.R;
 import com.ppa.perfildeaprendizado.ResultadoActivity;
 import com.ppa.perfildeaprendizado.data.model.Aluno;
@@ -111,7 +114,13 @@ public class EditarPerfilFragment extends Fragment {
         }
             return root;
     }
-
+/*
+    @Override
+    public void onBackPressed() {
+        Intent setIntent = new Intent(EditarPerfilFragment.this, MenuQuestionariosActivity.class);
+        startActivity(setIntent);
+    }
+*/
     private void editarAluno ( final Aluno aluno){
 
             int erros = 0;

@@ -55,6 +55,7 @@ public class MenuQuestionarioAdapter extends RecyclerView.Adapter<MenuQuestionar
             PerfilAluno perfilAluno = new BuscarPerfilAlunoTask(matriculaAluno, entity.getId()).execute().get();
             if(perfilAluno != null){
                 holder.botaoResponderNovamente.setVisibility(View.VISIBLE);
+                holder.botaoResponderNovamente.setText("Responder Novamente");
                 SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
                 String dataRespondido = formato.format(perfilAluno.getDataRealizado());
                 holder.statusQuestionario.setText("Respondido em: " + dataRespondido);
@@ -73,11 +74,13 @@ public class MenuQuestionarioAdapter extends RecyclerView.Adapter<MenuQuestionar
                     }
                 });
             }else{
-                holder.botaoResponderNovamente.setVisibility(View.GONE);
+                holder.botaoVerResultado.setVisibility(View.GONE);
+                holder.botaoResponderNovamente.setVisibility(View.VISIBLE);
+                holder.botaoResponderNovamente.setText("Responder este Questionário");
                 holder.statusQuestionario.setText("Não respondido");
                 holder.imagemStatusCinza.setVisibility(View.VISIBLE);
                 holder.imagemStatusVerde.setVisibility(View.GONE);
-                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                holder.botaoResponderNovamente.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         activity.goToQuetionario(entity);
