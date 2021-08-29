@@ -1,5 +1,6 @@
 package com.ppa.perfildeaprendizado.ui.estilos;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -21,6 +22,7 @@ import com.github.mikephil.charting.data.RadarDataSet;
 import com.github.mikephil.charting.data.RadarEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IRadarDataSet;
+import com.ppa.perfildeaprendizado.DetalhesEstilosActivity;
 import com.ppa.perfildeaprendizado.R;
 import com.ppa.perfildeaprendizado.data.DetalhesEstilosVO;
 import com.ppa.perfildeaprendizado.data.model.Aluno;
@@ -51,6 +53,7 @@ public class EstilosFragment extends Fragment {
     private Questionario questionario;
     private PerfilAluno perfilAluno;
     private List<RadarEntry> radarEntries = new ArrayList<>();
+    private DetalhesEstilosVO detalhesEstilosVO;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         estilosViewModel = ViewModelProviders.of(this).get(EstilosViewModel.class);
@@ -79,15 +82,16 @@ public class EstilosFragment extends Fragment {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-/*
+
         botaoVerMais.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), DetalhesEstilosActivity.class);
+                intent.putExtra(DetalhesEstilosVO.class.getSimpleName(), detalhesEstilosVO);
                 intent.putExtra(PerfilAluno.class.getSimpleName(), perfilAluno);
                 startActivity(intent);
             }
-        });*/
+        });
 
         return root;
     }
@@ -209,13 +213,15 @@ public class EstilosFragment extends Fragment {
         StringBuilder strCaracteristicas = new StringBuilder();
         for(Estilo e: estilosPredominantes){
             strPredominantes.append("\"" + e.getNome() + "\", " );
-            strCaracteristicas.append(e.getCaracteristicas() + "\n\n");
+            strCaracteristicas.append(e.getNome() + ": " + e.getCaracteristicas() + "\n\n");
         }
 
         String textoPredominantes  = strPredominantes.substring(0, strPredominantes.length() - 2);
         String caracteristicas = strCaracteristicas.substring(0, strCaracteristicas.length() - 2);
         textoEstilo.setText(textoPredominantes);
         textoCaracteristicas.setText(caracteristicas);
+
+        this.detalhesEstilosVO = vo;
     }
 
     private void divideEstilosByPredominancia(Map<Integer, List<Estilo>> estilosOrdenadosByPredominancia, List<Estilo> estilosPredominantes, List<Estilo> estilosNaoPredominantes, int estilosSize) {

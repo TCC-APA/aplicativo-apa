@@ -1,56 +1,54 @@
-/*package com.ppa.perfildeaprendizado;
+package com.ppa.perfildeaprendizado;
 
-import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
-import com.ppa.perfildeaprendizado.R;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.ppa.perfildeaprendizado.data.DetalhesEstilosVO;
 import com.ppa.perfildeaprendizado.data.model.Estilo;
 import com.ppa.perfildeaprendizado.ui.detalhes.DetalhesEstilosAdapter;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 
 public class DetalhesEstilosActivity extends AppCompatActivity {
     public static String TAG = DetalhesEstilosActivity.class.getSimpleName();
 
+    @BindView(R.id.outros_estilos)
     TextView mEstilosNaoCondizentes;
+    @BindView(R.id.lista_detalhes_predominantes)
     RecyclerView mPredominantesRecyclerView;
+    @BindView(R.id.lista_detalhes_outros)
     RecyclerView mNaoPredominantesRecyclerView;
+    private DetalhesEstilosVO detalhesEstilosVO;
 
-    List<Estilo> mList = new ArrayList<>();
+    private List<Estilo> predList = new ArrayList<>();
+    private List<Estilo> outrosList = new ArrayList<>();
 
-    DetalhesEstilosAdapter mAdapter;
+    private DetalhesEstilosAdapter mAdapterPred;
+    private DetalhesEstilosAdapter mAdapterOutros;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        mEstilosNaoCondizentes = (TextView) findViewById(R.id.outros_estilos);
-        mPredominantesRecyclerView = (RecyclerView) findViewById(R.id.lista_detalhes_predominantes);
-        mNaoPredominantesRecyclerView = (RecyclerView) findViewById(R.id.lista_detalhes_outros);
+        /* Setting Layout */
         setContentView(R.layout.activity_detalhes_estilos);
 
-        mPredominantesRecyclerView.setHasFixedSize(false);
-        mPredominantesRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mPredominantesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        /* Injection */
+        ButterKnife.bind(this);
+        detalhesEstilosVO = (DetalhesEstilosVO) getIntent().getSerializableExtra(DetalhesEstilosVO.class.getSimpleName());
 
-        mNaoPredominantesRecyclerView.setHasFixedSize(false);
-        mNaoPredominantesRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mNaoPredominantesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         /*
         Comparator<Equipamento> equipamentoComparator = new Comparator<Equipamento>() {
             @Override
@@ -58,8 +56,12 @@ public class DetalhesEstilosActivity extends AppCompatActivity {
                 return equipamento.getStringValue(Equipamento.ACTDESCRICAO).compareTo(equipamento1.getStringValue(Equipamento.ACTDESCRICAO));
             }
         };*/
-/*
-        mList = new ArrayList<>();
+
+        predList = new ArrayList<>();
+        outrosList = new ArrayList<>();
+        carregarListas();
+        carregarViews();
+
 
 //        mAdapter = new EquipamentoAdapter( this, searchFilter, false) {
 //            @Override
@@ -72,7 +74,6 @@ public class DetalhesEstilosActivity extends AppCompatActivity {
 //        };
 //        mRecyclerView.setAdapter(mAdapter);
 
-        carregarEquipamentos();
     }
 
     @Override
@@ -80,17 +81,38 @@ public class DetalhesEstilosActivity extends AppCompatActivity {
         super.onStart();
     }
 
-    private void carregarEstilos(Bundle savedInstanceState) {
-        List<>savedInstanceState.get("EstilosPredominantes");
-        mList.clear();
-        mList.addAll(Equipamento.findAll());
-
-        if (mList.size() < 1) {
-            mRecyclerView.setVisibility(View.GONE);
-            mSemEquipamento.setVisibility(View.VISIBLE);
+    private void carregarListas() {
+        if(detalhesEstilosVO != null){
+            predList.clear();
+            predList.addAll(detalhesEstilosVO.getEstilosPredominantes());
+            if(detalhesEstilosVO.getEstilosNaoPredominantes() != null && !detalhesEstilosVO.getEstilosNaoPredominantes().isEmpty()){
+                outrosList.clear();
+                outrosList.addAll(detalhesEstilosVO.getEstilosNaoPredominantes());
+            }
         }
+    }
 
-//        if(mAdapter != null) mAdapter.filter(null);
+    private void carregarViews() {
+        mAdapterPred = new DetalhesEstilosAdapter(this, predList, detalhesEstilosVO);
+        mAdapterOutros = new DetalhesEstilosAdapter(this, outrosList, detalhesEstilosVO);
+
+        mPredominantesRecyclerView.setHasFixedSize(false);
+        mPredominantesRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        mPredominantesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mPredominantesRecyclerView.setAdapter(mAdapterPred);
+        mPredominantesRecyclerView.setVisibility(View.VISIBLE);
+
+        if(outrosList != null && !outrosList.isEmpty()){
+            mNaoPredominantesRecyclerView.setHasFixedSize(false);
+            mNaoPredominantesRecyclerView.setItemAnimator(new DefaultItemAnimator());
+            mNaoPredominantesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+            mNaoPredominantesRecyclerView.setVisibility(View.VISIBLE);
+            mNaoPredominantesRecyclerView.setAdapter(mAdapterOutros);
+            mEstilosNaoCondizentes.setVisibility(View.VISIBLE);
+        } else {
+            mEstilosNaoCondizentes.setVisibility(View.GONE);
+            mNaoPredominantesRecyclerView.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -101,4 +123,3 @@ public class DetalhesEstilosActivity extends AppCompatActivity {
     }
 
 }
-*/

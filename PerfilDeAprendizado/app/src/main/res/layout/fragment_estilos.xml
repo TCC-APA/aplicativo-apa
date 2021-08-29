@@ -61,7 +61,7 @@
             <TextView
                 android:id="@+id/text_caracteristicas"
                 android:layout_width="match_parent"
-                android:layout_height="141dp"
+                android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 android:paddingBottom="10dp"

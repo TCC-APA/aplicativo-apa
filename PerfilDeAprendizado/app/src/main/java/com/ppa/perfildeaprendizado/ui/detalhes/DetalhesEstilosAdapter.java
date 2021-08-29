@@ -1,5 +1,5 @@
 package com.ppa.perfildeaprendizado.ui.detalhes;
-/*
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,71 +9,61 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.ppa.perfildeaprendizado.DetalhesEstilosActivity;
+import com.ppa.perfildeaprendizado.R;
+import com.ppa.perfildeaprendizado.data.DetalhesEstilosVO;
+import com.ppa.perfildeaprendizado.data.model.Estilo;
+import com.ppa.perfildeaprendizado.data.model.RangePontuacaoClassificacao;
 
-import br.com.activia.activiafs.bean.Equipamento;
-import br.com.iclass.fs.mobile.and.R;
-import br.com.iclass.fs.mobile.and.view.activity.InventariarAtivoActivity;
-import br.com.iclass.fs.mobile.and.view.fragment.os.EquipamentoFragment;
+import java.util.List;
+import java.util.Map;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class DetalhesEstilosAdapter extends RecyclerView.Adapter<DetalhesEstilosAdapter.DetalhesEstilosViewHolder> {
 
-    private List<Equipamento> mDataset = new ArrayList<>();
-    private EquipamentoFragment fragment;
-    private Context context;
+    private final DetalhesEstilosVO detalhesEstilosVO;
+    private final DetalhesEstilosActivity fragment;
+    private final List<Estilo> mDataset;
 
-    public DetalhesEstilosAdapter(@NonNull Context context, @NonNull br.com.iclass.fs.mobile.and.view.activity.DetalhesEstilosActivity fragment, @NonNull List<Equipamento> mDataset){
-        this.context = context;
+    public DetalhesEstilosAdapter(@NonNull DetalhesEstilosActivity fragment, @NonNull List<Estilo> mDataset, @NonNull DetalhesEstilosVO detalhesEstilosVO){
         this.fragment = fragment;
         this.mDataset = mDataset;
+        this.detalhesEstilosVO = detalhesEstilosVO;
         atualizarLista();
     }
 
     @Override
     public DetalhesEstilosViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.equipamento_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.detalhe_item, parent, false);
         return new DetalhesEstilosViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(DetalhesEstilosViewHolder holder, final int position) {
-        final Equipamento entity = this.mDataset.get(position);
-        holder.mDescricao.setText(entity.getStringValue(Equipamento.ACTDESCRICAO));
-        if(entity.getStringValue(Equipamento.ACTFABRICANTE)!= null && entity.getStringValue(Equipamento.ACTFABRICANTE).isEmpty())
-            holder.mFabricante.setVisibility(View.GONE);
-        holder.mFabricante.setText(entity.getStringValue(Equipamento.ACTFABRICANTE));
-
-        if(entity.getStringValue(Equipamento.ACTMODELO)!= null && entity.getStringValue(Equipamento.ACTMODELO).isEmpty())
-            holder.mModelo.setVisibility(View.GONE);
-        holder.mModelo.setText(entity.getStringValue(Equipamento.ACTMODELO));
-
-        if(entity.getStringValue(Equipamento.ACTCARGATERMICA)!= null && entity.getStringValue(Equipamento.ACTCARGATERMICA).isEmpty())
-            holder.mCargaTermica.setVisibility(View.GONE);
-        holder.mCargaTermica.setText(entity.getStringValue(Equipamento.ACTCARGATERMICA));
-
-        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                fragment.editarEquipamento(entity.getId());
-                return true;
-            }
-        });
-
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                selecionarEquipamento(position);
-            }
-        });
-
-    }
-
-    private void selecionarEquipamento(int position) {
-        InventariarAtivoActivity activity = (InventariarAtivoActivity) context;
-        activity.sendDataToFragment(this.mDataset.get(position));
+        final Estilo entity = this.mDataset.get(position);
+        Map<Long, RangePontuacaoClassificacao> mapRange = detalhesEstilosVO.getIdEstiloRange();
+        StringBuilder strRange = new StringBuilder();
+        if(mapRange != null && mapRange.containsKey(entity.getId())){
+            RangePontuacaoClassificacao range = mapRange.get(entity.getId());
+            strRange.append(": ")
+                    .append(range.getMinValue())
+                    .append(" ... ")
+                    .append(range.getMaxValue())
+                    .append(" (")
+                    .append(range.getClassificacao())
+                    .append(")");
+        }
+        holder.mEstilo.setText(entity.getNome() + strRange.toString());
+        holder.mCaracteristicas.setText(entity.getCaracteristicas());
+        if (detalhesEstilosVO.getEstilosPredominantes() != null && !detalhesEstilosVO.getEstilosNaoPredominantes().isEmpty() && detalhesEstilosVO.getEstilosPredominantes().contains(entity)){
+            holder.mComoMelhorar.setText(R.string.como_melhorar_predominante);
+            holder.mSugestao.setText(entity.getSugestoes());
+        } else {
+            holder.mComoMelhorar.setText(R.string.como_melhorar_nao_predominante);
+            holder.mSugestao.setText(entity.getSugestoes()/*.getComoMelhorar()*/);
+        }
     }
 
     @Override
@@ -87,28 +77,19 @@ public class DetalhesEstilosAdapter extends RecyclerView.Adapter<DetalhesEstilos
         }
     }
 
-    public void populateNextPage(List<Equipamento> mDataset){
-        this.mDataset.addAll(mDataset);
-        this.atualizarLista();
-    }
-
-    public void limparLista(){
-        this.mDataset.clear();
-    }
-
     public class DetalhesEstilosViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.equipamento_item_descricao)
-        TextView mDescricao;
+        @BindView(R.id.item_estilo)
+        TextView mEstilo;
 
-        @BindView(R.id.equipamento_item_fabricante)
-        TextView mFabricante;
+        @BindView(R.id.caracteristicas_estilo)
+        TextView mCaracteristicas;
 
-        @BindView(R.id.equipamento_item_modelo)
-        TextView mModelo;
+        @BindView(R.id.como_melhorar)
+        TextView mComoMelhorar;
 
-        @BindView(R.id.equipamento_item_carga_termica)
-        TextView mCargaTermica;
+        @BindView(R.id.sugestoes_estilo)
+        TextView mSugestao;
 
 
         public DetalhesEstilosViewHolder(View itemView) {
@@ -117,4 +98,4 @@ public class DetalhesEstilosAdapter extends RecyclerView.Adapter<DetalhesEstilos
         }
     }
 
-}*/
+}

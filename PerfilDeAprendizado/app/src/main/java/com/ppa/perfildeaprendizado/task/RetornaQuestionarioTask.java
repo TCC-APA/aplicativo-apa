@@ -51,9 +51,7 @@ public class RetornaQuestionarioTask extends AsyncTask<Void, Void, List<Question
                 gsonBuilder = gsonBuilder.setPrettyPrinting();
                 Gson gson = gsonBuilder.create();
 
-//                for (int i = 0; i < jsonArray.size(); i++){
-                    questionarios.add(new Gson().fromJson(jsonArray.get(0), Questionario.class));
-//                }
+                questionarios.add(new Gson().fromJson(jsonArray.get(0), Questionario.class));
 
                 if(connection.getResponseCode() != HttpURLConnection.HTTP_OK){
                     Log.e("ERRO", "Não foi possível acessar o WebService: " + connection.getResponseCode());

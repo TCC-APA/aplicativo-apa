@@ -3,11 +3,12 @@ package com.ppa.perfildeaprendizado.data;
 import com.ppa.perfildeaprendizado.data.model.Estilo;
 import com.ppa.perfildeaprendizado.data.model.RangePontuacaoClassificacao;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class DetalhesEstilosVO {
+public class DetalhesEstilosVO implements Serializable {
     List<Estilo> estilosPredominantes;
     List<Estilo> estilosNaoPredominantes;
     Map<Long, RangePontuacaoClassificacao> idEstiloRange;
