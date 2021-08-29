@@ -18,14 +18,12 @@ import com.ppa.perfildeaprendizado.data.model.ValorAlternativa;
 import com.ppa.perfildeaprendizado.task.InserirPontuacaoAlunoTask;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ExecutionException;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -55,9 +53,8 @@ public class QuestionarioActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_questionario);
-        this.questionario = MenuQuestionariosActivity.questionarioEscolhido;
+        this.questionario = (Questionario) getIntent().getSerializableExtra(Questionario.class.getSimpleName());
 
-//        this.questionario = (Questionario) getIntent().getSerializableExtra(Questionario.class.getSimpleName());
         if (questionario != null) {
             this.questoes = questionario.getQuestoes();
             if (questoes != null && !questoes.isEmpty()) {
@@ -202,10 +199,6 @@ public class QuestionarioActivity extends AppCompatActivity {
         intent.putExtra(Questionario.class.getSimpleName(), questionario);
         intent.putExtra(Aluno.class.getSimpleName(), aluno);
         startActivity(intent);
-    }
-
-    private void getPontuacaoByEstilo() {
-
     }
 
     public void inserirPontuacaoPerfil(Aluno aluno) {

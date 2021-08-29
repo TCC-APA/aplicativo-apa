@@ -64,7 +64,6 @@
         <item>"Masculino"</item>
         <item>"Outro"</item>
     </string-array>
-    <string name="escolha_questionario">"Escolha um questionário para responder"</string>
 
     <!--    Detalhes estilos-->
     <string name="como_melhorar_predominante">Como posso melhorar meus estudos?</string>
@@ -72,6 +71,7 @@
 
 
     <!--    Menu Questionarios-->
+    <string name="escolher_questionario">Escolha um questionário para responder ou ver seus resultados</string>
 
     <!--    Editar Perfil-->
 

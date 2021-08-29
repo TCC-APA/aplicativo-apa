@@ -3,42 +3,42 @@ package com.ppa.perfildeaprendizado;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 
 import com.ppa.perfildeaprendizado.data.model.Aluno;
-import com.ppa.perfildeaprendizado.data.model.PerfilAluno;
 import com.ppa.perfildeaprendizado.data.model.Questionario;
-import com.ppa.perfildeaprendizado.task.BuscarPerfilAlunoTask;
 import com.ppa.perfildeaprendizado.task.RetornaQuestionarioTask;
+import com.ppa.perfildeaprendizado.ui.adapters.MenuQuestionarioAdapter;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class MenuQuestionariosActivity extends AppCompatActivity {
 
-    private Button botaoQuestionario;
-    //K: Turma, V: Nome dos questionarios
+    @BindView(R.id.lista_questionarios)
+    RecyclerView listaQuestionarios;
+
     private List<Questionario> questionarios;
-    public static Questionario questionarioEscolhido;
+    private MenuQuestionarioAdapter adapter;
+    private Aluno aluno;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_questionarios);
-        botaoQuestionario = findViewById(R.id.botao_camea);
+
+        ButterKnife.bind(this);
         try {
-            Aluno aluno = (Aluno) getIntent().getSerializableExtra(Aluno.class.getSimpleName());
+            aluno = (Aluno) getIntent().getSerializableExtra(Aluno.class.getSimpleName());
             questionarios = new RetornaQuestionarioTask(aluno.getMatricula()).execute().get();
             if(questionarios != null && !questionarios.isEmpty()) {
-                botaoQuestionario.setText(questionarios.get(0).getNome());
-                botaoQuestionario.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        goToQuetionario();
-                    }
-                });
+                carregarView();
             }
         } catch (ExecutionException e) {
             e.printStackTrace();
@@ -47,28 +47,27 @@ public class MenuQuestionariosActivity extends AppCompatActivity {
         }
     }
 
-    public void goToQuetionario(){
-        try {
-            Aluno aluno = (Aluno) getIntent().getSerializableExtra(Aluno.class.getSimpleName());
-            PerfilAluno perfilAluno = new BuscarPerfilAlunoTask(aluno.getMatricula(), 48L).execute().get();
-            if(perfilAluno != null){
-                Intent intent = new Intent(MenuQuestionariosActivity.this, ResultadoActivity.class);
-                intent.putExtra(Aluno.class.getSimpleName(), aluno);
-                //TODO trocar isso pra pegar o questionario escolhido
-                intent.putExtra(Questionario.class.getSimpleName(), questionarios.get(0));
-                startActivity(intent);
-            }else {
-                Intent intent = new Intent(MenuQuestionariosActivity.this, QuestionarioActivity.class);
-                intent.putExtra(Aluno.class.getSimpleName(), aluno);
-                questionarioEscolhido = questionarios.get(0);
-//                intent.putExtra(Questionario.class.getSimpleName(), questionarios.get(0));
-                startActivity(intent);
-            }
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+    public void goToQuetionario(Questionario questionario){
+        Intent intent = new Intent(MenuQuestionariosActivity.this, QuestionarioActivity.class);
+        intent.putExtra(Aluno.class.getSimpleName(), aluno);
+        intent.putExtra(Questionario.class.getSimpleName(), questionario);
+        startActivity(intent);
+    }
+
+    public void goToResultado(Questionario questionario){
+        Intent intent = new Intent(MenuQuestionariosActivity.this, ResultadoActivity.class);
+        intent.putExtra(Aluno.class.getSimpleName(), aluno);
+        intent.putExtra(Questionario.class.getSimpleName(), questionario);
+        startActivity(intent);
+    }
+
+    private void carregarView(){
+        adapter = new MenuQuestionarioAdapter(questionarios, aluno.getMatricula(), this);
+        listaQuestionarios.setHasFixedSize(false);
+        listaQuestionarios.setItemAnimator(new DefaultItemAnimator());
+        listaQuestionarios.setLayoutManager(new LinearLayoutManager(this));
+        listaQuestionarios.setAdapter(adapter);
+        listaQuestionarios.setVisibility(View.VISIBLE);
 
     }
 }
