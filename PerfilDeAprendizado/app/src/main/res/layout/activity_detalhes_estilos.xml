@@ -7,16 +7,14 @@
     android:background="@color/background"
     tools:context=".DetalhesEstilosActivity">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="20dp"
         android:layout_marginTop="25dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="25dp"
-        android:background="#FFFFFF"
+        android:background="@color/background"
         android:orientation="vertical">
 
         <TextView
@@ -25,12 +23,14 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginBottom="5dp"
+            android:background="@color/background"
             android:gravity="center"
             android:paddingStart="5dp"
+            android:paddingEnd="5dp"
             android:text="@string/estilo_predominante"
             android:textAlignment="center"
-            android:textSize="14dp"
-            android:textStyle="normal"
+            android:textSize="14sp"
+            android:textStyle="bold"
             android:visibility="visible" />
 
         <androidx.recyclerview.widget.RecyclerView
@@ -49,17 +49,18 @@
             android:layout_marginBottom="5dp"
             android:gravity="center"
             android:paddingStart="5dp"
+            android:paddingEnd="5dp"
             android:text="@string/outros_estilos"
             android:textAlignment="center"
-            android:textSize="14dp"
-            android:textStyle="normal"
+            android:textSize="14sp"
+            android:textStyle="bold"
             android:visibility="visible" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/lista_detalhes_outros"
             android:layout_width="match_parent"
-            android:background="@color/background"
             android:layout_height="wrap_content"
+            android:background="@color/background"
             android:padding="@dimen/activity_horizontal_margin" />
 
         <!--ScrollView
