@@ -46,7 +46,8 @@ public class EstilosFragment extends Fragment {
     private TextView textoCaracteristicas;
     //private TextView textoAprendizadoEstilo;
     private Button botaoVerMais;
-    private static final float MAX = 50f, MIN = 0f;
+    private static final float MIN = 0f;
+    private float max;
     private RadarChart radarChart;
 
     private Aluno aluno;
@@ -58,6 +59,7 @@ public class EstilosFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         estilosViewModel = ViewModelProviders.of(this).get(EstilosViewModel.class);
         View root = inflater.inflate(R.layout.fragment_estilos, container, false);
+        max = 0f;
 
         textoEstilo = root.findViewById(R.id.text_estilo);
         textoCaracteristicas = root.findViewById(R.id.text_caracteristicas);
@@ -74,8 +76,8 @@ public class EstilosFragment extends Fragment {
         try {
             perfilAluno = new BuscarPerfilAlunoTask(aluno.getMatricula(), 48L).execute().get();
             if(perfilAluno != null){
-                fazerGrafico();
                 preencherTextosPerfilPredominante();
+                fazerGrafico();
             }
         } catch (ExecutionException e) {
             e.printStackTrace();
@@ -110,7 +112,7 @@ public class EstilosFragment extends Fragment {
 
         YAxis yAxis = radarChart.getYAxis();
         yAxis.setAxisMinimum(MIN);
-        yAxis.setAxisMaximum(MAX);
+        yAxis.setAxisMaximum(max);
         yAxis.setLabelCount(1, true);
 
         radarChart.setData(getData());
@@ -181,6 +183,8 @@ public class EstilosFragment extends Fragment {
                     for(RangePontuacaoClassificacao range: ranges){
                         if(range.getEstiloKey().equals(estiloIndex)){
                             rangesDoEstilo.add(range);
+                            if(range.getMaxValue() > max)
+                                max = (float) range.getMaxValue();
                         }
                     }
                     for(int i = 0; i<rangesDoEstilo.size(); i++){
