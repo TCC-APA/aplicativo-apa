@@ -8,6 +8,18 @@
     android:orientation="vertical"
     android:padding="5dp">
 
+    <Button
+        android:id="@+id/button_sobre"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_gravity="top|end"
+        android:background="@drawable/roundedbuttongray_icon"
+        android:scrollbarAlwaysDrawVerticalTrack="false"
+        android:text="?"
+        android:textColor="@color/background"
+        android:visibility="visible"
+        android:textSize="12sp" />
+
     <TextView
         android:id="@+id/tituloquestionario"
         android:layout_width="match_parent"
@@ -90,5 +102,8 @@
             android:textColor="@color/background"
             android:textSize="12sp" />
     </LinearLayout>
+
+
+
 
 </LinearLayout>

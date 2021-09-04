@@ -53,6 +53,18 @@ public class MenuQuestionarioAdapter extends RecyclerView.Adapter<MenuQuestionar
 
         try {
             PerfilAluno perfilAluno = new BuscarPerfilAlunoTask(matriculaAluno, entity.getId()).execute().get();
+            if(entity.getSobre() != null && !entity.getSobre().isEmpty()){
+                holder.botaoSobre.setVisibility(View.VISIBLE);
+                holder.botaoSobre.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        activity.goToSobre(entity);
+                    }
+                });
+            } else {
+                holder.botaoSobre.setVisibility(View.INVISIBLE);
+            }
+
             if(perfilAluno != null){
                 holder.botaoResponderNovamente.setVisibility(View.VISIBLE);
                 holder.botaoResponderNovamente.setText("Responder Novamente");
@@ -125,6 +137,10 @@ public class MenuQuestionarioAdapter extends RecyclerView.Adapter<MenuQuestionar
 
         @BindView(R.id.verresultado)
         Button botaoVerResultado;
+
+        @BindView(R.id.button_sobre)
+        Button botaoSobre;
+
 
 
         public MenuQuestionarioViewHolder(View itemView) {

@@ -12,6 +12,7 @@ public class Questionario implements Serializable {
 
     private Long id;
     private String nome;
+    private String sobre;
     private List<ValorAlternativa> valoresAlternativas = new ArrayList<>();
     //Estilos com um indice para facilitar a transformacao em JSON, utilizado nas questoes e nas ranges
     private Map<String, Estilo> estilosIndexados = new HashMap<>();
@@ -89,6 +90,14 @@ public class Questionario implements Serializable {
 
     public void setRanges(List<RangePontuacaoClassificacao> ranges) {
         this.ranges = ranges;
+    }
+
+    public String getSobre() {
+        return sobre;
+    }
+
+    public void setSobre(String sobre) {
+        this.sobre = sobre;
     }
 
     @NonNull

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MenuQuestionariosActivity">
+    tools:context=".QuestionarioSobreActivity">
 
   <LinearLayout
       android:layout_width="0dp"
@@ -22,23 +22,30 @@
       app:layout_constraintTop_toTopOf="parent">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/nome_questionario"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="10dp"
-        android:text="@string/escolher_questionario"
-        android:textSize="14sp"
+        android:text="CAMEA40"
+        android:textSize="20sp"
         android:textStyle="bold" />
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/back">
 
-      <androidx.recyclerview.widget.RecyclerView
-          android:id="@+id/lista_questionarios"
+      <TextView
+          android:id="@+id/sobre_questionario"
+          android:layout_marginStart="6dp"
+          android:layout_marginTop="6dp"
+          android:layout_marginEnd="6dp"
+          android:layout_marginBottom="6dp"
           android:layout_width="match_parent"
-          android:layout_height="match_parent"
-          />
+          android:layout_height="wrap_content"
+          android:paddingBottom="10dp"
+          android:text="Sobre sobre sobre sobre"
+          android:textSize="14sp"/>
 
     </ScrollView>
 

@@ -61,6 +61,12 @@ public class MenuQuestionariosActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void goToSobre(Questionario questionario){
+        Intent intent = new Intent(MenuQuestionariosActivity.this, QuestionarioSobreActivity.class);
+        intent.putExtra(Questionario.class.getSimpleName(), questionario);
+        startActivity(intent);
+    }
+
     private void carregarView(){
         adapter = new MenuQuestionarioAdapter(questionarios, aluno.getMatricula(), this);
         listaQuestionarios.setHasFixedSize(false);
