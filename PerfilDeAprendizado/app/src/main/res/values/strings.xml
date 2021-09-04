@@ -45,7 +45,7 @@
     <string name="teorico">"Teórico"</string>
     <string name="pragmático">"Pragmático"</string>
     <string name="estilos_resultado">Perfil de Aprendizagem</string>
-    <string name="editar_perfil">Editar Dados</string>
+    <string name="editar_dados">Editar Dados</string>
     <string name="grafico_titulo">Gráfico de Grau de Pertinência dos Estilos</string>
     <string name="estilo_predominante">Seu(s) Estilo(s) de Aprendizagem predominante(s):</string>
     <string name="outros_estilos">Estes estilos não condizem com o seu perfil:</string>
@@ -56,21 +56,38 @@
     <string name="aprendizado">Lidam com atividades curtas que apresentem desafios ou tenham resultados imediatos.</string>
 
     <!--    Gêneros Perfil Aprendizado-->
+    <string name="como_melhorar_predominante">Como posso melhorar meus estudos?</string>
+
+    <!--    Detalhes estilos-->
+    <string name="como_melhorar_nao_predominante">Como posso melhorar essa pontuação?</string>
+    <string name="escolher_questionario">Escolha um questionário para responder ou ver seus resultados</string>
+
+
+    <!--    Menu Questionarios-->
+    <string name="title_activity_menu">MenuActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">João Silva</string>
+    <string name="nav_header_subtitle">2822178BCC</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="menu_home">Home</string>
+
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="home_second">Home Second</string>
+
+    <string name="editar_perfil">Editar Perfil</string>
+
+    <!--    Menu-->
+    <string name="questionarios">Questionários</string>
+    <string name="sobre">Sobre</string>
+
     <string-array name="generos">
         <item>"Gênero"</item>
         <item>"Feminino"</item>
         <item>"Masculino"</item>
         <item>"Outro"</item>
     </string-array>
-
-    <!--    Detalhes estilos-->
-    <string name="como_melhorar_predominante">Como posso melhorar meus estudos?</string>
-    <string name="como_melhorar_nao_predominante">Como posso melhorar essa pontuação?</string>
-
-
-    <!--    Menu Questionarios-->
-    <string name="escolher_questionario">Escolha um questionário para responder ou ver seus resultados</string>
-
-    <!--    Editar Perfil-->
 
 </resources>

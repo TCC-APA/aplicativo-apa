@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.ppa.perfildeaprendizado.MenuActivity;
 import com.ppa.perfildeaprendizado.MenuQuestionariosActivity;
 import com.ppa.perfildeaprendizado.R;
 import com.ppa.perfildeaprendizado.TermoActivity;
@@ -85,7 +86,7 @@ public class LoginActivity extends AppCompatActivity {
     private void updateUiWithUser(Aluno aluno) {
         String welcome = getString(R.string.welcome) + aluno.getNome() + "!";
         Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
-        Intent intent = new Intent(LoginActivity.this, MenuQuestionariosActivity.class);
+        Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
         intent.putExtra(Aluno.class.getSimpleName(), aluno);
         startActivity(intent);
     }

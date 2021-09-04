@@ -1,4 +1,4 @@
-package com.ppa.perfildeaprendizado.ui.editar_perfil;
+package com.ppa.perfildeaprendizado.ui.fragments;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
@@ -208,11 +208,11 @@ public class EditarPerfilFragment extends Fragment {
         return getResources().getString(R.string.campo_obrigatorio);
     }
 
-    @Override
-    public void onStop() {
-        if(getActivity() != null) {
-            ((ResultadoActivity) getActivity()).navController.navigate(R.id.navigation_resultado);
-        }
-        super.onStop();
-    }
+//    @Override
+//    public void onStop() {
+//        if(getActivity() != null) {
+//            ((ResultadoActivity) getActivity()).navController.navigate(R.id.navigation_resultado);
+//        }
+//        super.onStop();
+//    }
 }
