@@ -2,6 +2,7 @@ package com.ppa.perfildeaprendizado;
 
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -11,7 +12,9 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ppa.perfildeaprendizado.controller.MenuController;
 import com.ppa.perfildeaprendizado.data.DetalhesEstilosVO;
+import com.ppa.perfildeaprendizado.data.model.Aluno;
 import com.ppa.perfildeaprendizado.data.model.Estilo;
 import com.ppa.perfildeaprendizado.ui.detalhes.DetalhesEstilosAdapter;
 
@@ -39,6 +42,8 @@ public class DetalhesEstilosActivity extends AppCompatActivity {
     private DetalhesEstilosAdapter mAdapterPred;
     private DetalhesEstilosAdapter mAdapterOutros;
 
+    private Aluno aluno;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +53,8 @@ public class DetalhesEstilosActivity extends AppCompatActivity {
         /* Injection */
         ButterKnife.bind(this);
         detalhesEstilosVO = (DetalhesEstilosVO) getIntent().getSerializableExtra(DetalhesEstilosVO.class.getSimpleName());
+        aluno = (Aluno) getIntent().getSerializableExtra(Aluno.class.getSimpleName());
+
 
         /*
         Comparator<Equipamento> equipamentoComparator = new Comparator<Equipamento>() {
@@ -117,9 +124,29 @@ public class DetalhesEstilosActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-//        addSearchMenu(menu,mAdapter,mRecyclerView, getMenuInflater());
+        MenuController.setupMenu(menu, getMenuInflater());
+        return true;
+    }
 
-        return super.onCreateOptionsMenu(menu);
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.navigation_editar_perfil:
+                MenuController.editarPerfilAction(this, aluno);
+                return true;
+            case R.id.navigation_inicio:
+                MenuController.inicioAction(this, aluno);
+                return true;
+            case R.id.navigation_sobre:
+                MenuController.sobreAction(this);
+                return true;
+            case R.id.navigation_sair:
+                MenuController.sairAction(this);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
 }

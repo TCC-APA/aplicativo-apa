@@ -2,8 +2,13 @@ package com.ppa.perfildeaprendizado.ui.editar_perfil;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -17,6 +22,7 @@ import com.ppa.perfildeaprendizado.DetalhesEstilosActivity;
 import com.ppa.perfildeaprendizado.MenuQuestionariosActivity;
 import com.ppa.perfildeaprendizado.R;
 import com.ppa.perfildeaprendizado.ResultadoActivity;
+import com.ppa.perfildeaprendizado.controller.MenuController;
 import com.ppa.perfildeaprendizado.data.model.Aluno;
 import com.ppa.perfildeaprendizado.task.EditarPerfilAlunoTask;
 
@@ -35,6 +41,7 @@ import androidx.navigation.ui.NavigationUI;
 
 public class EditarPerfilActivity extends AppCompatActivity {
 
+    private Aluno aluno;
     private EditText nome;
     private EditText matricula;
     private EditText dataNascimento;
@@ -52,69 +59,69 @@ public class EditarPerfilActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_editar_perfil);
 
-            final Aluno aluno = (Aluno) getIntent().getSerializableExtra(Aluno.class.getSimpleName());
+        aluno = (Aluno) getIntent().getSerializableExtra(Aluno.class.getSimpleName());
 
-            nome = findViewById(R.id.nome);
-            matricula = findViewById(R.id.matricula);
-            dataNascimento = findViewById(R.id.dataNascimento);
-            senhaAntiga = findViewById(R.id.senhaAntiga);
-            senha = findViewById(R.id.senhaNova);
-            confirmarSenha = findViewById(R.id.confirmarSenhaNova);
-            genero = findViewById(R.id.genero);
-            enviar = findViewById(R.id.enviar);
-            trocaSenha = findViewById(R.id.trocaSenha);
+        nome = findViewById(R.id.nome);
+        matricula = findViewById(R.id.matricula);
+        dataNascimento = findViewById(R.id.dataNascimento);
+        senhaAntiga = findViewById(R.id.senhaAntiga);
+        senha = findViewById(R.id.senhaNova);
+        confirmarSenha = findViewById(R.id.confirmarSenhaNova);
+        genero = findViewById(R.id.genero);
+        enviar = findViewById(R.id.enviar);
+        trocaSenha = findViewById(R.id.trocaSenha);
 
-            dataNascimento.setFocusable(false);
-            dataNascimento.setOnClickListener(new View.OnClickListener() {
+        dataNascimento.setFocusable(false);
+        dataNascimento.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Calendar calendar = Calendar.getInstance();
+                datePickerDialog = new DatePickerDialog(EditarPerfilActivity.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        dataNascAux.set(year, month, dayOfMonth);
+                        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+                        dataNascimento.setText(formato.format(dataNascAux.getTime()));
+                    }
+                }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+                datePickerDialog.show();
+            }
+        });
+
+        if (aluno != null) {
+            nome.setText(aluno.getNome());
+            matricula.setText(aluno.getMatricula());
+            if (aluno.getDataNascimento() != null) {
+                SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+                SimpleDateFormat formatoBanco = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+                try {
+                    dataNascimento.setText(formato.format(formatoBanco.parse(aluno.getDataNascimento())));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+            matricula.setEnabled(false);
+            String[] generos = getResources().getStringArray(R.array.generos);
+            for (int i = 0; i < generos.length; i++) {
+                if (aluno.getGenero().equals(generos[i])) {
+                    genero.setSelection(i);
+                }
+            }
+
+            enviar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    final Calendar calendar = Calendar.getInstance();
-                    datePickerDialog = new DatePickerDialog(EditarPerfilActivity.this, new DatePickerDialog.OnDateSetListener() {
-                        @Override
-                        public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                            dataNascAux.set(year, month, dayOfMonth);
-                            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-                            dataNascimento.setText(formato.format(dataNascAux.getTime()));
-                        }
-                    }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
-                    datePickerDialog.show();
+                    editarAluno(aluno);
                 }
             });
 
-            if (aluno != null) {
-                nome.setText(aluno.getNome());
-                matricula.setText(aluno.getMatricula());
-                if (aluno.getDataNascimento() != null) {
-                    SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-                    SimpleDateFormat formatoBanco = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
-                    try {
-                        dataNascimento.setText(formato.format(formatoBanco.parse(aluno.getDataNascimento())));
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
+            trocaSenha.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    trocarSenha(aluno);
                 }
-                matricula.setEnabled(false);
-                String[] generos = getResources().getStringArray(R.array.generos);
-                for (int i = 0; i < generos.length; i++) {
-                    if (aluno.getGenero().equals(generos[i])) {
-                        genero.setSelection(i);
-                    }
-                }
-
-                enviar.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        editarAluno(aluno);
-                    }
-                });
-
-                trocaSenha.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        trocarSenha(aluno);
-                    }
-                });
-            }
+            });
+        }
     }
 /*
     @Override
@@ -198,12 +205,40 @@ public class EditarPerfilActivity extends AppCompatActivity {
                     Toast.makeText(this, "Ocorreu um problema no salvamento dos seus dados. Verifique sua conexão.", Toast.LENGTH_LONG).show();
                 } else{
                     Toast.makeText(this, "Senha alterada com sucesso!", Toast.LENGTH_LONG).show();
+                    finish();
                 }
             } catch (ExecutionException e) {
                 e.printStackTrace();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuController.setupMenu(menu, getMenuInflater());
+        MenuItem itemEditar = menu.findItem(R.id.navigation_editar_perfil);
+        itemEditar.setVisible(false);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.navigation_inicio:
+                MenuController.inicioAction(this, aluno);
+                return true;
+            case R.id.navigation_sobre:
+                MenuController.sobreAction(this);
+                return true;
+            case R.id.navigation_sair:
+                MenuController.sairAction(this);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 

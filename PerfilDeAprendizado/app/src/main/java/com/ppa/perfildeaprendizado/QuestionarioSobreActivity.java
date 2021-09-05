@@ -3,6 +3,8 @@ package com.ppa.perfildeaprendizado;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -14,6 +16,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.ppa.perfildeaprendizado.controller.MenuController;
 import com.ppa.perfildeaprendizado.data.model.Aluno;
 import com.ppa.perfildeaprendizado.data.model.Questionario;
 import com.ppa.perfildeaprendizado.task.InserirAlunoTask;
@@ -34,6 +37,7 @@ public class QuestionarioSobreActivity extends AppCompatActivity {
     protected TextView sobre;
 
     private Questionario questionario;
+    private Aluno aluno;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +46,37 @@ public class QuestionarioSobreActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         this.questionario = (Questionario) getIntent().getSerializableExtra(Questionario.class.getSimpleName());
+        this.aluno = (Aluno) getIntent().getSerializableExtra(Aluno.class.getSimpleName());
+
         nome.setText("Sobre o questionário: " + questionario.getNome());
         sobre.setText(questionario.getSobre());
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuController.setupMenu(menu, getMenuInflater());
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.navigation_editar_perfil:
+                MenuController.editarPerfilAction(this, aluno);
+                return true;
+            case R.id.navigation_inicio:
+                MenuController.inicioAction(this, aluno);
+                return true;
+            case R.id.navigation_sobre:
+                MenuController.sobreAction(this);
+                return true;
+            case R.id.navigation_sair:
+                MenuController.sairAction(this);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

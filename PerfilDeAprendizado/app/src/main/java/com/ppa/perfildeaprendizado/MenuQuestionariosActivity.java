@@ -57,6 +57,9 @@ public class MenuQuestionariosActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuController.setupMenu(menu, getMenuInflater());
+        MenuItem itemInicio = menu.findItem(R.id.navigation_inicio);
+        itemInicio.setVisible(false);
+
         return true;
     }
 
@@ -94,6 +97,7 @@ public class MenuQuestionariosActivity extends AppCompatActivity {
     public void goToSobre(Questionario questionario){
         Intent intent = new Intent(MenuQuestionariosActivity.this, QuestionarioSobreActivity.class);
         intent.putExtra(Questionario.class.getSimpleName(), questionario);
+        intent.putExtra(Aluno.class.getSimpleName(), aluno);
         startActivity(intent);
     }
 

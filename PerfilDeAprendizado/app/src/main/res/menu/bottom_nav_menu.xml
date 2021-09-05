@@ -3,6 +3,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/navigation_inicio"
+        android:icon="@drawable/round_insert_chart_outlined_24"
+        android:visible="true"
+        android:title="@string/inicio" />
+
+    <item
         android:id="@+id/navigation_sobre"
         android:icon="@drawable/round_insert_chart_outlined_24"
         android:title="@string/sobre" />

@@ -9,15 +9,25 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.ppa.perfildeaprendizado.MenuQuestionariosActivity;
 import com.ppa.perfildeaprendizado.R;
 import com.ppa.perfildeaprendizado.data.model.Aluno;
 import com.ppa.perfildeaprendizado.ui.editar_perfil.EditarPerfilActivity;
 import com.ppa.perfildeaprendizado.ui.login.LoginActivity;
 
 public final class MenuController {
+    public static void inicioAction(Context context, Aluno aluno){
+        Intent i = new Intent(context, MenuQuestionariosActivity.class);
+        i.putExtra(Aluno.class.getSimpleName(), aluno);
+        context.startActivity(i);
+    }
+
     public static void sairAction(Context context){
         Intent i = new Intent(context, LoginActivity.class);
         context.startActivity(i);
+    }
+
+    public static void sobreAction(Context context){
     }
 
     public static void editarPerfilAction(Context context, Aluno aluno){
