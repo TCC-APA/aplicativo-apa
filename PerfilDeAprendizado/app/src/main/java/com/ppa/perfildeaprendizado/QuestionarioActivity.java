@@ -387,45 +387,26 @@ public class QuestionarioActivity extends AppCompatActivity {
         });
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        MenuController.setupMenu(menu, getMenuInflater());
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        final boolean[] retorno = new boolean[1];
-//        new AlertDialog.Builder(this)
-//                .setTitle("Atenção!")
-//                .setMessage("Se você sair dessa página agora suas respostas não serão salvas.")
-//                .setNegativeButton("Cancelar", null)
-//                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        // Handle item selection
-//                        switch (item.getItemId()) {
-//                            case R.id.navigation_editar_perfil:
-//                                MenuController.editarPerfilAction(QuestionarioActivity.this, aluno);
-//                                retorno[0] = true;
-//                            case R.id.navigation_inicio:
-//                                MenuController.inicioAction(QuestionarioActivity.this, aluno);
-//                                retorno[0] = true;
-//                            case R.id.navigation_sobre:
-//                                MenuController.sobreAction(QuestionarioActivity.this, aluno);
-//                                retorno[0] = true;
-//                            case R.id.navigation_sair:
-//                                MenuController.sairAction(QuestionarioActivity.this);
-//                                retorno[0] = true;
-//                            default:
-//                                retorno[0] = false;
-//                        }
-//                    }
-//                }).show();
-//
-//        if(!retorno[0]){
-//            return super.onOptionsItemSelected(item);
-//        }
-//        return retorno[0];
-//    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuController.setupMenu(menu, getMenuInflater());
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.navigation_inicio:
+                MenuController.inicioAction(this, aluno);
+                return true;
+            case R.id.navigation_sair:
+                MenuController.sairAction(this);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+    }
 
 }
