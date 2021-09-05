@@ -390,6 +390,11 @@ public class QuestionarioActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuController.setupMenu(menu, getMenuInflater());
+        MenuItem itemSobre = menu.findItem(R.id.navigation_sobre);
+        MenuItem itemEditarPerfil = menu.findItem(R.id.navigation_editar_perfil);
+        itemSobre.setVisible(false);
+        itemEditarPerfil.setVisible(false);
+
         return true;
     }
 
