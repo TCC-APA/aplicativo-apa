@@ -8,7 +8,6 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.ppa.perfildeaprendizado.data.model.Aluno;
-import com.ppa.perfildeaprendizado.ui.login.LoginActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 

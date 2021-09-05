@@ -82,7 +82,7 @@ public class MenuQuestionarioAdapter extends RecyclerView.Adapter<MenuQuestionar
                 holder.botaoResponderNovamente.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        activity.goToQuetionario(entity);
+                        activity.goToQuestionario(entity);
                     }
                 });
             }else{
@@ -95,7 +95,7 @@ public class MenuQuestionarioAdapter extends RecyclerView.Adapter<MenuQuestionar
                 holder.botaoResponderNovamente.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        activity.goToQuetionario(entity);
+                        activity.goToQuestionario(entity);
                     }
                 });
             }

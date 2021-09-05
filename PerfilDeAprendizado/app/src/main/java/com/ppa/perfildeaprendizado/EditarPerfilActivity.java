@@ -1,16 +1,11 @@
-package com.ppa.perfildeaprendizado.ui.editar_perfil;
+package com.ppa.perfildeaprendizado;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.text.SpannableString;
-import android.text.style.ForegroundColorSpan;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -18,10 +13,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ppa.perfildeaprendizado.DetalhesEstilosActivity;
-import com.ppa.perfildeaprendizado.MenuQuestionariosActivity;
-import com.ppa.perfildeaprendizado.R;
-import com.ppa.perfildeaprendizado.ResultadoActivity;
 import com.ppa.perfildeaprendizado.controller.MenuController;
 import com.ppa.perfildeaprendizado.data.model.Aluno;
 import com.ppa.perfildeaprendizado.task.EditarPerfilAlunoTask;
@@ -32,12 +23,7 @@ import java.util.Calendar;
 import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 
 public class EditarPerfilActivity extends AppCompatActivity {
 
@@ -57,7 +43,7 @@ public class EditarPerfilActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_editar_perfil);
+        setContentView(R.layout.activity_editar_perfil);
 
         aluno = (Aluno) getIntent().getSerializableExtra(Aluno.class.getSimpleName());
 
@@ -162,7 +148,10 @@ public class EditarPerfilActivity extends AppCompatActivity {
                         Toast.makeText(this, "Ocorreu um problema no salvamento dos seus dados. Verifique sua conexão.", Toast.LENGTH_LONG).show();
                     } else {
                         Toast.makeText(this, "Mudanças salvas com sucesso!", Toast.LENGTH_LONG).show();
-                        finish();
+                        Intent intent = new Intent(EditarPerfilActivity.this, MenuQuestionariosActivity.class);
+                        intent.putExtra(Aluno.class.getSimpleName(), aluno);
+                        startActivity(intent);
+
                     }
                 } catch (ExecutionException e) {
                     e.printStackTrace();
@@ -205,7 +194,9 @@ public class EditarPerfilActivity extends AppCompatActivity {
                     Toast.makeText(this, "Ocorreu um problema no salvamento dos seus dados. Verifique sua conexão.", Toast.LENGTH_LONG).show();
                 } else{
                     Toast.makeText(this, "Senha alterada com sucesso!", Toast.LENGTH_LONG).show();
-                    finish();
+                    Intent intent = new Intent(EditarPerfilActivity.this, MenuQuestionariosActivity.class);
+                    intent.putExtra(Aluno.class.getSimpleName(), aluno);
+                    startActivity(intent);
                 }
             } catch (ExecutionException e) {
                 e.printStackTrace();
@@ -232,7 +223,7 @@ public class EditarPerfilActivity extends AppCompatActivity {
                 MenuController.inicioAction(this, aluno);
                 return true;
             case R.id.navigation_sobre:
-                MenuController.sobreAction(this);
+                MenuController.sobreAction(this, aluno);
                 return true;
             case R.id.navigation_sair:
                 MenuController.sairAction(this);
@@ -244,7 +235,9 @@ public class EditarPerfilActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        finish();
+        Intent intent = new Intent(EditarPerfilActivity.this, MenuQuestionariosActivity.class);
+        intent.putExtra(Aluno.class.getSimpleName(), aluno);
+        startActivity(intent);
     }
 
     private String erroCampoObrigatorio(){

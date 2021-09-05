@@ -11,8 +11,9 @@ import android.view.MenuItem;
 
 import com.ppa.perfildeaprendizado.MenuQuestionariosActivity;
 import com.ppa.perfildeaprendizado.R;
+import com.ppa.perfildeaprendizado.SobreActivity;
 import com.ppa.perfildeaprendizado.data.model.Aluno;
-import com.ppa.perfildeaprendizado.ui.editar_perfil.EditarPerfilActivity;
+import com.ppa.perfildeaprendizado.EditarPerfilActivity;
 import com.ppa.perfildeaprendizado.ui.login.LoginActivity;
 
 public final class MenuController {
@@ -27,7 +28,10 @@ public final class MenuController {
         context.startActivity(i);
     }
 
-    public static void sobreAction(Context context){
+    public static void sobreAction(Context context, Aluno aluno){
+        Intent i = new Intent(context, SobreActivity.class);
+        i.putExtra(Aluno.class.getSimpleName(), aluno);
+        context.startActivity(i);
     }
 
     public static void editarPerfilAction(Context context, Aluno aluno){
@@ -37,7 +41,7 @@ public final class MenuController {
     }
 
     public static void setupMenu(Menu menu, MenuInflater menuInflater){
-        menuInflater.inflate(R.menu.bottom_nav_menu, menu);
+        menuInflater.inflate(R.menu.nav_menu, menu);
 
         MenuItem itemSair = menu.findItem(R.id.navigation_sair);
         SpannableString spanString = new SpannableString(itemSair.getTitle().toString());

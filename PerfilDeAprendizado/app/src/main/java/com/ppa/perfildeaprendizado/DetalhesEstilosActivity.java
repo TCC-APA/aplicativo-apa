@@ -6,12 +6,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.ppa.perfildeaprendizado.controller.MenuController;
 import com.ppa.perfildeaprendizado.data.DetalhesEstilosVO;
 import com.ppa.perfildeaprendizado.data.model.Aluno;
@@ -21,6 +15,10 @@ import com.ppa.perfildeaprendizado.ui.detalhes.DetalhesEstilosAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -139,7 +137,7 @@ public class DetalhesEstilosActivity extends AppCompatActivity {
                 MenuController.inicioAction(this, aluno);
                 return true;
             case R.id.navigation_sobre:
-                MenuController.sobreAction(this);
+                MenuController.sobreAction(this, aluno);
                 return true;
             case R.id.navigation_sair:
                 MenuController.sairAction(this);

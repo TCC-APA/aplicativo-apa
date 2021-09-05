@@ -10,15 +10,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".DetalhesEstilosActivity"
-            android:screenOrientation="portrait"/>
+        <activity android:name=".SobreActivity"></activity>
+        <activity
+            android:name=".DetalhesEstilosActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ResultadoActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".MenuQuestionariosActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".QuestionarioSobreActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MenuQuestionariosActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".QuestionarioSobreActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".QuestionarioActivity"
             android:screenOrientation="portrait" />
@@ -26,7 +30,7 @@
             android:name=".PerguntasPessoaisActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.editar_perfil.EditarPerfilActivity"
+            android:name=".EditarPerfilActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.login.LoginActivity"
@@ -51,8 +55,8 @@
         android:resizeable="true"
         android:smallScreens="true"
         android:xlargeScreens="true" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
     <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
 </manifest>

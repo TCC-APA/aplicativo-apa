@@ -1,10 +1,7 @@
 package com.ppa.perfildeaprendizado;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.text.SpannableString;
-import android.text.style.ForegroundColorSpan;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,7 +11,6 @@ import com.ppa.perfildeaprendizado.data.model.Aluno;
 import com.ppa.perfildeaprendizado.data.model.Questionario;
 import com.ppa.perfildeaprendizado.task.RetornaQuestionarioTask;
 import com.ppa.perfildeaprendizado.ui.adapters.MenuQuestionarioAdapter;
-import com.ppa.perfildeaprendizado.ui.login.LoginActivity;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -68,6 +64,7 @@ public class MenuQuestionariosActivity extends AppCompatActivity {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.navigation_sobre:
+                MenuController.sobreAction(this, aluno);
                 return true;
             case R.id.navigation_editar_perfil:
                 MenuController.editarPerfilAction(this, aluno);
@@ -80,7 +77,7 @@ public class MenuQuestionariosActivity extends AppCompatActivity {
         }
     }
 
-    public void goToQuetionario(Questionario questionario){
+    public void goToQuestionario(Questionario questionario){
         Intent intent = new Intent(MenuQuestionariosActivity.this, QuestionarioActivity.class);
         intent.putExtra(Aluno.class.getSimpleName(), aluno);
         intent.putExtra(Questionario.class.getSimpleName(), questionario);

@@ -53,12 +53,19 @@
     <string name="estilo_predominante">Seu(s) Estilo(s) de Aprendizagem predominante(s):</string>
     <string name="outros_estilos">Estes estilos não condizem com o seu perfil:</string>
     <string name="caracteristicas_estilo">Características desse(s) estilo(s)</string>
-    <string name="aprendizado_estilo">Tem facilidade para aprender quando...</string>
+    <string name="aprendizado_estilo">Tem facilidade para aprender quando…</string>
     <string name="ver_mais_botao">Ver Mais</string>
     <string name="caracteristicas">Pessoas do estilo Ativo costumam se beneficiar de novas experiências, possuem a mente aberta e se sentem entusiasmadas ao realizarem novas tarefas.</string>
     <string name="aprendizado">Lidam com atividades curtas que apresentem desafios ou tenham resultados imediatos.</string>
+    <string name="titulo_grafico">Estilo de Aprendizagem de </string>
 
     <!--    Gêneros Perfil Aprendizado-->
+    <string name="como_melhorar_predominante">Como posso melhorar meus estudos?</string>
+
+    <!--    Detalhes estilos-->
+    <string name="como_melhorar_nao_predominante">Como posso melhorar essa pontuação?</string>
+    <string name="escolher_questionario">Escolha um questionário para responder ou ver seus resultados</string>
+
     <string-array name="generos">
         <item>"Gênero"</item>
         <item>"Feminino"</item>
@@ -66,14 +73,10 @@
         <item>"Outro"</item>
     </string-array>
 
-    <!--    Detalhes estilos-->
-    <string name="como_melhorar_predominante">Como posso melhorar meus estudos?</string>
-    <string name="como_melhorar_nao_predominante">Como posso melhorar essa pontuação?</string>
-
-
-    <!--    Menu Questionarios-->
-    <string name="escolher_questionario">Escolha um questionário para responder ou ver seus resultados</string>
-
-    <!--    Editar Perfil-->
+    <!--    Sobre-->
+    <string name="titulo_sobre">Sobre o APA</string>
+    <string name="texto_sobre">O APA (aplicativo para avaliar o perfil de aprendizagem) foi criado com a intenção de ajudar estudantes a compreenderem seu perfil de aprendizagem e melhorarem seus estudos a partir desse conhecimento.
+\n\nEssa aplicação faz parte do trabalho de conclusão de curso de alunos do CEFET/RJ.
+</string>
 
 </resources>
