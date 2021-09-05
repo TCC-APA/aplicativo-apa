@@ -44,6 +44,7 @@ public class EstilosFragment extends Fragment {
 
     private TextView textoEstilo;
     private TextView textoCaracteristicas;
+    //private TextView textoAprendizadoEstilo;
     private Button botaoVerMais;
     private static final float MIN = 0f;
     private float max;

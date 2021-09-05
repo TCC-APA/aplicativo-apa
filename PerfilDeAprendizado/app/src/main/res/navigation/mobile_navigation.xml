@@ -3,24 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_menu_questionario">
+    app:startDestination="@+id/navigation_resultado">
+
+    <fragment
+        android:id="@+id/navigation_resultado"
+        android:name="com.ppa.perfildeaprendizado.ui.estilos.EstilosFragment"
+        tools:layout="@layout/fragment_estilos" />
 
     <fragment
         android:id="@+id/navigation_editar_perfil"
-        android:name="com.ppa.perfildeaprendizado.ui.fragments.EditarPerfilFragment"
-        android:label="@string/editar_perfil"
-        tools:layout="@layout/fragment_editar_perfil">
-    </fragment>
+        android:name="com.ppa.perfildeaprendizado.ui.editar_perfil.EditarPerfilFragment"
+        tools:layout="@layout/fragment_editar_perfil" />
 
-    <activity
-        android:id="@+id/navigation_menu_questionario"
-        android:name="com.ppa.perfildeaprendizado.ui.fragments.MenuQuestionarioFragment"
-        android:label="@string/questionarios"
-        tools:layout="@layout/fragment_menu_questionario" />
-
-    <fragment
-        android:id="@+id/navigation_sobre"
-        android:name="com.ppa.perfildeaprendizado.ui.fragments.SobreFragment"
-        android:label="@string/sobre"
-        tools:layout="@layout/fragment_sobre" />
 </navigation>

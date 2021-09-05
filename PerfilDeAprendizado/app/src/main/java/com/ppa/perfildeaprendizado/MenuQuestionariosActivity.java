@@ -38,7 +38,7 @@ public class MenuQuestionariosActivity extends AppCompatActivity {
             aluno = (Aluno) getIntent().getSerializableExtra(Aluno.class.getSimpleName());
             questionarios = new RetornaQuestionarioTask(aluno.getMatricula()).execute().get();
             if(questionarios != null && !questionarios.isEmpty()) {
-//                carregarView();
+                carregarView();
             }
         } catch (ExecutionException e) {
             e.printStackTrace();
@@ -67,13 +67,13 @@ public class MenuQuestionariosActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-//    private void carregarView(){
-//        adapter = new MenuQuestionarioAdapter(questionarios, aluno.getMatricula(), this);
-//        listaQuestionarios.setHasFixedSize(false);
-//        listaQuestionarios.setItemAnimator(new DefaultItemAnimator());
-//        listaQuestionarios.setLayoutManager(new LinearLayoutManager(this));
-//        listaQuestionarios.setAdapter(adapter);
-//        listaQuestionarios.setVisibility(View.VISIBLE);
-//
-//    }
+    private void carregarView(){
+        adapter = new MenuQuestionarioAdapter(questionarios, aluno.getMatricula(), this);
+        listaQuestionarios.setHasFixedSize(false);
+        listaQuestionarios.setItemAnimator(new DefaultItemAnimator());
+        listaQuestionarios.setLayoutManager(new LinearLayoutManager(this));
+        listaQuestionarios.setAdapter(adapter);
+        listaQuestionarios.setVisibility(View.VISIBLE);
+
+    }
 }

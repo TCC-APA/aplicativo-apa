@@ -12,7 +12,6 @@ import com.ppa.perfildeaprendizado.R;
 import com.ppa.perfildeaprendizado.data.model.PerfilAluno;
 import com.ppa.perfildeaprendizado.data.model.Questionario;
 import com.ppa.perfildeaprendizado.task.BuscarPerfilAlunoTask;
-import com.ppa.perfildeaprendizado.ui.fragments.MenuQuestionarioFragment;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -28,12 +27,12 @@ public class MenuQuestionarioAdapter extends RecyclerView.Adapter<MenuQuestionar
 
     private List<Questionario> mDataset;
     private String matriculaAluno;
-    private MenuQuestionarioFragment fragment;
+    private MenuQuestionariosActivity activity;
 
-    public MenuQuestionarioAdapter(@NonNull List<Questionario> mDataset, @NonNull String matriculaAluno, MenuQuestionarioFragment fragment) {
+    public MenuQuestionarioAdapter(@NonNull List<Questionario> mDataset, @NonNull String matriculaAluno, MenuQuestionariosActivity activity) {
         this.mDataset = mDataset;
         this.matriculaAluno = matriculaAluno;
-        this.fragment = fragment;
+        this.activity = activity;
     }
 
     @NonNull
@@ -59,7 +58,7 @@ public class MenuQuestionarioAdapter extends RecyclerView.Adapter<MenuQuestionar
                 holder.botaoSobre.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        fragment.goToSobre(entity);
+                        activity.goToSobre(entity);
                     }
                 });
             } else {
@@ -77,13 +76,13 @@ public class MenuQuestionarioAdapter extends RecyclerView.Adapter<MenuQuestionar
                 holder.botaoVerResultado.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        fragment.goToResultado(entity);
+                        activity.goToResultado(entity);
                     }
                 });
                 holder.botaoResponderNovamente.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        fragment.goToQuestionario(entity);
+                        activity.goToQuetionario(entity);
                     }
                 });
             }else{
@@ -96,7 +95,7 @@ public class MenuQuestionarioAdapter extends RecyclerView.Adapter<MenuQuestionar
                 holder.botaoResponderNovamente.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        fragment.goToQuestionario(entity);
+                        activity.goToQuetionario(entity);
                     }
                 });
             }
