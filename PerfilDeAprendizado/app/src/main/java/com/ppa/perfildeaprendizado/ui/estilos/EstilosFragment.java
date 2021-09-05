@@ -90,6 +90,7 @@ public class EstilosFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), DetalhesEstilosActivity.class);
                 intent.putExtra(DetalhesEstilosVO.class.getSimpleName(), detalhesEstilosVO);
+                intent.putExtra(Aluno.class.getSimpleName(), aluno);
                 intent.putExtra(PerfilAluno.class.getSimpleName(), perfilAluno);
                 startActivity(intent);
             }
