@@ -27,9 +27,13 @@ import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 
-public class EditarPerfilFragment extends Fragment {
+public class EditarPerfilActivity extends AppCompatActivity {
 
     private EditText nome;
     private EditText matricula;
@@ -43,29 +47,29 @@ public class EditarPerfilFragment extends Fragment {
     private DatePickerDialog datePickerDialog;
     private Calendar dataNascAux = Calendar.getInstance();
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
 
-        View root = inflater.inflate(R.layout.fragment_editar_perfil, container, false);
-        if(getActivity() != null) {
-            final Aluno aluno = (Aluno) getActivity().getIntent().getSerializableExtra(Aluno.class.getSimpleName());
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.fragment_editar_perfil);
 
-            nome = root.findViewById(R.id.nome);
-            matricula = root.findViewById(R.id.matricula);
-            dataNascimento = root.findViewById(R.id.dataNascimento);
-            senhaAntiga = root.findViewById(R.id.senhaAntiga);
-            senha = root.findViewById(R.id.senhaNova);
-            confirmarSenha = root.findViewById(R.id.confirmarSenhaNova);
-            genero = root.findViewById(R.id.genero);
-            enviar = root.findViewById(R.id.enviar);
-            trocaSenha = root.findViewById(R.id.trocaSenha);
+            final Aluno aluno = (Aluno) getIntent().getSerializableExtra(Aluno.class.getSimpleName());
+
+            nome = findViewById(R.id.nome);
+            matricula = findViewById(R.id.matricula);
+            dataNascimento = findViewById(R.id.dataNascimento);
+            senhaAntiga = findViewById(R.id.senhaAntiga);
+            senha = findViewById(R.id.senhaNova);
+            confirmarSenha = findViewById(R.id.confirmarSenhaNova);
+            genero = findViewById(R.id.genero);
+            enviar = findViewById(R.id.enviar);
+            trocaSenha = findViewById(R.id.trocaSenha);
 
             dataNascimento.setFocusable(false);
             dataNascimento.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     final Calendar calendar = Calendar.getInstance();
-                    datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+                    datePickerDialog = new DatePickerDialog(EditarPerfilActivity.this, new DatePickerDialog.OnDateSetListener() {
                         @Override
                         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                             dataNascAux.set(year, month, dayOfMonth);
@@ -111,8 +115,6 @@ public class EditarPerfilFragment extends Fragment {
                     }
                 });
             }
-        }
-            return root;
     }
 /*
     @Override
@@ -150,9 +152,10 @@ public class EditarPerfilFragment extends Fragment {
                     aluno.setGenero(genero.getSelectedItem().toString());
                     String retorno = new EditarPerfilAlunoTask(aluno).execute().get();
                     if (retorno.equals("erroResponseCode")) {
-                        Toast.makeText(getContext(), "Ocorreu um problema no salvamento dos seus dados. Verifique sua conexão.", Toast.LENGTH_LONG).show();
+                        Toast.makeText(this, "Ocorreu um problema no salvamento dos seus dados. Verifique sua conexão.", Toast.LENGTH_LONG).show();
                     } else {
-                        Toast.makeText(getContext(), "Mudanças salvas com sucesso!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(this, "Mudanças salvas com sucesso!", Toast.LENGTH_LONG).show();
+                        finish();
                     }
                 } catch (ExecutionException e) {
                     e.printStackTrace();
@@ -192,9 +195,9 @@ public class EditarPerfilFragment extends Fragment {
                 aluno.setSenha(senha.getText().toString());
                 String retorno = new EditarPerfilAlunoTask(aluno).execute().get();
                 if (retorno.equals("erroResponseCode")){
-                    Toast.makeText(getContext(), "Ocorreu um problema no salvamento dos seus dados. Verifique sua conexão.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "Ocorreu um problema no salvamento dos seus dados. Verifique sua conexão.", Toast.LENGTH_LONG).show();
                 } else{
-                    Toast.makeText(getContext(), "Senha alterada com sucesso!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "Senha alterada com sucesso!", Toast.LENGTH_LONG).show();
                 }
             } catch (ExecutionException e) {
                 e.printStackTrace();
@@ -204,15 +207,13 @@ public class EditarPerfilFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
+
     private String erroCampoObrigatorio(){
         return getResources().getString(R.string.campo_obrigatorio);
     }
 
-    @Override
-    public void onStop() {
-        if(getActivity() != null) {
-            ((ResultadoActivity) getActivity()).navController.navigate(R.id.navigation_resultado);
-        }
-        super.onStop();
-    }
 }

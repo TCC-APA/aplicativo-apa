@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_resultado"
+        android:id="@+id/navigation_sobre"
         android:icon="@drawable/round_insert_chart_outlined_24"
-        android:title="@string/estilos_resultado" />
+        android:title="@string/sobre" />
 
     <item
         android:id="@+id/navigation_editar_perfil"
         android:icon="@drawable/round_person_24"
         android:title="@string/editar_perfil" />
+
+    <item
+        android:id="@+id/navigation_sair"
+        android:icon="@drawable/round_person_24"
+        android:title="@string/sair" />
+
 
 </menu>

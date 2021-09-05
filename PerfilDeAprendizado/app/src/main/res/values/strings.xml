@@ -46,6 +46,8 @@
     <string name="pragmático">"Pragmático"</string>
     <string name="estilos_resultado">Perfil de Aprendizagem</string>
     <string name="editar_perfil">Editar Dados</string>
+    <string name="sobre">Sobre</string>
+    <string name="sair">Sair</string>
     <string name="grafico_titulo">Gráfico de Grau de Pertinência dos Estilos</string>
     <string name="estilo_predominante">Seu(s) Estilo(s) de Aprendizagem predominante(s):</string>
     <string name="outros_estilos">Estes estilos não condizem com o seu perfil:</string>

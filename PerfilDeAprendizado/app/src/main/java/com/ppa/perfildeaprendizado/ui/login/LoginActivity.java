@@ -82,6 +82,11 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        finishAffinity();
+    }
+
     private void updateUiWithUser(Aluno aluno) {
         String welcome = getString(R.string.welcome) + aluno.getNome() + "!";
         Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();

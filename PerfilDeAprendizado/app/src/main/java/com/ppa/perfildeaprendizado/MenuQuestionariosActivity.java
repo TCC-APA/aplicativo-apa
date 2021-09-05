@@ -1,13 +1,20 @@
 package com.ppa.perfildeaprendizado;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
+import com.ppa.perfildeaprendizado.controller.MenuController;
 import com.ppa.perfildeaprendizado.data.model.Aluno;
 import com.ppa.perfildeaprendizado.data.model.Questionario;
 import com.ppa.perfildeaprendizado.task.RetornaQuestionarioTask;
 import com.ppa.perfildeaprendizado.ui.adapters.MenuQuestionarioAdapter;
+import com.ppa.perfildeaprendizado.ui.login.LoginActivity;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -44,6 +51,29 @@ public class MenuQuestionariosActivity extends AppCompatActivity {
             e.printStackTrace();
         } catch (InterruptedException e) {
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuController.setupMenu(menu, getMenuInflater());
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.navigation_sobre:
+                return true;
+            case R.id.navigation_editar_perfil:
+                MenuController.editarPerfilAction(this, aluno);
+                return true;
+            case R.id.navigation_sair:
+                MenuController.sairAction(this);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 

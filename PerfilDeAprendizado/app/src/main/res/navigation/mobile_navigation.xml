@@ -12,7 +12,7 @@
 
     <fragment
         android:id="@+id/navigation_editar_perfil"
-        android:name="com.ppa.perfildeaprendizado.ui.editar_perfil.EditarPerfilFragment"
+        android:name="com.ppa.perfildeaprendizado.ui.editar_perfil.EditarPerfilActivity"
         tools:layout="@layout/fragment_editar_perfil" />
 
 </navigation>
