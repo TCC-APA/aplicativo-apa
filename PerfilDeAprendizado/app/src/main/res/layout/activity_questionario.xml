@@ -37,145 +37,159 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent" /-->
 
-  <ScrollView
-      android:layout_width="match_parent"
-      android:layout_height="match_parent">
+  <Button
+      android:id="@+id/buttonVoltar"
+      android:layout_width="72dp"
+      android:layout_height="33dp"
+      android:layout_marginStart="16dp"
+      android:layout_marginLeft="16dp"
+      android:layout_marginTop="35dp"
+      android:layout_marginBottom="36dp"
+      android:background="@color/colorPrimary"
+      android:text="Voltar"
+      android:textColor="#FFFFFF"
+      app:layout_constraintBottom_toTopOf="@+id/pergunta"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
+  <Button
+      android:id="@+id/buttonProx"
+      android:layout_width="72dp"
+      android:layout_height="33dp"
+      android:layout_marginTop="35dp"
+      android:layout_marginEnd="16dp"
+      android:layout_marginRight="16dp"
+      android:layout_marginBottom="36dp"
+      android:background="@color/colorPrimary"
+      android:text="Próxima"
+      android:textColor="#FFFFFF"
+      app:layout_constraintBottom_toTopOf="@+id/pergunta"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+
+  <Button
+      android:id="@+id/enviar_button"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="157dp"
+      android:layout_marginEnd="168dp"
+      android:layout_marginBottom="20dp"
+      android:background="@drawable/roundedbuttondisabled"
+      android:enabled="false"
+      android:paddingLeft="20dp"
+      android:paddingRight="20dp"
+      android:text="@string/enviar_respostas"
+      android:textColor="@android:color/white"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.443"
+      app:layout_constraintStart_toStartOf="parent" />
+
+  <RadioGroup
+      android:id="@+id/radioQuestionario"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="16dp"
+      android:layout_marginTop="2dp"
+      android:layout_marginEnd="16dp"
+      android:layout_marginBottom="20dp"
+      android:background="#FFFFFF"
+      android:isScrollContainer="true"
+      android:overScrollMode="ifContentScrolls"
+      android:padding="10dp"
+      android:scrollbars="vertical"
+      app:layout_constraintBottom_toTopOf="@+id/enviar_button"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.01"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/pergunta">
+
+    <RadioButton
+        android:id="@+id/radioNunca"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:layout_margin="4dp"
+        android:text="@string/nunca"
+        android:textSize="16sp"
+        tools:layout_editor_absoluteX="35dp"
+        tools:layout_editor_absoluteY="628dp" />
 
-      <LinearLayout
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"
-          android:gravity="center"
-          android:orientation="horizontal"
-          android:padding="15dp">
+    <RadioButton
+        android:id="@+id/radioAlgVezes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:text="@string/alg_vezes"
+        android:textSize="16sp"
+        tools:layout_editor_absoluteX="35dp"
+        tools:layout_editor_absoluteY="628dp" />
 
-        <Button
-            android:id="@+id/buttonVoltar"
-            android:layout_width="wrap_content"
-            android:layout_height="33dp"
-            android:background="@color/colorPrimary"
-            android:text="Voltar"
-            android:textColor="#FFFFFF" />
-
-        <TextView
-            android:id="@+id/posicaoQuest"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:paddingStart="50dp"
-            android:paddingEnd="50dp"
-            android:text="1 /40"
-            android:textSize="16sp" />
-
-        <Button
-            android:id="@+id/buttonProx"
-            android:layout_width="wrap_content"
-            android:layout_height="33dp"
-            android:layout_gravity="center_horizontal|end"
-            android:background="@color/colorPrimary"
-            android:text="Próxima"
-            android:textColor="#FFFFFF" />
-
-      </LinearLayout>
-
-      <TextView
-          android:id="@+id/pergunta"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_marginStart="15dp"
-          android:layout_marginEnd="15dp"
-          android:background="#FFFFFF"
-          android:hapticFeedbackEnabled="false"
-          android:padding="20dp"
-          android:scrollbars="vertical"
-          android:shadowColor="#00424242"
-          android:shadowRadius="0.5"
-          android:text="Normalmente resolvo os problemas de forma metódica, ou seja, passo a passo"
-          android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-          android:textSize="18sp"
-          app:fontFamily="sans-serif" />
-
-      <RadioGroup
-          android:id="@+id/radioQuestionario"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_marginStart="15dp"
-          android:layout_marginTop="5dp"
-          android:layout_marginEnd="15dp"
-          android:background="#FFFFFF"
-          android:isScrollContainer="true"
-          android:overScrollMode="ifContentScrolls"
-          android:padding="10dp"
-          android:scrollbars="vertical">
-
-        <RadioButton
-            android:id="@+id/radioNunca"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="4dp"
-            android:text="@string/nunca"
-            android:textSize="16sp"
-            tools:layout_editor_absoluteX="35dp"
-            tools:layout_editor_absoluteY="628dp" />
-
-        <RadioButton
-            android:id="@+id/radioAlgVezes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="4dp"
-            android:text="@string/alg_vezes"
-            android:textSize="16sp"
-            tools:layout_editor_absoluteX="35dp"
-            tools:layout_editor_absoluteY="628dp" />
-
-        <RadioButton
-            android:id="@+id/radioMuitasVezes"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="4dp"
-            android:text="@string/mtas_vezes"
-            android:textSize="16sp" />
+    <RadioButton
+        android:id="@+id/radioMuitasVezes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:text="@string/mtas_vezes"
+        android:textSize="16sp" />
 
 
-        <RadioButton
-            android:id="@+id/radioQseSempre"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="4dp"
-            android:text="@string/qse_sempre"
-            android:textSize="16sp"
-            tools:layout_editor_absoluteX="35dp"
-            tools:layout_editor_absoluteY="628dp" />
+    <RadioButton
+        android:id="@+id/radioQseSempre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:text="@string/qse_sempre"
+        android:textSize="16sp"
+        tools:layout_editor_absoluteX="35dp"
+        tools:layout_editor_absoluteY="628dp" />
 
-        <RadioButton
-            android:id="@+id/radioSempre"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="4dp"
-            android:text="@string/sempre"
-            android:textSize="16sp" />
+    <RadioButton
+        android:id="@+id/radioSempre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:text="@string/sempre"
+        android:textSize="16sp" />
 
-      </RadioGroup>
+  </RadioGroup>
 
-      <Button
-          android:id="@+id/enviar_button"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_gravity="center"
-          android:layout_marginTop="10dp"
-          android:background="@drawable/roundedbuttondisabled"
-          android:enabled="false"
-          android:paddingLeft="20dp"
-          android:paddingRight="20dp"
-          android:text="@string/enviar_respostas"
-          android:textColor="@android:color/white" />
+  <TextView
+      android:id="@+id/posicaoQuest"
+      android:layout_width="67dp"
+      android:layout_height="0dp"
+      android:layout_marginStart="176dp"
+      android:layout_marginLeft="176dp"
+      android:layout_marginTop="33dp"
+      android:layout_marginEnd="168dp"
+      android:layout_marginRight="168dp"
+      android:text="     /"
+      android:textSize="16sp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
 
-    </LinearLayout>
-  </ScrollView>
+  <TextView
+      android:id="@+id/pergunta"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      android:layout_marginStart="16dp"
+      android:layout_marginTop="15dp"
+      android:layout_marginEnd="16dp"
+      android:background="#FFFFFF"
+      android:hapticFeedbackEnabled="false"
+      android:padding="20dp"
+      android:scrollbars="vertical"
+      android:shadowColor="#00424242"
+      android:shadowRadius="0.5"
+      android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+      android:textSize="24sp"
+      app:fontFamily="sans-serif"
+      app:layout_constraintBottom_toTopOf="@+id/radioQuestionario"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.0"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/posicaoQuest"
+      app:layout_constraintVertical_bias="0.37" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

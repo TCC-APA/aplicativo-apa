@@ -1,155 +1,146 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/background"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="7dp"
+    android:layout_marginTop="16dp"
+    android:layout_marginEnd="7dp"
+    android:background="#FFFFFF"
+    app:layout_constraintHorizontal_bias="0.481"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
     tools:context=".EditarPerfilActivity">
 
-    <ScrollView
-        android:layout_width="370dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="7dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="7dp"
-        android:background="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.481"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:orientation="vertical"
+        android:padding="20dp">
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="20dp">
+            android:layout_margin="20dp"
+            android:text="@string/perfil_aluno"
+            android:textColor="#CD141414"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                android:text="@string/perfil_aluno"
-                android:textColor="#CD141414"
-                android:textSize="24sp"
-                android:textStyle="bold" />
+        <EditText
+            android:id="@+id/nome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:ems="10"
+            android:hint="@string/nome"
+            android:inputType="textPersonName" />
 
-            <EditText
-                android:id="@+id/nome"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:ems="10"
-                android:hint="@string/nome"
-                android:inputType="textPersonName" />
+        <EditText
+            android:id="@+id/matricula"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:ems="10"
+            android:enabled="false"
+            android:hint="@string/matricula"
+            android:inputType="textPersonName" />
 
-            <EditText
-                android:id="@+id/matricula"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:ems="10"
-                android:enabled="false"
-                android:hint="@string/matricula"
-                android:inputType="textPersonName" />
+        <EditText
+            android:id="@+id/dataNascimento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:ems="10"
+            android:hint="@string/data_nascimento"
+            android:inputType="date" />
 
-            <EditText
-                android:id="@+id/dataNascimento"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:ems="10"
-                android:hint="@string/data_nascimento"
-                android:inputType="date" />
+        <EditText
+            android:id="@+id/idade"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:ems="10"
+            android:hint="@string/idade"
+            android:inputType="number"
+            android:visibility="gone" />
 
-            <EditText
-                android:id="@+id/idade"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:ems="10"
-                android:hint="@string/idade"
-                android:inputType="number"
-                android:visibility="gone" />
+        <Spinner
+            android:id="@+id/genero"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:layout_margin="10dp"
+            android:entries="@array/generos" />
 
-            <Spinner
-                android:id="@+id/genero"
-                android:layout_width="match_parent"
-                android:layout_height="38dp"
-                android:layout_margin="10dp"
-                android:entries="@array/generos" />
+        <Button
+            android:id="@+id/enviar"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="80dp"
+            android:background="@drawable/roundedbutton"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="Salvar"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp" />
 
-            <Button
-                android:id="@+id/enviar"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="80dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="80dp"
-                android:background="@drawable/roundedbutton"
-                android:gravity="center"
-                android:padding="10dp"
-                android:text="Salvar"
-                android:textColor="#FFFFFF"
-                android:textSize="14sp" />
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="5dp"
+            android:text="Trocar Senha"
+            android:textColor="#CD141414"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="5dp"
-                android:text="Trocar Senha"
-                android:textColor="#CD141414"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+        <EditText
+            android:id="@+id/senhaAntiga"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:ems="10"
+            android:hint="Senha Antiga"
+            android:inputType="textPassword" />
 
-            <EditText
-                android:id="@+id/senhaAntiga"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:ems="10"
-                android:hint="Senha Antiga"
-                android:inputType="textPassword" />
+        <EditText
+            android:id="@+id/senhaNova"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:ems="10"
+            android:hint="Senha Nova"
+            android:inputType="textPassword" />
 
-            <EditText
-                android:id="@+id/senhaNova"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:ems="10"
-                android:hint="Senha Nova"
-                android:inputType="textPassword" />
+        <EditText
+            android:id="@+id/confirmarSenhaNova"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:ems="10"
+            android:hint="Repetir Senha Nova"
+            android:inputType="textPassword" />
 
-            <EditText
-                android:id="@+id/confirmarSenhaNova"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:ems="10"
-                android:hint="Repetir Senha Nova"
-                android:inputType="textPassword" />
+        <Button
+            android:id="@+id/trocaSenha"
+            android:layout_width="142dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="80dp"
+            android:layout_marginBottom="100dp"
+            android:background="@drawable/roundedbutton"
+            android:padding="10dp"
+            android:text="Salvar Senha"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp" />
 
-            <Button
-                android:id="@+id/trocaSenha"
-                android:layout_width="142dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="80dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="80dp"
-                android:layout_marginBottom="100dp"
-                android:background="@drawable/roundedbutton"
-                android:padding="10dp"
-                android:text="Salvar Senha"
-                android:textColor="#FFFFFF"
-                android:textSize="14sp" />
-
-        </LinearLayout>
-    </ScrollView>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+</ScrollView>
