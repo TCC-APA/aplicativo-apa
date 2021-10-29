@@ -6,6 +6,7 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.ppa.perfildeaprendizado.data.model.Questionario;
 
@@ -47,11 +48,11 @@ public class RetornaQuestionarioTask extends AsyncTask<Void, Void, List<Question
 
                 JsonArray jsonArray = (JsonArray) new JsonParser().parse(resposta.toString()).getAsJsonObject().get("questionarios");
 
-                GsonBuilder gsonBuilder = new GsonBuilder();
-                gsonBuilder = gsonBuilder.setPrettyPrinting();
-                Gson gson = gsonBuilder.create();
-
-                questionarios.add(new Gson().fromJson(jsonArray.get(0), Questionario.class));
+                if(jsonArray != null && jsonArray.size() > 0){
+                    for(JsonElement e: jsonArray){
+                        questionarios.add(new Gson().fromJson(e, Questionario.class));
+                    }
+                }
 
                 if(connection.getResponseCode() != HttpURLConnection.HTTP_OK){
                     Log.e("ERRO", "Não foi possível acessar o WebService: " + connection.getResponseCode());

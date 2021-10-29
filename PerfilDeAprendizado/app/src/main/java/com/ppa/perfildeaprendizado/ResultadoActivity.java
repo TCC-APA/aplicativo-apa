@@ -68,7 +68,7 @@ public class ResultadoActivity extends AppCompatActivity {
         textoCaracteristicas.setText("");
 
         try {
-            perfilAluno = new BuscarPerfilAlunoTask(aluno.getMatricula(), 48L).execute().get();
+            perfilAluno = new BuscarPerfilAlunoTask(aluno.getMatricula(), questionario.getId()).execute().get();
             if(perfilAluno != null){
                 preencherTextosPerfilPredominante();
                 StringBuilder stringBuilder = new StringBuilder();
@@ -200,8 +200,7 @@ public class ResultadoActivity extends AppCompatActivity {
     public void preencherTextosPerfilPredominante(){
         Map<Integer, List<Estilo>> estilosOrdenadosByPredominancia = new HashMap<>();
         Map<Long, RangePontuacaoClassificacao> idEstilosRange = new HashMap<>();
-        List<Estilo> estilos = perfilAluno.getEstilos();
-
+        Integer rangesSize = 0;
         if (perfilAluno.getPontuacaoPorEstilo() != null && !perfilAluno.getPontuacaoPorEstilo().isEmpty()) {
             List<RangePontuacaoClassificacao> ranges = questionario.getRanges();
 
@@ -220,6 +219,7 @@ public class ResultadoActivity extends AppCompatActivity {
                                 max = (float) range.getMaxValue();
                         }
                     }
+                    rangesSize = rangesDoEstilo.size();
                     for(int i = 0; i<rangesDoEstilo.size(); i++){
                         RangePontuacaoClassificacao rangeEstilo = rangesDoEstilo.get(i);
                         if(pontuacaoEstilo >= rangeEstilo.getMinValue() && pontuacaoEstilo <= rangeEstilo.getMaxValue()){
@@ -239,7 +239,7 @@ public class ResultadoActivity extends AppCompatActivity {
         List<Estilo> estilosPredominantes = new ArrayList<>();
         List<Estilo> estilosNaoPredominantes = new ArrayList<>();
 
-        divideEstilosByPredominancia(estilosOrdenadosByPredominancia, estilosPredominantes, estilosNaoPredominantes, estilos.size());
+        divideEstilosByPredominancia(estilosOrdenadosByPredominancia, estilosPredominantes, estilosNaoPredominantes, rangesSize);
 
         DetalhesEstilosVO vo = new DetalhesEstilosVO();
         vo.setEstilosNaoPredominantes(estilosNaoPredominantes);

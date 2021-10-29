@@ -233,7 +233,7 @@ public class QuestionarioActivity extends AppCompatActivity {
 
                 perfilRespostas.setMatriculaAluno(aluno.getMatricula());
                 perfilRespostas.setDataRealizado(formatter.format(date));
-                perfilRespostas.setIdQuestionario(48L);
+                perfilRespostas.setIdQuestionario(questionario.getId());
                 perfilRespostas.setPontuacaoPorEstilo(estilosPontuacao);
 
                 try {
