@@ -7,6 +7,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.animation.Easing;
@@ -41,6 +43,8 @@ public class ResultadoActivity extends AppCompatActivity {
     private TextView textoCaracteristicas;
     private Button botaoVerMais;
     private TextView tituloGrafico;
+    private ScrollView scrollEstilosAprendizagem;
+    private RelativeLayout graficoRelative;
     private static final float MIN = 0f;
     private float max;
     private RadarChart radarChart;
@@ -64,6 +68,8 @@ public class ResultadoActivity extends AppCompatActivity {
         radarChart = findViewById(R.id.radarChart);
         botaoVerMais = findViewById(R.id.button_ver_mais);
         tituloGrafico = findViewById(R.id.titulo_grafico_container);
+        scrollEstilosAprendizagem = findViewById(R.id.estilos_aprendizagem_scroll);
+        graficoRelative = findViewById(R.id.grafico);
         textoEstilo.setText("");
         textoCaracteristicas.setText("");
 
@@ -71,12 +77,19 @@ public class ResultadoActivity extends AppCompatActivity {
             perfilAluno = new BuscarPerfilAlunoTask(aluno.getMatricula(), questionario.getId()).execute().get();
             if(perfilAluno != null){
                 preencherTextosPerfilPredominante();
-                StringBuilder stringBuilder = new StringBuilder();
-                stringBuilder.append(getString(R.string.titulo_grafico));
-                stringBuilder.append(" ");
-                stringBuilder.append(aluno.getNome().split(" ")[0]);
-                tituloGrafico.setText(stringBuilder.toString());
-                fazerGrafico();
+                if(questionario.getTipoGrafico() != null){
+                    StringBuilder stringBuilder = new StringBuilder();
+                    stringBuilder.append(getString(R.string.titulo_grafico));
+                    stringBuilder.append(" ");
+                    stringBuilder.append(aluno.getNome().split(" ")[0]);
+                    tituloGrafico.setText(stringBuilder.toString());
+                    fazerGrafico();
+                } else {
+                    graficoRelative.setVisibility(View.GONE);
+                    RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
+                    layoutParams.setMargins(40, 40, 41, 0);
+                    scrollEstilosAprendizagem.setLayoutParams(layoutParams);
+                }
             }
         } catch (ExecutionException e) {
             e.printStackTrace();
@@ -132,23 +145,26 @@ public class ResultadoActivity extends AppCompatActivity {
     }
 
     public void fazerGrafico(){
-        radarChart.setBackgroundColor(Color.WHITE);
-        radarChart.getDescription().setEnabled(false);
-        radarChart.setWebLineWidth(1f);
-        radarChart.getLegend().setEnabled(false);
-        radarChart.animateXY(1400, 1400, Easing.EaseInOutQuad, Easing.EaseInOutQuad);
-        radarChart.setWebAlpha(100);
+        switch (questionario.getTipoGrafico()){
+            case 0: //Teia
+                radarChart.setBackgroundColor(Color.WHITE);
+                radarChart.getDescription().setEnabled(false);
+                radarChart.setWebLineWidth(1f);
+                radarChart.getLegend().setEnabled(false);
+                radarChart.animateXY(1400, 1400, Easing.EaseInOutQuad, Easing.EaseInOutQuad);
+                radarChart.setWebAlpha(100);
 
 
-        XAxis xAxis = radarChart.getXAxis();
-        xAxis.setValueFormatter(new IndexAxisValueFormatter(getLabels()));
+                XAxis xAxis = radarChart.getXAxis();
+                xAxis.setValueFormatter(new IndexAxisValueFormatter(getLabels()));
 
-        YAxis yAxis = radarChart.getYAxis();
-        yAxis.setAxisMinimum(MIN);
-        yAxis.setAxisMaximum(max);
-        yAxis.setLabelCount(1, true);
+                YAxis yAxis = radarChart.getYAxis();
+                yAxis.setAxisMinimum(MIN);
+                yAxis.setAxisMaximum(max);
+                yAxis.setLabelCount(1, true);
 
-        radarChart.setData(getData());
+                radarChart.setData(getData());
+        }
     }
 
     private RadarData getData() {

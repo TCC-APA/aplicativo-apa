@@ -18,6 +18,7 @@ public class Questionario implements Serializable {
     private Map<String, Estilo> estilosIndexados = new HashMap<>();
     private List<Questao> questoes = new ArrayList<>();
     private List<RangePontuacaoClassificacao> ranges;
+    private Integer tipoGrafico;
 
     public Questionario() {
 
@@ -98,6 +99,14 @@ public class Questionario implements Serializable {
 
     public void setSobre(String sobre) {
         this.sobre = sobre;
+    }
+
+    public Integer getTipoGrafico() {
+        return tipoGrafico;
+    }
+
+    public void setTipoGrafico(Integer tipoGrafico) {
+        this.tipoGrafico = tipoGrafico;
     }
 
     @NonNull
