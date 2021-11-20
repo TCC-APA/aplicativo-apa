@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -87,7 +88,7 @@ public class ResultadoActivity extends AppCompatActivity {
                 } else {
                     graficoRelative.setVisibility(View.GONE);
                     RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
-                    layoutParams.setMargins(40, 40, 41, 0);
+                    layoutParams.setMargins(51, 40, 54, 0);
                     scrollEstilosAprendizagem.setLayoutParams(layoutParams);
                 }
             }
