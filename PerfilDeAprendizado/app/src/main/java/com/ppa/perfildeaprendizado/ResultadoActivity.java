@@ -98,7 +98,7 @@ public class ResultadoActivity extends AppCompatActivity {
                     layoutParamsVerMais.setMargins(40, 0, 41, 40);
                     scrollEstilosAprendizagem.setLayoutParams(layoutParamsScroll);
                     verMaisRelative.setLayoutParams(layoutParamsVerMais);
-                    
+
                 }
             }
         } catch (ExecutionException e) {
