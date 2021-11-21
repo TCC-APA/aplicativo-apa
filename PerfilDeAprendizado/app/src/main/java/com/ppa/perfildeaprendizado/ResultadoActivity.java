@@ -37,6 +37,9 @@ import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
+
+import butterknife.BindView;
 
 public class ResultadoActivity extends AppCompatActivity {
 
@@ -46,6 +49,7 @@ public class ResultadoActivity extends AppCompatActivity {
     private TextView tituloGrafico;
     private ScrollView scrollEstilosAprendizagem;
     private RelativeLayout graficoRelative;
+    private RelativeLayout verMaisRelative;
     private static final float MIN = 0f;
     private float max;
     private RadarChart radarChart;
@@ -71,6 +75,7 @@ public class ResultadoActivity extends AppCompatActivity {
         tituloGrafico = findViewById(R.id.titulo_grafico_container);
         scrollEstilosAprendizagem = findViewById(R.id.estilos_aprendizagem_scroll);
         graficoRelative = findViewById(R.id.grafico);
+        verMaisRelative = findViewById(R.id.button_view);
         textoEstilo.setText("");
         textoCaracteristicas.setText("");
 
@@ -87,9 +92,12 @@ public class ResultadoActivity extends AppCompatActivity {
                     fazerGrafico();
                 } else {
                     graficoRelative.setVisibility(View.GONE);
-                    RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
-                    layoutParams.setMargins(51, 40, 54, 0);
-                    scrollEstilosAprendizagem.setLayoutParams(layoutParams);
+                    RelativeLayout.LayoutParams layoutParamsScroll = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+                    LinearLayout.LayoutParams layoutParamsVerMais = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                    layoutParamsScroll.setMargins(40, 40, 41, 0);
+                    layoutParamsVerMais.setMargins(40, 0, 41, 40);
+                    scrollEstilosAprendizagem.setLayoutParams(layoutParamsScroll);
+                    verMaisRelative.setLayoutParams(layoutParamsVerMais);
                 }
             }
         } catch (ExecutionException e) {
