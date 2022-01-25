@@ -35,6 +35,7 @@ public class MenuQuestionariosActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_questionarios);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         ButterKnife.bind(this);
         try {
@@ -69,11 +70,9 @@ public class MenuQuestionariosActivity extends AppCompatActivity {
             case R.id.navigation_editar_perfil:
                 MenuController.editarPerfilAction(this, aluno);
                 return true;
-            case R.id.navigation_sair:
+            default:
                 MenuController.sairAction(this);
                 return true;
-            default:
-                return super.onOptionsItemSelected(item);
         }
     }
 

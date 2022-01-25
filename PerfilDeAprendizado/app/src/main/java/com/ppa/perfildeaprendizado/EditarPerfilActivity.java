@@ -44,6 +44,8 @@ public class EditarPerfilActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editar_perfil);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
         aluno = (Aluno) getIntent().getSerializableExtra(Aluno.class.getSimpleName());
 
@@ -229,7 +231,8 @@ public class EditarPerfilActivity extends AppCompatActivity {
                 MenuController.sairAction(this);
                 return true;
             default:
-                return super.onOptionsItemSelected(item);
+                onBackPressed();
+                return true;
         }
     }
 

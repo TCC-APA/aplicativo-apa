@@ -3,10 +3,12 @@ package com.ppa.perfildeaprendizado;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import com.ppa.perfildeaprendizado.controller.MenuController;
 import com.ppa.perfildeaprendizado.data.model.Aluno;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +20,8 @@ public class TermoActivity extends AppCompatActivity {
 //        LoginActivity.loadingProgressBar.setVisibility(View.GONE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_termo);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         final TextView textoTermo = findViewById(R.id.textoTermo);
         final RadioButton radioSim = findViewById(R.id.radioYes);
         final RadioButton radioNao = findViewById(R.id.radioNo);
@@ -47,5 +51,11 @@ public class TermoActivity extends AppCompatActivity {
 
     public void voltarLogin(){
         finish();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        onBackPressed();
+        return true;
     }
 }

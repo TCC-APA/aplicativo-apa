@@ -66,6 +66,8 @@ public class ResultadoActivity extends AppCompatActivity {
         aluno = (Aluno) getIntent().getSerializableExtra(Aluno.class.getSimpleName());
         questionario = (Questionario) getIntent().getSerializableExtra(Questionario.class.getSimpleName());
         setContentView(R.layout.activity_resultado);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         max = 0f;
 
         textoEstilo = findViewById(R.id.text_estilo);
@@ -150,7 +152,8 @@ public class ResultadoActivity extends AppCompatActivity {
                 MenuController.sairAction(this);
                 return true;
             default:
-                return super.onOptionsItemSelected(item);
+                onBackPressed();
+                return true;
         }
     }
 

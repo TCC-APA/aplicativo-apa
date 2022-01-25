@@ -61,7 +61,7 @@ public class QuestionarioActivity extends AppCompatActivity {
         setContentView(R.layout.activity_questionario);
         this.questionario = (Questionario) getIntent().getSerializableExtra(Questionario.class.getSimpleName());
         this.aluno = (Aluno) getIntent().getSerializableExtra(Aluno.class.getSimpleName());
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         if (questionario != null) {
             this.questoes = questionario.getQuestoes();
             if (questoes != null && !questoes.isEmpty()) {
@@ -409,7 +409,8 @@ public class QuestionarioActivity extends AppCompatActivity {
                 MenuController.sairAction(this);
                 return true;
             default:
-                return super.onOptionsItemSelected(item);
+                onBackPressed();
+                return true;
         }
 
     }

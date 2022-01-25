@@ -27,6 +27,8 @@ public class QuestionarioSobreActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sobre_questionario);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         ButterKnife.bind(this);
 
         this.questionario = (Questionario) getIntent().getSerializableExtra(Questionario.class.getSimpleName());
@@ -60,7 +62,8 @@ public class QuestionarioSobreActivity extends AppCompatActivity {
                 MenuController.sairAction(this);
                 return true;
             default:
-                return super.onOptionsItemSelected(item);
+                onBackPressed();
+                return true;
         }
     }
 }

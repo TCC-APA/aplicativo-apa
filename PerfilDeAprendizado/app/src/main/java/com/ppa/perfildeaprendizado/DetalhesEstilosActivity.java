@@ -47,6 +47,7 @@ public class DetalhesEstilosActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         /* Setting Layout */
         setContentView(R.layout.activity_detalhes_estilos);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         /* Injection */
         ButterKnife.bind(this);
@@ -143,7 +144,8 @@ public class DetalhesEstilosActivity extends AppCompatActivity {
                 MenuController.sairAction(this);
                 return true;
             default:
-                return super.onOptionsItemSelected(item);
+                onBackPressed();
+                return true;
         }
     }
 
