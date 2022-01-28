@@ -42,6 +42,30 @@
             android:padding="@dimen/activity_horizontal_margin" />
 
         <TextView
+            android:id="@+id/seus_estilos_menos_predominantes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginBottom="5dp"
+            android:background="@color/background"
+            android:gravity="center"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:text="@string/estilos_menos_predominante"
+            android:textAlignment="center"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:visibility="visible" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/lista_detalhes_menos_predominantes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:background="@color/background"
+            android:padding="@dimen/activity_horizontal_margin" />
+
+        <TextView
             android:id="@+id/outros_estilos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

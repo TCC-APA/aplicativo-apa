@@ -10,6 +10,7 @@ import java.util.Map;
 public class DetalhesEstilosVO implements Serializable {
     List<Estilo> estilosPredominantes;
     List<Estilo> estilosNaoPredominantes;
+    List<Estilo> estiloMaisPredominante;
     Map<Long, RangePontuacaoClassificacao> idEstiloRange;
 
     public List<Estilo> getEstilosPredominantes() {
@@ -34,5 +35,13 @@ public class DetalhesEstilosVO implements Serializable {
 
     public void setIdEstiloRange(Map<Long, RangePontuacaoClassificacao> idEstiloRange) {
         this.idEstiloRange = idEstiloRange;
+    }
+
+    public List<Estilo> getEstiloMaisPredominante() {
+        return estiloMaisPredominante;
+    }
+
+    public void setEstiloMaisPredominante(List<Estilo> estiloMaisPredominante) {
+        this.estiloMaisPredominante = estiloMaisPredominante;
     }
 }

@@ -50,7 +50,8 @@
     <string name="sobre">Sobre</string>
     <string name="sair">Sair</string>
     <string name="grafico_titulo">Gráfico de Grau de Pertinência dos Estilos</string>
-    <string name="estilo_predominante">Seu(s) Estilo(s) de Aprendizagem predominante(s):</string>
+    <string name="estilo_predominante">Este(s) Estilo(s) condiz(em) mais com o seu perfil:</string>
+    <string name="estilos_menos_predominante">Você também possui algumas características deste(s) Estilo(s):</string>
     <string name="outros_estilos">Estes estilos não condizem com o seu perfil:</string>
     <string name="caracteristicas_estilo">Características desse(s) estilo(s)</string>
     <string name="aprendizado_estilo">Tem facilidade para aprender quando…</string>

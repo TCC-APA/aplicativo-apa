@@ -37,12 +37,10 @@ import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
-
-import butterknife.BindView;
 
 public class ResultadoActivity extends AppCompatActivity {
 
+    private TextView textoEstilosPredominantes;
     private TextView textoEstilo;
     private TextView textoCaracteristicas;
     private Button botaoVerMais;
@@ -70,6 +68,7 @@ public class ResultadoActivity extends AppCompatActivity {
 
         max = 0f;
 
+        textoEstilosPredominantes = findViewById(R.id.estilo_predominante);
         textoEstilo = findViewById(R.id.text_estilo);
         textoCaracteristicas = findViewById(R.id.text_caracteristicas);
         radarChart = findViewById(R.id.radarChart);
@@ -271,19 +270,49 @@ public class ResultadoActivity extends AppCompatActivity {
         divideEstilosByPredominancia(estilosOrdenadosByPredominancia, estilosPredominantes, estilosNaoPredominantes, rangesSize);
 
         DetalhesEstilosVO vo = new DetalhesEstilosVO();
+
+
+        //É o estilo com maior pontuação, mas podem ter dois ou mais estilos com pontuações iguais
+        List<Estilo> estilosPredominantesMaiorPontuacao = new ArrayList<>();
+        long maiorPontuacao = 0L;
+        for(Estilo e: estilosPredominantes){
+            long pontuacaoAtual = perfilAluno.getPontuacaoPorEstilo().get(e.getId().toString());
+            if(pontuacaoAtual > maiorPontuacao){
+                maiorPontuacao = pontuacaoAtual;
+                estilosPredominantesMaiorPontuacao.clear();
+                estilosPredominantesMaiorPontuacao.add(e);
+            } else if(pontuacaoAtual == maiorPontuacao) {
+                estilosPredominantesMaiorPontuacao.add(e);
+            }
+        }
+
+        vo.setEstiloMaisPredominante(estilosPredominantesMaiorPontuacao);
+        estilosPredominantes.removeAll(estilosPredominantesMaiorPontuacao);
+
         vo.setEstilosNaoPredominantes(estilosNaoPredominantes);
         vo.setEstilosPredominantes(estilosPredominantes);
         vo.setIdEstiloRange(idEstilosRange);
 
         StringBuilder strPredominantes = new StringBuilder();
         StringBuilder strCaracteristicas = new StringBuilder();
-        for(Estilo e: estilosPredominantes){
+
+        for(Estilo e: estilosPredominantesMaiorPontuacao){
             strPredominantes.append("\"" + e.getNome() + "\", " );
             strCaracteristicas.append(e.getNome() + ": " + e.getCaracteristicas() + "\n\n");
         }
 
         String textoPredominantes  = strPredominantes.substring(0, strPredominantes.length() - 2);
         String caracteristicas = strCaracteristicas.substring(0, strCaracteristicas.length() - 2);
+        if(!estilosPredominantes.isEmpty()){
+            String predominantesNaoMaiores = "";
+            for(Estilo e: estilosPredominantes){
+                predominantesNaoMaiores += "\"" + e.getNome() + "\", ";
+            }
+            String textoEstilosPredominantesString = "Você também possui algumas características do(s) estilo(s) "+predominantesNaoMaiores.substring(0, predominantesNaoMaiores.length() - 2);
+            textoEstilosPredominantesString += ". Porém, este(s) estilo(s) se sobressai(em):";
+            textoEstilosPredominantes.setText(textoEstilosPredominantesString);
+        }
+
         textoEstilo.setText(textoPredominantes);
         textoCaracteristicas.setText(caracteristicas);
 

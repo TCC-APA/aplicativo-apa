@@ -28,16 +28,22 @@ public class DetalhesEstilosActivity extends AppCompatActivity {
 
     @BindView(R.id.outros_estilos)
     TextView mEstilosNaoCondizentes;
+    @BindView(R.id.seus_estilos_menos_predominantes)
+    TextView mEstilosMenosPredominantes;
     @BindView(R.id.lista_detalhes_predominantes)
     RecyclerView mPredominantesRecyclerView;
     @BindView(R.id.lista_detalhes_outros)
     RecyclerView mNaoPredominantesRecyclerView;
+    @BindView(R.id.lista_detalhes_menos_predominantes)
+    RecyclerView mMenosPredominantesRecyclerView;
     private DetalhesEstilosVO detalhesEstilosVO;
 
     private List<Estilo> predList = new ArrayList<>();
+    private List<Estilo> menosPredList = new ArrayList<>();
     private List<Estilo> outrosList = new ArrayList<>();
 
     private DetalhesEstilosAdapter mAdapterPred;
+    private DetalhesEstilosAdapter mAdapterMenosPred;
     private DetalhesEstilosAdapter mAdapterOutros;
 
     private Aluno aluno;
@@ -64,6 +70,7 @@ public class DetalhesEstilosActivity extends AppCompatActivity {
         };*/
 
         predList = new ArrayList<>();
+        menosPredList = new ArrayList<>();
         outrosList = new ArrayList<>();
         carregarListas();
         carregarViews();
@@ -90,16 +97,21 @@ public class DetalhesEstilosActivity extends AppCompatActivity {
     private void carregarListas() {
         if(detalhesEstilosVO != null){
             predList.clear();
-            predList.addAll(detalhesEstilosVO.getEstilosPredominantes());
+            predList.addAll(detalhesEstilosVO.getEstiloMaisPredominante());
             if(detalhesEstilosVO.getEstilosNaoPredominantes() != null && !detalhesEstilosVO.getEstilosNaoPredominantes().isEmpty()){
                 outrosList.clear();
                 outrosList.addAll(detalhesEstilosVO.getEstilosNaoPredominantes());
+            }
+            if(detalhesEstilosVO.getEstilosPredominantes() != null && !detalhesEstilosVO.getEstilosPredominantes().isEmpty()){
+                menosPredList.clear();
+                menosPredList.addAll(detalhesEstilosVO.getEstilosPredominantes());
             }
         }
     }
 
     private void carregarViews() {
         mAdapterPred = new DetalhesEstilosAdapter(this, predList, detalhesEstilosVO);
+        mAdapterMenosPred = new DetalhesEstilosAdapter(this, menosPredList, detalhesEstilosVO);
         mAdapterOutros = new DetalhesEstilosAdapter(this, outrosList, detalhesEstilosVO);
 
         mPredominantesRecyclerView.setHasFixedSize(false);
@@ -107,6 +119,18 @@ public class DetalhesEstilosActivity extends AppCompatActivity {
         mPredominantesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mPredominantesRecyclerView.setAdapter(mAdapterPred);
         mPredominantesRecyclerView.setVisibility(View.VISIBLE);
+
+        if(menosPredList != null && !menosPredList.isEmpty()){
+            mMenosPredominantesRecyclerView.setHasFixedSize(false);
+            mMenosPredominantesRecyclerView.setItemAnimator(new DefaultItemAnimator());
+            mMenosPredominantesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+            mMenosPredominantesRecyclerView.setVisibility(View.VISIBLE);
+            mMenosPredominantesRecyclerView.setAdapter(mAdapterMenosPred);
+            mEstilosMenosPredominantes.setVisibility(View.VISIBLE);
+        } else {
+            mEstilosMenosPredominantes.setVisibility(View.GONE);
+            mMenosPredominantesRecyclerView.setVisibility(View.GONE);
+        }
 
         if(outrosList != null && !outrosList.isEmpty()){
             mNaoPredominantesRecyclerView.setHasFixedSize(false);
