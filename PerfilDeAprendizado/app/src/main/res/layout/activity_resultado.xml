@@ -21,6 +21,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="21dp"
+            android:fadeScrollbars="false"
             android:background="#FFFFFF">
 
             <LinearLayout

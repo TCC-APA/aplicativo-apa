@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:fadeScrollbars="false"
     android:layout_height="match_parent"
     android:background="@color/background"
     tools:context=".DetalhesEstilosActivity">
@@ -37,6 +38,10 @@
             android:id="@+id/lista_detalhes_predominantes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fadeScrollbars="false"
+            android:scrollbars="vertical"
+            android:scrollbarThumbVertical="@android:color/darker_gray"
+            android:scrollbarSize="5dp"
             android:layout_marginBottom="15dp"
             android:background="@color/background"
             android:padding="@dimen/activity_horizontal_margin" />
@@ -63,6 +68,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
             android:background="@color/background"
+            android:fadeScrollbars="false"
             android:padding="@dimen/activity_horizontal_margin" />
 
         <TextView
@@ -85,6 +91,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/background"
+            android:fadeScrollbars="false"
             android:padding="@dimen/activity_horizontal_margin" />
 
         <!--ScrollView

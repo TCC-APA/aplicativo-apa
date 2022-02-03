@@ -10,7 +10,7 @@ package-lock*
 /node_modules/
 webpack.config.js
 .project
-.idea/*
+PerfilDeAprendizado/.idea/*
 .classpath
 
 
